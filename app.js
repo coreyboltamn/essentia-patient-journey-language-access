@@ -97,6 +97,126 @@ const stages = [
   },
 ];
 
+const ecosystem = [
+  {
+    id: "interpreter-workforce",
+    title: "Interpreter Workforce",
+    category: "services",
+    summary: "In-person, video, and audio interpreting for clinical, complex, and sensitive interactions.",
+    stages: ["Arrival & Check-In", "Clinical Encounter", "Treatment/Inpatient Stay", "Discharge"],
+    users: ["Registration teams", "Nurses", "Physicians", "Care coordinators"],
+    talkingPoints: [
+      "Rapid access to medically qualified interpreters",
+      "Language and specialty matching",
+      "Consistent documentation for interpreted encounters",
+    ],
+  },
+  {
+    id: "jaide-translation",
+    title: "Jaide Translation",
+    category: "services",
+    summary: "AI-enabled written translation and routine communication support.",
+    stages: ["Pre-Visit", "Clinical Encounter", "Discharge", "Post Visit"],
+    users: ["Patient access", "Clinical educators", "Discharge teams"],
+    talkingPoints: [
+      "Supports forms, consent documents, and instructions",
+      "Translation memory and terminology consistency",
+      "Human + machine workflow options by turnaround need",
+    ],
+  },
+  {
+    id: "patient-line",
+    title: "Patient Line",
+    category: "services",
+    summary: "Language assistance from the first patient call through follow-up interactions.",
+    stages: ["Awareness & Access", "Scheduling", "Follow-Up"],
+    users: ["Call center reps", "Patient access teams", "Care coordinators"],
+    talkingPoints: [
+      "Supports referrals, billing, and care coordination",
+      "Warm transfer and continuity",
+      "Reduced abandonment and clearer communication",
+    ],
+  },
+  {
+    id: "equipment-program",
+    title: "Equipment Program",
+    category: "services",
+    summary: "Purpose-built access points across care settings (workstations, carts, tablets, smart TVs).",
+    stages: ["Arrival & Check-In", "Clinical Encounter", "Inpatient Stay"],
+    users: ["Unit leaders", "Nursing", "IT/Biomed"],
+    talkingPoints: [
+      "Right device in the right care context",
+      "Optimized clinician workflow access",
+      "Deployment planning by service line/facility",
+    ],
+  },
+  {
+    id: "any-device",
+    title: "Any Device, Anywhere",
+    category: "tech",
+    summary: "Interpreter access across mobile, workstation, smart TVs, and clinical devices.",
+    stages: ["All stages"],
+    users: ["Clinicians", "Patient access", "Virtual care teams"],
+    talkingPoints: [
+      "Supports bedside, clinic, and virtual contexts",
+      "Improves adoption by meeting teams where they work",
+      "Consistent access experience across settings",
+    ],
+  },
+  {
+    id: "ehr-integration",
+    title: "EHR Integration",
+    category: "tech",
+    summary: "Interpreter access and data exchange embedded within clinical workflows.",
+    stages: ["Check-In", "Clinical Encounter", "Documentation", "Reporting"],
+    users: ["Providers", "Nurses", "Informatics", "Compliance teams"],
+    talkingPoints: [
+      "Launch interpretation from chart context",
+      "Capture interpreter details and encounter metadata",
+      "Supports HL7/FHIR/API integration patterns",
+    ],
+  },
+  {
+    id: "telehealth-integration",
+    title: "Telehealth Integration",
+    category: "tech",
+    summary: "Interpreter access embedded into supported virtual-care encounters.",
+    stages: ["Virtual intake", "Virtual encounter", "Post-visit"],
+    users: ["Virtual clinicians", "Patients on mobile", "Interpreters"],
+    talkingPoints: [
+      "Three-way video/audio workflow",
+      "Interpreter handoff for continuity",
+      "Fallback from video to audio if connection degrades",
+    ],
+  },
+  {
+    id: "apis-interoperability",
+    title: "APIs & Interoperability",
+    category: "tech",
+    summary: "Configurable connections with customer and third-party applications.",
+    stages: ["Architecture", "Integration", "Administration"],
+    users: ["IT integration teams", "Enterprise architects", "Product owners"],
+    talkingPoints: [
+      "Supports APIs, SDKs, and webhooks",
+      "Flexible ecosystem integration approach",
+      "Enables future workflow expansion",
+    ],
+  },
+  {
+    id: "strategic-partnership",
+    title: "Strategic Partnership Solutions",
+    category: "strategy",
+    summary: "Program strategy, implementation, training, adoption, optimization, and governance.",
+    stages: ["Implementation", "Rollout", "Optimization", "Governance"],
+    users: ["Executive sponsors", "Operations", "IT", "Clinical leadership"],
+    talkingPoints: [
+      "Phased rollout by facility/service line",
+      "Training and change management support",
+      "Continuous performance optimization and governance",
+    ],
+  },
+];
+
 const agenda = [
   "Healthcare Language Access Overview",
   "Solution Architecture and Integration Overview",
@@ -122,6 +242,7 @@ const endToEnd = [
 
 let selectedScenario = scenarios[0].id;
 let selectedStage = stages[0].id;
+let selectedEco = ecosystem[0].id;
 
 const scenarioGrid = document.getElementById("scenarioGrid");
 const timeline = document.getElementById("timeline");
@@ -132,6 +253,12 @@ const actionsEl = document.getElementById("actions");
 const impactEl = document.getElementById("impact");
 const agendaList = document.getElementById("agendaList");
 const endToEndList = document.getElementById("endToEndList");
+const ecosystemGrid = document.getElementById("ecosystemGrid");
+const ecoTitle = document.getElementById("ecoTitle");
+const ecoSummary = document.getElementById("ecoSummary");
+const ecoStages = document.getElementById("ecoStages");
+const ecoUsers = document.getElementById("ecoUsers");
+const ecoTalkingPoints = document.getElementById("ecoTalkingPoints");
 const resetBtn = document.getElementById("resetBtn");
 
 function renderScenarios() {
@@ -187,6 +314,35 @@ function renderStageDetail() {
   renderList(impactEl, stage.impact);
 }
 
+function renderEcosystem() {
+  ecosystemGrid.innerHTML = "";
+  ecosystem.forEach((item) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = `ecosystem-card ${item.id === selectedEco ? "active" : ""}`;
+    card.innerHTML = `
+      <h3>${item.title}</h3>
+      <p>${item.summary}</p>
+      <span class="pill ${item.category}">${item.category === "tech" ? "Technology & Connectivity" : item.category === "strategy" ? "Strategic Partnership" : "Services & Access"}</span>
+    `;
+    card.addEventListener("click", () => {
+      selectedEco = item.id;
+      renderEcosystem();
+      renderEcosystemDetail();
+    });
+    ecosystemGrid.appendChild(card);
+  });
+}
+
+function renderEcosystemDetail() {
+  const item = ecosystem.find((e) => e.id === selectedEco);
+  ecoTitle.textContent = item.title;
+  ecoSummary.textContent = item.summary;
+  renderList(ecoStages, item.stages);
+  renderList(ecoUsers, item.users);
+  renderList(ecoTalkingPoints, item.talkingPoints);
+}
+
 function renderAgenda() {
   agendaList.innerHTML = "";
   agenda.forEach((item, index) => {
@@ -209,14 +365,19 @@ function renderEndToEnd() {
 resetBtn.addEventListener("click", () => {
   selectedScenario = scenarios[0].id;
   selectedStage = stages[0].id;
+  selectedEco = ecosystem[0].id;
   renderScenarios();
   renderTimeline();
   renderStageDetail();
+  renderEcosystem();
+  renderEcosystemDetail();
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 renderScenarios();
 renderTimeline();
 renderStageDetail();
+renderEcosystem();
+renderEcosystemDetail();
 renderAgenda();
 renderEndToEnd();

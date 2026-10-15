@@ -112,35 +112,54 @@ h2 {
   font-size: 1.15rem;
 }
 
-.scenario-grid {
+.scenario-grid,
+.ecosystem-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.75rem;
 }
 
-.scenario-card {
+.scenario-card,
+.ecosystem-card {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.75rem;
   cursor: pointer;
   background: #fbfdff;
+  text-align: left;
 }
 
-.scenario-card.active {
+.scenario-card.active,
+.ecosystem-card.active {
   border-color: var(--purple);
   box-shadow: 0 0 0 2px #e7def7 inset;
 }
 
-.scenario-card h3 {
+.scenario-card h3,
+.ecosystem-card h3 {
   margin: 0 0 0.25rem;
   font-size: 1rem;
 }
 
-.scenario-card p {
+.scenario-card p,
+.ecosystem-card p {
   margin: 0;
   color: #4b6175;
   font-size: 0.9rem;
 }
+
+.ecosystem-card .pill {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.pill.services { background: #e9f8ef; color: #1f7a37; }
+.pill.tech { background: #eaf2fb; color: #0e4f85; }
+.pill.strategy { background: #f3ecff; color: #6237a3; }
 
 .timeline {
   display: flex;
@@ -175,16 +194,31 @@ h2 {
   gap: 0.75rem;
 }
 
-.cards-row article {
+.cards-row article,
+.ecosystem-detail {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.7rem;
   background: #fcfeff;
 }
 
-.cards-row h3 {
+.cards-row h3,
+.cards-row h4 {
   margin: 0 0 0.5rem;
   font-size: 0.98rem;
+}
+
+.ecosystem-detail {
+  margin-top: 0.85rem;
+}
+
+.ecosystem-detail h3 {
+  margin: 0 0 0.35rem;
+}
+
+.ecosystem-detail p {
+  margin: 0 0 0.75rem;
+  color: #3f556a;
 }
 
 ul, ol {
