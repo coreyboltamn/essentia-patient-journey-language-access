@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Essentia + AMN | Patient Journey to Language Access</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-block">
+        <div class="brand-chip">Essentia</div>
+        <span class="partner-plus">+</span>
+        <div class="brand-chip amn">AMN Healthcare</div>
+      </div>
+      <button id="resetBtn" class="ghost-btn" type="button">Reset Journey</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Co-Branded Demo Experience</p>
+        <h1>Patient Journey to Language Access</h1>
+        <p class="hero-copy">
+          Interactive microsite to walk Essentia stakeholders through language access
+          workflows across patient access, point-of-care, telehealth, discharge, and
+          post-visit engagement.
+        </p>
+      </section>
+
+      <section class="panel scenario-panel">
+        <h2>1) Choose a Demo Scenario</h2>
+        <div class="scenario-grid" id="scenarioGrid"></div>
+      </section>
+
+      <section class="panel timeline-panel">
+        <h2>2) Follow the Patient Engagement Timeline</h2>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section class="panel stage-panel">
+        <h2 id="stageTitle">Select a stage to view details</h2>
+        <p id="stageSummary" class="stage-summary">
+          Click any stage in the timeline to review common touchpoints, language access
+          needs, and AMN-enabled workflow actions.
+        </p>
+        <div class="cards-row">
+          <article>
+            <h3>Common Touchpoints</h3>
+            <ul id="touchpoints"></ul>
+          </article>
+          <article>
+            <h3>Language Access Actions</h3>
+            <ul id="actions"></ul>
+          </article>
+          <article>
+            <h3>Expected Impact</h3>
+            <ul id="impact"></ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel agenda-panel">
+        <h2>3) Agenda Explorer</h2>
+        <p>
+          Use this to navigate your 2-hour call narrative while keeping the workflow tied
+          to Essentia patient journey stages.
+        </p>
+        <div class="agenda-list" id="agendaList"></div>
+      </section>
+
+      <section class="panel end2end-panel">
+        <h2>4) End-to-End Emergency/Urgent Care Walkthrough</h2>
+        <ol id="endToEndList" class="end-to-end"></ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Demo note: This microsite uses fictional patient examples only and contains no
+        PHI.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
