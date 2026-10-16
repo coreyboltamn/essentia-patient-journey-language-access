@@ -83,20 +83,34 @@
       </section>
 
       <section class="panel" id="demoPanel">
-        <h2>4. Live Demo Transition</h2>
-        <div class="demo-grid">
-          <article class="demo-card"><h3>Now presenting</h3><p id="demoOwner"></p></article>
-          <article class="demo-card"><h3>Demo focus</h3><p id="demoFocus"></p></article>
-          <article class="demo-card"><h3>Timebox</h3><p id="demoTime"></p></article>
+        <h2>4. Live Demo at This Step</h2>
+
+        <div class="demo-status-row">
+          <span class="demo-badge" id="demoBadge"></span>
+          <p class="demo-headline" id="demoHeadline"></p>
         </div>
-        <div class="demo-script">
-          <h3>Presenter cue</h3>
-          <p id="demoCue"></p>
-          <h3>Audience should see</h3>
-          <ul id="demoSee"></ul>
-          <h3>Return cue</h3>
-          <p id="demoReturn"></p>
+
+        <div class="demo-simple-grid">
+          <article class="demo-card">
+            <h3>What we'll show</h3>
+            <ul id="demoSee"></ul>
+          </article>
+          <article class="demo-card">
+            <h3>Why it matters</h3>
+            <p id="demoWhy"></p>
+            <p class="demo-time"><strong>Time:</strong> <span id="demoTime"></span></p>
+          </article>
         </div>
+
+        <details id="presenterNotes" class="presentation-only">
+          <summary>Presenter Notes (internal)</summary>
+          <div class="demo-script">
+            <p><strong>Now presenting:</strong> <span id="demoOwner"></span></p>
+            <p><strong>Demo focus:</strong> <span id="demoFocus"></span></p>
+            <p><strong>Cue:</strong> <span id="demoCue"></span></p>
+            <p><strong>Return cue:</strong> <span id="demoReturn"></span></p>
+          </div>
+        </details>
       </section>
 
       <section class="impact-band">

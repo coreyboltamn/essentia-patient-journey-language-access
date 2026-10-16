@@ -45,9 +45,12 @@ const stages = [
     impact: "Reduce friction early by securing language support before care begins.",
     connections: ["patientline", "apis"],
     demo: {
+      type: "narrative",
       owner: "Journey Narrator",
       focus: "Context setup (no full live tool demo)",
       time: "~1 min",
+      headline: "Set context for how language needs are identified at first contact.",
+      why: "Prevents delays later and improves patient confidence.",
       cue: "This is where language needs first surface and get captured.",
       see: ["How preferred language is identified", "How access barriers are flagged early"],
       returnCue: "Now let’s show how planned support is secured pre-visit.",
@@ -70,9 +73,12 @@ const stages = [
     impact: "Prevent no-shows and confusion by preparing language support before arrival.",
     connections: ["patientline", "jaide", "scheduler", "apis"],
     demo: {
+      type: "live",
       owner: "Access/Scheduling Team",
       focus: "Onsite Interpreter Scheduler Tool",
       time: "~3-4 min",
+      headline: "At this step, the Access team demonstrates onsite interpreter scheduling.",
+      why: "Proves language support is secured before the patient arrives.",
       cue: "For planned visits, we secure the right interpreter in advance.",
       see: ["Interpreter request creation", "Scheduling confirmation and visibility"],
       returnCue: "With support planned, we move to day-of-arrival workflows.",
@@ -95,9 +101,12 @@ const stages = [
     impact: "Move from intake to care with no communication gap at the front door.",
     connections: ["device", "ehr", "equipment", "vriopi"],
     demo: {
+      type: "narrative",
       owner: "Front Desk / Operations",
       focus: "Quick launch walkthrough (optional)",
       time: "~1-2 min",
+      headline: "Show how check-in teams launch language support without delay.",
+      why: "Maintains throughput and reduces communication risk before triage.",
       cue: "At check-in, staff can launch language support without delay.",
       see: ["Where launch options appear", "How escalation to VRI/OPI is triggered"],
       returnCue: "Next, let’s demonstrate the live clinical interpreting experience.",
@@ -120,9 +129,12 @@ const stages = [
     impact: "Ensure safe, clear communication at the moment clinical decisions are made.",
     connections: ["workforce", "vriopi", "device", "ehr", "equipment"],
     demo: {
+      type: "live",
       owner: "Clinical + Interpreter Operations",
       focus: "VRI/OPI Remote Interpreting Interface",
       time: "~4-5 min",
+      headline: "At this step, the care team demonstrates the live VRI/OPI interface.",
+      why: "Shows immediate, safe communication support during clinical decision-making.",
       cue: "When communication is needed immediately, we connect in real time.",
       see: ["Live interpreter connection", "Clinical communication flow with interpreter"],
       returnCue: "After treatment, discharge understanding becomes the next priority.",
@@ -145,9 +157,12 @@ const stages = [
     impact: "Sustain communication quality throughout ongoing inpatient care.",
     connections: ["workforce", "vriopi", "equipment", "device"],
     demo: {
+      type: "narrative",
       owner: "Inpatient Operations",
       focus: "Continuity reference",
       time: "~1-2 min",
+      headline: "Reinforce interpreter continuity across bedside and care transitions.",
+      why: "Prevents communication breakdowns during longer episodes of care.",
       cue: "Language support continues across bedside and care planning interactions.",
       see: ["Consistency across units", "Shared workflow for interpreter access"],
       returnCue: "Next, we’ll show discharge communication and patient education.",
@@ -170,9 +185,12 @@ const stages = [
     impact: "Improve safety after discharge with clear multilingual instructions.",
     connections: ["jaide", "workforce", "ehr"],
     demo: {
+      type: "live",
       owner: "Care Transition / Patient Education",
       focus: "Jaide AI Translation Tool",
       time: "~3-4 min",
+      headline: "At this step, the team demonstrates Jaide for discharge communication.",
+      why: "Strengthens patient understanding and post-visit adherence.",
       cue: "Discharge understanding drives safety, adherence, and outcomes.",
       see: ["Translation workflow for discharge content", "How language clarity is delivered to patient"],
       returnCue: "Finally, support continues in follow-up and ongoing care.",
@@ -195,9 +213,12 @@ const stages = [
     impact: "Extend language access beyond discharge into long-term engagement.",
     connections: ["jaide", "telehealth", "apis", "patientline"],
     demo: {
+      type: "narrative",
       owner: "Digital / Follow-up Team",
       focus: "Optional quick walkthrough",
       time: "~1-2 min",
+      headline: "Close the journey by showing multilingual continuity after discharge.",
+      why: "Demonstrates that language access extends across long-term care touchpoints.",
       cue: "Language access extends into follow-up, portal, and virtual touchpoints.",
       see: ["Multilingual continuity after discharge", "Channels for ongoing support"],
       returnCue: "That completes the end-to-end language access journey.",
@@ -293,13 +314,26 @@ function renderConnections() {
 }
 
 function renderDemo() {
-  const s = stages[sIndex].demo;
-  $("demoOwner").textContent = s.owner;
-  $("demoFocus").textContent = s.focus;
-  $("demoTime").textContent = s.time;
-  $("demoCue").textContent = s.cue;
-  $("demoReturn").textContent = s.returnCue;
-  setList("demoSee", s.see);
+  const d = stages[sIndex].demo;
+
+  const badge = $("demoBadge");
+  if (d.type === "live") {
+    badge.textContent = "Live demo now";
+    badge.classList.add("live");
+  } else {
+    badge.textContent = "Narrative step";
+    badge.classList.remove("live");
+  }
+
+  $("demoHeadline").textContent = d.headline;
+  $("demoWhy").textContent = d.why;
+  $("demoTime").textContent = d.time;
+  setList("demoSee", d.see);
+
+  $("demoOwner").textContent = d.owner;
+  $("demoFocus").textContent = d.focus;
+  $("demoCue").textContent = d.cue;
+  $("demoReturn").textContent = d.returnCue;
 }
 
 function render() {

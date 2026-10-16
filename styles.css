@@ -127,14 +127,65 @@ li { margin: .35rem 0; }
 .connection-card p { margin: 0; color: #4b6175; font-size: .85rem; }
 .connection-card.active { border-color: var(--green); box-shadow: 0 0 0 2px #dff4e6 inset; background: #f6fff9; }
 
-.demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: .65rem; margin-bottom: .75rem; }
-.demo-card { border: 1px solid var(--border); border-radius: 10px; padding: .65rem .75rem; background: #fbfdff; }
-.demo-card h3, .demo-script h3 { margin: 0 0 .35rem; font-size: .9rem; color: var(--navy); }
-.demo-card p, .demo-script p { margin: 0; color: #344f63; }
-.demo-script { border: 1px solid var(--border); border-radius: 10px; padding: .75rem; background: #fcfeff; }
+.demo-status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+.demo-badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  border: 1px solid var(--border);
+  background: #f5f8fc;
+  color: #41586d;
+}
+.demo-badge.live {
+  background: #e9f8ef;
+  border-color: #8fd3a3;
+  color: #1f7a37;
+}
+.demo-headline {
+  margin: 0;
+  font-weight: 600;
+  color: #274156;
+}
+
+.demo-simple-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+.demo-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: #fcfeff;
+}
+.demo-card h3 { margin: 0 0 0.45rem; font-size: 0.92rem; color: var(--navy); }
+.demo-card p { margin: 0 0 0.45rem; color: #344f63; }
+.demo-time { margin-top: 0.6rem; font-size: 0.9rem; }
 
 .presentation-only { display: none; }
 .presentation-mode .presentation-only { display: block; }
+#presenterNotes {
+  margin-top: 0.8rem;
+  border: 1px dashed #b8cadd;
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  background: #f7fbff;
+}
+#presenterNotes summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #365066;
+}
+.demo-script { margin-top: 0.6rem; }
+.demo-script p { margin: 0.35rem 0; color: #344f63; }
 
 .impact-band {
   background: #fff; border: 1px solid var(--navy); color: var(--navy); border-radius: 10px;
