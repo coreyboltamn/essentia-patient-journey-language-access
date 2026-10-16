@@ -11,44 +11,35 @@
   </head>
   <body>
     <header class="topbar">
-      <div class="brand-block"></div>
-      <button id="resetBtn" class="ghost-btn" type="button">Restart Journey</button>
+      <div class="brand-block">
+        <h1 class="top-title">Patient Journey Mapping</h1>
+      </div>
+      <div class="top-actions">
+        <label class="toggle-wrap" for="presentationMode">
+          <input id="presentationMode" type="checkbox" />
+          <span>Presentation Mode</span>
+        </label>
+        <button id="resetBtn" class="ghost-btn" type="button">Restart Journey</button>
+      </div>
     </header>
 
     <main>
       <section class="hero">
         <div class="hero-text">
-          <p class="eyebrow">Co-Branded Demo Experience</p>
-          <h1>Follow the Patient: Journey to Language Access</h1>
-          <p class="hero-copy">Walk alongside a patient through every step of care and see how Essentia and AMN language access services remove barriers at each moment.</p>
+          <p class="eyebrow">One Partner. Every Language Access Need.</p>
+          <h2>Patient Engagement Timeline + AMN Connecting Points</h2>
+          <p class="hero-copy">Select a patient scenario, walk the timeline, and show exactly where AMN services connect. Built-in live demo handoffs keep presenter transitions smooth.</p>
         </div>
-        <svg class="hero-art" viewBox="0 0 320 190" role="img" aria-label="Illustration of multilingual conversation between patient, interpreter and clinician">
-          <defs>
-            <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#4fa3dc"/><stop offset="1" stop-color="#6c3eb4"/></linearGradient>
-            <linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#008d95"/><stop offset="1" stop-color="#4fa3dc"/></linearGradient>
-          </defs>
-          <circle cx="160" cy="95" r="84" fill="#eef4fb"/>
-          <circle cx="160" cy="95" r="58" fill="none" stroke="#cfe0f0" stroke-width="2" stroke-dasharray="4 6"/>
-          <path d="M76 95h168M160 11c-30 24-30 144 0 168M160 11c30 24 30 144 0 168" stroke="#cfe0f0" stroke-width="2" fill="none"/>
-          <rect x="28" y="34" width="108" height="52" rx="16" fill="url(#g1)"/>
-          <path d="M52 86l-6 18 22-18z" fill="#5a6fcb"/>
-          <text x="82" y="67" text-anchor="middle" font-size="20" fill="#fff" font-weight="700">Hola</text>
-          <rect x="184" y="92" width="112" height="52" rx="16" fill="url(#g2)"/>
-          <path d="M270 144l8 18-24-18z" fill="#0a98a8"/>
-          <text x="240" y="125" text-anchor="middle" font-size="20" fill="#fff" font-weight="700">Hello</text>
-          <circle cx="160" cy="95" r="20" fill="#fff" stroke="#6c3eb4" stroke-width="3"/>
-          <path d="M152 95h16M160 87v16" stroke="#6c3eb4" stroke-width="3" stroke-linecap="round"/>
-        </svg>
       </section>
 
       <section class="panel">
-        <h2>1. Choose your patient</h2>
+        <h2>1. Choose your patient scenario</h2>
         <div class="scenario-grid" id="scenarioGrid"></div>
       </section>
 
       <section class="panel journey-panel">
         <div class="journey-head">
-          <h2>2. Follow the journey</h2>
+          <h2>2. Patient engagement timeline</h2>
           <div class="controls">
             <button id="prevBtn" class="ghost-btn" type="button">&larr; Back</button>
             <button id="playBtn" class="ghost-btn" type="button">&#9654; Auto-play</button>
@@ -62,7 +53,7 @@
             <div class="nodes" id="nodes"></div>
           </div>
         </div>
-        <p class="hint">Tip: use the arrow keys to move the patient forward and back.</p>
+        <p class="hint">Tip: use arrow keys to move steps. Presentation Mode reveals speaker handoff cues.</p>
       </section>
 
       <section class="panel stage-panel" id="stagePanel">
@@ -80,15 +71,42 @@
         <div class="status-row" id="statusRow"></div>
 
         <div class="cards-row">
-          <article><h3>What happens behind the scenes</h3><ul id="behindList"></ul></article>
+          <article><h3>What happens at this step</h3><ul id="behindList"></ul></article>
           <article><h3>Who is involved</h3><ul id="whoList"></ul></article>
-          <article><h3>Outcome for the patient and Essentia</h3><ul id="outcomeList"></ul></article>
+          <article><h3>Outcome for patient and Essentia</h3><ul id="outcomeList"></ul></article>
         </div>
+      </section>
+
+      <section class="panel">
+        <h2>3. AMN connection points at this step</h2>
+        <div class="connection-grid" id="connectionGrid"></div>
+      </section>
+
+      <section class="panel" id="demoPanel">
+        <h2>4. Live Demo Transition</h2>
+        <div class="demo-grid">
+          <article class="demo-card"><h3>Now presenting</h3><p id="demoOwner"></p></article>
+          <article class="demo-card"><h3>Demo focus</h3><p id="demoFocus"></p></article>
+          <article class="demo-card"><h3>Timebox</h3><p id="demoTime"></p></article>
+        </div>
+        <div class="demo-script">
+          <h3>Presenter cue</h3>
+          <p id="demoCue"></p>
+          <h3>Audience should see</h3>
+          <ul id="demoSee"></ul>
+          <h3>Return cue</h3>
+          <p id="demoReturn"></p>
+        </div>
+      </section>
+
+      <section class="impact-band">
+        <strong>The Impact:</strong>
+        <span id="impactText"></span>
       </section>
     </main>
 
     <footer>
-      <p>Demo note: This microsite uses fictional patient examples only and contains no PHI.</p>
+      <p>Demo note: Fictional patient scenarios only. No PHI included.</p>
     </footer>
 
     <script src="app.js"></script>
