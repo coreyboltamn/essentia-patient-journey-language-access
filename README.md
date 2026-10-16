@@ -9,7 +9,7 @@ https://coreyboltamn.github.io/essentia-patient-journey-language-access/
 
 The live-demo callout, demo markers and presenter handoff controls have been
 removed for a cleaner shared-screen experience. Scenario selection, timeline
-navigation, stage details, AMN connections and stakeholders remain available.
+navigation, stage details and AMN connections remain available.
 
 ### Presenter workflow
 
@@ -18,8 +18,8 @@ navigation, stage details, AMN connections and stakeholders remain available.
    compact at laptop sizes. **Choose / change** always
    shows the current persona and opens the scenario choices; **Common touchpoints**
    opens supporting detail. Both are keyboard-accessible disclosure controls.
-   Leaving Presentation Mode expands these controls again. Other stage, solution
-   and stakeholder content remains available below; nothing is fixed-height.
+   Leaving Presentation Mode expands these controls again. Other stage and
+   solution content remains available below; nothing is fixed-height.
 2. Walk the spine or use **Back** and **Next** to explore each stage.
    **Auto-play** advances the journey; **Pause** stops it.
 3. Scenario selection, direct timeline selection, Back, Next and Restart stop
@@ -36,8 +36,8 @@ are not ASL substitutes. Do not put credentials, PHI or invented demo URLs in th
 
 Run `node --test tests/*.test.cjs` (Node 18+) and `node --check app.js`.
 The dependency-free tests cover callout removal, scenario/stage navigation,
-autoplay, restart, stakeholder selection, presentation-mode disclosures, AMN
-connection mapping, ASL and nonclinical AI safeguards. There is no build step.
+autoplay, restart, presentation-mode disclosures, AMN connection mapping, ASL and
+nonclinical AI safeguards. There is no build step.
 Repeat the browser checks below when changing the journey controls.
 
 **Merge this PR and complete GitHub Pages deployment to update the public site.**
@@ -60,7 +60,7 @@ interpretation; written clinical materials require appropriate qualified review.
 These are editorial examples, not validated integration or language availability.
 No APIs, credentials, PHI collection, automatic Epic synchronization or deployed
 capabilities were added. The approved palette, journey visuals, stage mapping,
-scenarios and stakeholder sections are retained.
+scenarios are retained.
 
 ### Connection regression checks
 
@@ -111,8 +111,8 @@ To repeat the checks in a browser:
    the first and last steps.
 3. Confirm no live-demo callout, demo markers or presenter handoff controls appear.
    Joanna must see qualified ASL VRI, never audio OPI or Jaide as ASL substitutes.
-4. Exercise Back, Next, Restart Journey, all stakeholder buttons, and Auto-play
-   followed by Pause. Restart should return to the first scenario and step.
+4. Exercise Back, Next, Restart Journey, and Auto-play followed by Pause. Restart
+   should return to the first scenario and step.
 5. Expand/collapse **Choose / change** and **Common touchpoints** using the
    keyboard. Detail remains available in both modes.
 6. Confirm no console errors, layout gaps or orphaned callout borders remain.

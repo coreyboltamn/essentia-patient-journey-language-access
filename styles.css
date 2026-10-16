@@ -411,30 +411,6 @@ button {
   color: #516b84;
 }
 
-.stakeholder-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-}
-
-.stake-chip {
-  border: 1px solid #cfdcf1;
-  background: #fff;
-  border-radius: 999px;
-  padding: 0.34rem 0.58rem;
-  cursor: pointer;
-}
-
-.stake-chip.active {
-  background: #eaf1ff;
-  border-color: #7f9de3;
-}
-
-.stakeholder-detail {
-  margin: 0.55rem 0 0;
-  color: #274562;
-}
-
 :focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: 3px;

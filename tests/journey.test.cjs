@@ -67,6 +67,46 @@ test("live-demo callout, markers, styles, data and handlers are removed", () => 
   for (const stop of app.el("nodes").children) assert.equal(stop.children.length, 1);
 });
 
+test("stakeholder panel and unused UI hooks are removed without leaving an empty panel", () => {
+  assert.doesNotMatch(html, /What matters to your team|stakeholderStrip|stakeholderDetail/);
+  assert.doesNotMatch(source, /stakeholder|activeStakeholder/);
+  assert.doesNotMatch(css, /stakeholder|stake-chip/);
+  const app = journey();
+  assert.equal(app.el("stakeholderStrip"), null);
+  assert.equal(app.el("stakeholderDetail"), null);
+});
+
+test("scenario and journey headings and all stage labels have no numbering prefixes", () => {
+  assert.doesNotMatch(html, /<(?:h[1-6]|summary)\b[^>]*>\s*\d+\.\s/i);
+  assert.match(html, /<summary>Patient scenario/);
+  assert.match(html, /<h2>Patient engagement timeline<\/h2>/);
+  assert.match(html, /<h2>AMN connection points at this step<\/h2>/);
+  for (const stage of stages) assert.doesNotMatch(stage.title, /^\d+\.\s/);
+
+  const app = journey();
+  stages.forEach((stage, index) => {
+    app.node(index).click();
+    assert.equal(app.el("stageTitle").textContent, stage.title);
+    assert.equal(app.node(index)["aria-label"], stage.title);
+  });
+});
+
+test("Abdi's Somali-language journey moves from pregnancy and prenatal care into inpatient maternity care", () => {
+  const abdi = personas.find(({ id }) => id === "som");
+  assert.equal(abdi.name, "Abdi");
+  assert.match(abdi.situation, /pregnancy.*prenatal.*inpatient maternity care/i);
+  assert.match(abdi.opening, /pregnant.*prenatal.*inpatient stay/i);
+  const moments = stages.map(({ patient }) => patient.som);
+  assert.match(moments[0], /prenatal maternity care.*Somali.*qualified interpreter/i);
+  assert.match(moments[1], /prenatal visit.*qualified Somali interpreter/i);
+  assert.match(moments[2], /prenatal visit.*qualified Somali interpreter/i);
+  assert.match(moments[3], /prenatal assessment.*Somali.*qualified interpreter/i);
+  assert.match(moments[4], /prenatal visits to inpatient maternity care.*qualified Somali interpreter.*admission/i);
+  assert.match(moments[5], /leaving inpatient maternity care.*postpartum.*Somali.*qualified interpreter/i);
+  assert.match(moments[6], /After discharge.*postpartum follow-up.*Somali.*qualified interpreter/i);
+  assert.doesNotMatch(moments.join(" "), /medical advice|diagnos(?:is|ed)/i);
+});
+
 test("every scenario and timeline stage renders details and AMN mappings without the callout", () => {
   const app = journey();
   personas.forEach((persona, pIndex) => {
@@ -123,16 +163,6 @@ test("autoplay advances, wraps and pauses without demo state", () => {
   app.el("playBtn").click();
   assert.equal(app.state().auto, null);
   assert.equal(app.el("playBtn").textContent, "▶ Auto-play");
-});
-
-test("stakeholder selection updates details and restart restores the default", () => {
-  const app = journey();
-  for (const [index, key] of ["it", "clinical", "ops", "exec"].entries()) {
-    app.el("stakeholderStrip").children[index].click();
-    assert.equal(app.el("stakeholderDetail").textContent, stages[0].stakeholder[key]);
-  }
-  app.el("resetBtn").click();
-  assert.equal(app.el("stakeholderDetail").textContent, stages[0].stakeholder.it);
 });
 
 test("presentation mode still collapses and restores support controls without changing the journey", () => {
