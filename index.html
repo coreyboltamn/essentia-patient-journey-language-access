@@ -6,115 +6,94 @@
     <title>Essentia + AMN | Patient Journey to Language Access</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="topbar">
       <div class="brand-block">
-        <div class="brand-chip">Essentia</div>
+        <!-- To use official logos: upload essentia-logo.png and amn-logo.png into the repo, then replace each .logo-fallback span with <img src="essentia-logo.png" alt="Essentia" /> -->
+        <div class="logo essentia"><span class="logo-fallback"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0e3a5b"/><path d="M7 12h10M12 7v10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>Essentia</span></div>
         <span class="partner-plus">+</span>
-        <div class="brand-chip amn">AMN Healthcare</div>
+        <div class="logo amn"><span class="logo-fallback"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6" fill="#6c3eb4"/><path d="M6 17l6-10 6 10" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>AMN Healthcare</span></div>
       </div>
-      <button id="resetBtn" class="ghost-btn" type="button">Reset Journey</button>
+      <button id="resetBtn" class="ghost-btn" type="button">Restart Journey</button>
     </header>
 
     <main>
       <section class="hero">
-        <p class="eyebrow">Co-Branded Demo Experience</p>
-        <h1>Patient Journey to Language Access</h1>
-        <p class="hero-copy">
-          Interactive microsite to walk Essentia stakeholders through language access
-          workflows across patient access, point-of-care, telehealth, discharge, and
-          post-visit engagement.
-        </p>
+        <div class="hero-text">
+          <p class="eyebrow">Co-Branded Demo Experience</p>
+          <h1>Follow the Patient: Journey to Language Access</h1>
+          <p class="hero-copy">Walk alongside a patient through every step of care and see how Essentia and AMN language access services remove barriers at each moment.</p>
+        </div>
+        <svg class="hero-art" viewBox="0 0 320 190" role="img" aria-label="Illustration of multilingual conversation between patient, interpreter and clinician">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#4fa3dc"/><stop offset="1" stop-color="#6c3eb4"/></linearGradient>
+            <linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#008d95"/><stop offset="1" stop-color="#4fa3dc"/></linearGradient>
+          </defs>
+          <circle cx="160" cy="95" r="84" fill="#eef4fb"/>
+          <circle cx="160" cy="95" r="58" fill="none" stroke="#cfe0f0" stroke-width="2" stroke-dasharray="4 6"/>
+          <path d="M76 95h168M160 11c-30 24-30 144 0 168M160 11c30 24 30 144 0 168" stroke="#cfe0f0" stroke-width="2" fill="none"/>
+          <rect x="28" y="34" width="108" height="52" rx="16" fill="url(#g1)"/>
+          <path d="M52 86l-6 18 22-18z" fill="#5a6fcb"/>
+          <text x="82" y="67" text-anchor="middle" font-size="20" fill="#fff" font-weight="700">Hola</text>
+          <rect x="184" y="92" width="112" height="52" rx="16" fill="url(#g2)"/>
+          <path d="M270 144l8 18-24-18z" fill="#0a98a8"/>
+          <text x="240" y="125" text-anchor="middle" font-size="20" fill="#fff" font-weight="700">Hello</text>
+          <circle cx="160" cy="95" r="20" fill="#fff" stroke="#6c3eb4" stroke-width="3"/>
+          <path d="M152 95h16M160 87v16" stroke="#6c3eb4" stroke-width="3" stroke-linecap="round"/>
+        </svg>
       </section>
 
-      <section class="panel scenario-panel">
-        <h2>1) Choose a Demo Scenario</h2>
+      <section class="panel">
+        <h2>1. Choose your patient</h2>
         <div class="scenario-grid" id="scenarioGrid"></div>
       </section>
 
-      <section class="panel timeline-panel">
-        <h2>2) Follow the Patient Engagement Timeline</h2>
-        <div class="timeline" id="timeline"></div>
-      </section>
-
-      <section class="panel stage-panel">
-        <h2 id="stageTitle">Select a stage to view details</h2>
-        <p id="stageSummary" class="stage-summary">
-          Click any stage in the timeline to review common touchpoints, language access
-          needs, and AMN-enabled workflow actions.
-        </p>
-        <div class="cards-row">
-          <article>
-            <h3>Common Touchpoints</h3>
-            <ul id="touchpoints"></ul>
-          </article>
-          <article>
-            <h3>Language Access Actions</h3>
-            <ul id="actions"></ul>
-          </article>
-          <article>
-            <h3>Expected Impact</h3>
-            <ul id="impact"></ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel ecosystem-panel">
-        <h2>3) AMN Ecosystem Connections (Clickable)</h2>
-        <p>
-          Click any solution card to see where it connects in the patient journey, primary
-          users, and how it supports Essentia's language access goals.
-        </p>
-        <div class="ecosystem-grid" id="ecosystemGrid"></div>
-        <div class="ecosystem-detail" id="ecosystemDetail">
-          <h3 id="ecoTitle">Select a solution card</h3>
-          <p id="ecoSummary">
-            Details for services, technology, and strategic partnership solutions will
-            display here.
-          </p>
-          <div class="cards-row ecosystem-meta">
-            <article>
-              <h4>Journey Stages</h4>
-              <ul id="ecoStages"></ul>
-            </article>
-            <article>
-              <h4>Primary Users</h4>
-              <ul id="ecoUsers"></ul>
-            </article>
-            <article>
-              <h4>Demo Talking Points</h4>
-              <ul id="ecoTalkingPoints"></ul>
-            </article>
+      <section class="panel journey-panel">
+        <div class="journey-head">
+          <h2>2. Follow the journey</h2>
+          <div class="controls">
+            <button id="prevBtn" class="ghost-btn" type="button">&larr; Back</button>
+            <button id="playBtn" class="ghost-btn" type="button">&#9654; Auto-play</button>
+            <button id="nextBtn" class="primary-btn" type="button">Next &rarr;</button>
           </div>
         </div>
+        <div class="track-wrap">
+          <div class="track" id="track">
+            <div class="track-line"><div class="track-fill" id="trackFill"></div></div>
+            <div class="avatar" id="avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M4 21c0-5 4-7 8-7s8 2 8 7" fill="#fff"/></svg></div>
+            <div class="nodes" id="nodes"></div>
+          </div>
+        </div>
+        <p class="hint">Tip: use the arrow keys to move the patient forward and back.</p>
       </section>
 
-      <section class="panel agenda-panel">
-        <h2>4) Agenda Explorer</h2>
-        <p>
-          Use this to navigate your 2-hour call narrative while keeping the workflow tied
-          to Essentia patient journey stages.
-        </p>
-        <div class="agenda-list" id="agendaList"></div>
-      </section>
+      <section class="panel stage-panel" id="stagePanel">
+        <div class="stage-top">
+          <div class="stage-icon" id="stageIcon"></div>
+          <div>
+            <p class="phase" id="stagePhase"></p>
+            <h2 id="stageTitle"></h2>
+          </div>
+          <div class="counter" id="stageCounter"></div>
+        </div>
 
-      <section class="panel end2end-panel">
-        <h2>5) End-to-End Emergency/Urgent Care Walkthrough</h2>
-        <ol id="endToEndList" class="end-to-end"></ol>
+        <blockquote class="patient-moment" id="patientMoment"></blockquote>
+
+        <div class="status-row" id="statusRow"></div>
+
+        <div class="cards-row">
+          <article><h3>What happens behind the scenes</h3><ul id="behindList"></ul></article>
+          <article><h3>Who is involved</h3><ul id="whoList"></ul></article>
+          <article><h3>Outcome for the patient and Essentia</h3><ul id="outcomeList"></ul></article>
+        </div>
       </section>
     </main>
 
     <footer>
-      <p>
-        Demo note: This microsite uses fictional patient examples only and contains no
-        PHI.
-      </p>
+      <p>Demo note: This microsite uses fictional patient examples only and contains no PHI. Logos shown are placeholders; replace with approved brand assets.</p>
     </footer>
 
     <script src="app.js"></script>
