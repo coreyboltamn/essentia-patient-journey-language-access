@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="touchpoints.css" />
+    <link rel="stylesheet" href="interpreter.css" />
   </head>
   <body>
     <header class="topbar">
@@ -126,34 +127,55 @@
       </section>
 
       <section class="panel" id="demoPanel">
-        <h2>5. AMN in Action at This Step</h2>
+        <h2 id="demoTitle">5. AMN in Action at This Step</h2>
 
-        <div class="demo-status-row">
-          <span class="demo-badge" id="demoBadge"></span>
-          <p class="demo-headline" id="demoHeadline"></p>
+        <div class="view-toggle" role="tablist" aria-label="Step view">
+          <button id="viewActionBtn" class="active" type="button" role="tab">AMN in Action</button>
+          <button id="viewInterpBtn" type="button" role="tab">Interpreter Experience</button>
         </div>
 
-        <div class="demo-simple-grid">
-          <article class="demo-card">
-            <h3 id="demoLeftTitle"></h3>
-            <ul id="demoSee"></ul>
-          </article>
-          <article class="demo-card">
-            <h3>Why it matters</h3>
-            <p id="demoWhy"></p>
-          </article>
-        </div>
-
-        <details id="presenterNotes" class="presentation-only">
-          <summary>Presenter Notes (internal)</summary>
-          <div class="demo-script">
-            <p><strong>Now presenting:</strong> <span id="demoOwner"></span></p>
-            <p><strong>Demo focus:</strong> <span id="demoFocus"></span></p>
-            <p><strong>Time:</strong> <span id="demoTime"></span></p>
-            <p><strong>Cue:</strong> <span id="demoCue"></span></p>
-            <p><strong>Return cue:</strong> <span id="demoReturn"></span></p>
+        <div id="actionView">
+          <div class="demo-status-row">
+            <span class="demo-badge" id="demoBadge"></span>
+            <p class="demo-headline" id="demoHeadline"></p>
           </div>
-        </details>
+
+          <div class="demo-simple-grid">
+            <article class="demo-card">
+              <h3 id="demoLeftTitle"></h3>
+              <ul id="demoSee"></ul>
+            </article>
+            <article class="demo-card">
+              <h3>Why it matters</h3>
+              <p id="demoWhy"></p>
+            </article>
+          </div>
+
+          <details id="presenterNotes" class="presentation-only">
+            <summary>Presenter Notes (internal)</summary>
+            <div class="demo-script">
+              <p><strong>Now presenting:</strong> <span id="demoOwner"></span></p>
+              <p><strong>Demo focus:</strong> <span id="demoFocus"></span></p>
+              <p><strong>Time:</strong> <span id="demoTime"></span></p>
+              <p><strong>Cue:</strong> <span id="demoCue"></span></p>
+              <p><strong>Return cue:</strong> <span id="demoReturn"></span></p>
+            </div>
+          </details>
+        </div>
+
+        <div id="interpView" hidden>
+          <div class="interp-head">
+            <span class="interp-status" id="interpStatus"></span>
+            <p class="interp-step" id="interpStep"></p>
+          </div>
+          <div class="interp-grid">
+            <article class="interp-card"><h3>What the interpreter sees</h3><p id="interpSees"></p></article>
+            <article class="interp-card"><h3>What the system does</h3><p id="interpSystem"></p></article>
+            <article class="interp-card"><h3>Risk controlled</h3><p id="interpRisk"></p></article>
+            <article class="interp-card"><h3>Capabilities in play</h3><ul id="interpFocus"></ul></article>
+          </div>
+          <div class="interp-rail" id="interpRail" aria-label="Interpreter experience capabilities"></div>
+        </div>
       </section>
 
       <section class="impact-band">
@@ -168,5 +190,6 @@
 
     <script src="app.js"></script>
     <script src="touchpoints.js"></script>
+    <script src="interpreter.js"></script>
   </body>
 </html>
