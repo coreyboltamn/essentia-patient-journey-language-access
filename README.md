@@ -5,6 +5,49 @@ Microsite demo for Essentia + AMN patient journey language access workflows.
 ## Live site
 https://coreyboltamn.github.io/essentia-patient-journey-language-access/
 
+## AMN solution connections
+
+The existing connection section now uses one eight-solution catalog in `app.js`.
+Each stage has explicit solution IDs and patient/staff workflow descriptions.
+Patient Line and approved written content support access/preparation; qualified
+interpretation and configured endpoints support encounters; Smart TV appears
+for inpatient care; discharge and follow-up emphasize reviewed instructions and
+continued communication. Teladoc cards appear only in Tran's virtual-visit
+preparation, encounter and ongoing-care stages.
+
+Joanna's cards omit Patient Line audio and AI options, use VRI rather than OPI
+for ASL, and require qualified ASL interpreters and configured accessible video
+workflows for mobile/TV endpoints. AI is not a substitute for qualified medical
+interpretation; written clinical materials require appropriate qualified review.
+These are editorial examples, not validated integration or language availability.
+No APIs, credentials, PHI collection, automatic Epic synchronization or deployed
+capabilities were added. The repaired layout, scenarios, controls, tabs and
+presentation mode are retained.
+
+### Connection regression checks
+
+Run `node --test tests/connections.test.cjs` (Node 18+). All eight tests passed:
+canonical names/IDs, all seven stages, representation of all eight solutions,
+stage-specific descriptions across all four personas, ASL-safe variants,
+virtual-visit filtering and AI review safeguards. `node --check app.js` and
+`git diff --check` also passed. No dependencies or build tools were added.
+
+Local headless Chromium checks served the site under
+`/essentia-patient-journey-language-access/`. All 112 combinations of four
+personas, seven stages and widths 1440/768/375/320 passed card-content,
+text-wrapping and page-overflow checks. Both tabs, touchpoint/interpreter
+extensions, Next/Back, timeline selection, restart, stakeholder buttons,
+presentation mode and autoplay (including wraparound, pause and cancellation)
+passed. All eight local CSS/JS assets returned HTTP 200; no JavaScript exceptions
+or application console errors occurred. Google Fonts failed DNS resolution, so
+checks used the fallback font; Chromium also requested an absent favicon (404).
+Other browsers, physical devices and the public deployment were not verified.
+Repeat the manual interaction checks below when editing the mappings.
+
+The latest existing Pages deployment (`38948324313`, commit `b08191ac`) succeeded,
+as confirmed by its deployment logs. **This PR must still be merged and deployed
+before these new connections appear on the public site.**
+
 ## Layout repair
 
 The design reference is commit `bcea34f1d25c1cfd51a21f56b788db2c39c160bb`.
