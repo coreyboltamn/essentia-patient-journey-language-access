@@ -542,7 +542,7 @@ function renderDemo(stage) {
 function renderTimeline() {
   const pct = (sIndex / (stages.length - 1)) * 100;
   trackFill.style.width = `${pct}%`;
-  avatar.style.left = `calc(${pct}% - 21px)`;
+  avatar.style.left = `${((sIndex + 0.5) / stages.length) * 100}%`;
   [...nodesWrap.children].forEach((n, i) => {
     n.classList.toggle("active", i <= sIndex);
     n.classList.toggle("current", i === sIndex);
