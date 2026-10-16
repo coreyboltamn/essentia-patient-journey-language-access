@@ -1,0 +1,28 @@
+/* Executive polish for Interpreter Experience */
+.interp-exec-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin: 0 0 0.8rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #d9e4f0;
+  background: #f8fbff;
+  border-radius: 10px;
+}
+.interp-stage-pill {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.28rem 0.72rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  background: #eef2ff;
+  border: 1px solid #c8cffc;
+  color: #3f4bb8;
+  letter-spacing: 0.01em;
+}
+.interp-stage-summary {
+  margin: 0;
+  color: #2e465a;
+  font-weight: 600;
+}
