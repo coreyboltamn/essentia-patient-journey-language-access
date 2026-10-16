@@ -76,6 +76,9 @@ Fonts failed DNS resolution (fallback fonts were used), and a first-load
 favicon request returned 404. The browser-tool connection was unavailable, so
 checks used installed Chromium directly. Other browsers, physical devices,
 external demo applications and the public deployment were not verified.
+CodeQL reported zero JavaScript alerts and the changed-file secret scan was
+clean. Automated code review was unavailable because of a model-configuration
+error; an independent read-only review found no significant issues.
 
 **Merge this PR and complete GitHub Pages deployment to update the public site.**
 No live technology integration is added.
