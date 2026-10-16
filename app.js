@@ -320,63 +320,6 @@ const stakeholders = [
   { key: "exec", label: "Executive Sponsors", icon: "📊" },
 ];
 
-// Suggested presentation plan, not product availability or timing claims.
-const liveDemoCheckpoints = [
-  {
-    id: "jaide", stageIndex: 0, demoLabel: "Jaide Translation",
-    why: "Pause as the patient looks for routine service information, before clinical discussions.",
-    handoff: "Let’s switch to a fictional, nonclinical translation example to show how access information could be prepared.",
-    duration: "2 minutes",
-    show: ["Translate routine visiting-hours or wayfinding text using fictional content.", "Discuss appropriate qualified review before use. AI translation/live speech is not a replacement for qualified interpretation in clinical decisions or consent."],
-    returnCue: "Return to access planning, then continue to appointment preparation.",
-  },
-  {
-    id: "in-person", stageIndex: 1, demoLabel: "Interpreter Scheduler",
-    why: "Interpreter needs are known and can be planned before the appointment.",
-    handoff: "Let’s pause to walk through a fictional interpreter request and confirmation.",
-    duration: "3 minutes",
-    show: ["Show a sample request with language, visit time, location and communication preferences.", "Walk through assignment, confirmation and a backup plan in the configured illustrative scheduling workflow."],
-    returnCue: "Return to the confirmed language-access plan, then continue to arrival.",
-    asl: {
-      handoff: "Let’s show how a qualified in-person ASL interpreter is requested, with visual communication preferences.",
-      show: ["Request a qualified in-person ASL interpreter using a fictional appointment.", "Review visual communication preferences, confirmation and a qualified visual backup plan."],
-    },
-  },
-  {
-    id: "vri-opi", stageIndex: 2, demoLabel: "VRI/OPI",
-    why: "Check-in is the handoff from planned support to a qualified interpreter connection.",
-    handoff: "Let’s switch to a sample qualified video or phone interpreter connection for check-in.",
-    duration: "3 minutes",
-    show: ["Show language and modality selection with fictional check-in details.", "Demonstrate connection readiness and an appropriate qualified-interpreter backup workflow."],
-    returnCue: "Return to check-in with communication support ready, then continue to the clinical encounter.",
-    asl: {
-      variant: "VRI / qualified ASL",
-      handoff: "Let’s show a qualified ASL interpreter connection by VRI, checking visual access and sightlines.",
-      show: ["Show qualified ASL interpreter selection and configured accessible video readiness.", "Check sightlines, framing and a qualified visual backup; OPI/audio-only is not an ASL substitute."],
-    },
-  },
-  {
-    id: "teladoc", stageIndex: 3, demoLabel: "Telehealth / Teladoc",
-    why: "Tran’s virtual encounter is the point to show the patient, clinician and qualified interpreter joining.",
-    handoff: "Let’s pause for a configured illustrative telehealth workflow, not proof of a live deployment.",
-    duration: "3 minutes",
-    show: ["Use fictional participants to walk through the configured Teladoc joining workflow.", "Show qualified interpreter participation, connection checks and a backup plan. No live integration is demonstrated by this microsite."],
-    returnCue: "Return to Tran’s interpreted clinical encounter, then continue the care journey.",
-  },
-];
-
-function checkpointsFor(stage, personaKey) {
-  const connections = connectionsFor(stage, personaKey);
-  return liveDemoCheckpoints
-    .filter((checkpoint) => stages[checkpoint.stageIndex] === stage
-      && connections.some(({ id }) => id === checkpoint.id))
-    .map((checkpoint) => ({
-      ...checkpoint,
-      ...(personaKey === "joanna" ? checkpoint.asl : {}),
-      label: solutionCatalog[checkpoint.id],
-    }));
-}
-
 const scenarioGrid = document.getElementById("scenarioGrid");
 const nodesWrap = document.getElementById("nodes");
 const trackFill = document.getElementById("trackFill");
@@ -404,15 +347,6 @@ let pIndex = 0;
 let sIndex = 0;
 let auto = null;
 let activeStakeholder = "it";
-let liveDemoId = null;
-let selectedDemoId = null;
-
-function clearLiveDemo() {
-  liveDemoId = null;
-  selectedDemoId = null;
-  document.getElementById("liveDemoDetails").open = false;
-}
-
 function make(tag, cls, text) {
   const el = document.createElement(tag);
   if (cls) el.className = cls;
@@ -432,7 +366,6 @@ function populateScenarioCards() {
       <p>${p.situation}</p>
     `;
     card.addEventListener("click", () => {
-      clearLiveDemo();
       pIndex = i;
       sIndex = 0;
       setScenarioActive();
@@ -460,39 +393,12 @@ function buildNodes() {
     node.setAttribute("aria-label", s.title);
     node.innerHTML = `<span>${s.title}</span>`;
     node.addEventListener("click", () => {
-      clearLiveDemo();
       sIndex = i;
       render();
       stopAuto();
     });
     stop.appendChild(node);
-    stop.appendChild(make("div", "node-demos"));
     nodesWrap.appendChild(stop);
-  });
-}
-
-function renderDemoMarkers(personaKey) {
-  [...nodesWrap.children].forEach((stop, i) => {
-    const markers = stop.children[1];
-    markers.innerHTML = "";
-    checkpointsFor(stages[i], personaKey).forEach((checkpoint) => {
-      const label = checkpoint.variant || checkpoint.demoLabel;
-      const marker = make("button", "demo-marker", `Demo · ${label}`);
-      marker.type = "button";
-      marker.id = `demo-marker-${i}-${checkpoint.id}`;
-      marker.dataset.solutionId = checkpoint.id;
-      marker.setAttribute("aria-label", `Live demo opportunity: ${label} at ${stages[i].title}`);
-      marker.setAttribute("aria-pressed", String(i === sIndex && checkpoint.id === selectedDemoId));
-      marker.addEventListener("click", () => {
-        stopAuto();
-        clearLiveDemo();
-        sIndex = i;
-        selectedDemoId = checkpoint.id;
-        render();
-        document.getElementById(marker.id).focus({ preventScroll: true });
-      });
-      markers.appendChild(marker);
-    });
   });
 }
 
@@ -531,56 +437,6 @@ function renderStakeholders(stage) {
   stakeholderDetail.textContent = stage.stakeholder[activeStakeholder];
 }
 
-function renderLiveDemo(stage, personaKey) {
-  const checkpoints = checkpointsFor(stage, personaKey);
-  const panel = document.getElementById("liveDemoCheckpoint");
-  const choices = document.getElementById("liveDemoChoices");
-  panel.hidden = checkpoints.length === 0;
-  choices.innerHTML = "";
-  choices.hidden = checkpoints.length < 2;
-  playBtn.disabled = liveDemoId !== null;
-  const checkpoint = checkpoints.find(({ id }) => id === selectedDemoId) || checkpoints[0];
-  selectedDemoId = checkpoint ? checkpoint.id : null;
-  document.getElementById("liveDemoState").textContent = "";
-  if (!checkpoint) {
-    for (const id of ["liveDemoHeading", "liveDemoWhy", "liveDemoSummary", "liveDemoHandoff", "liveDemoReturn"]) {
-      document.getElementById(id).textContent = "";
-    }
-    fillList(document.getElementById("liveDemoShow"), []);
-    return;
-  }
-
-  checkpoints.forEach((checkpoint) => {
-    const chip = make("button", "demo-chip", checkpoint.variant || checkpoint.demoLabel);
-    chip.type = "button";
-    chip.id = `demo-choice-${checkpoint.id}`;
-    chip.dataset.solutionId = checkpoint.id;
-    chip.setAttribute("aria-pressed", String(checkpoint.id === selectedDemoId));
-    chip.disabled = liveDemoId !== null;
-    chip.addEventListener("click", () => {
-      selectedDemoId = checkpoint.id;
-      document.getElementById("liveDemoDetails").open = false;
-      renderLiveDemo(stage, personaKey);
-      renderDemoMarkers(personaKey);
-      document.getElementById(chip.id).focus({ preventScroll: true });
-    });
-    choices.appendChild(chip);
-  });
-  document.getElementById("liveDemoHeading").textContent =
-    `Live demo opportunity · ${checkpoint.variant || checkpoint.demoLabel}`;
-  document.getElementById("liveDemoWhy").textContent = checkpoint.why;
-  document.getElementById("liveDemoSummary").textContent = `Presenter handoff · Suggested ${checkpoint.duration}`;
-  document.getElementById("liveDemoHandoff").textContent = `Say: “${checkpoint.handoff}”`;
-  fillList(document.getElementById("liveDemoShow"), checkpoint.show);
-  document.getElementById("liveDemoReturn").textContent = `Return cue: ${checkpoint.returnCue}`;
-  document.getElementById("liveDemoState").textContent = liveDemoId
-    ? `Journey paused at ${personas[pIndex].name} · ${stage.title}. Switch manually to your own demo application, then return here.`
-    : "";
-  const toggle = document.getElementById("liveDemoToggle");
-  toggle.textContent = liveDemoId ? "Return to journey" : "Pause journey for live demo";
-  toggle.className = liveDemoId ? "primary-btn" : "ghost-btn";
-}
-
 function renderTimeline() {
   const pct = (sIndex / (stages.length - 1)) * 100;
   trackFill.style.width = `${pct}%`;
@@ -610,8 +466,6 @@ function render() {
 
   renderConnections(stage, persona.id);
   renderStakeholders(stage);
-  renderLiveDemo(stage, persona.id);
-  renderDemoMarkers(persona.id);
 
   impactText.textContent = stage.impact;
 
@@ -621,7 +475,6 @@ function render() {
 }
 
 function next() {
-  clearLiveDemo();
   if (sIndex < stages.length - 1) {
     sIndex += 1;
   } else {
@@ -631,13 +484,11 @@ function next() {
 }
 
 function prev() {
-  clearLiveDemo();
   if (sIndex > 0) sIndex -= 1;
   render();
 }
 
 function toggleAuto() {
-  if (liveDemoId !== null) return;
   if (auto) {
     stopAuto();
   } else {
@@ -664,7 +515,6 @@ nextBtn.addEventListener("click", () => {
 });
 playBtn.addEventListener("click", toggleAuto);
 resetBtn.addEventListener("click", () => {
-  clearLiveDemo();
   pIndex = 0;
   sIndex = 0;
   activeStakeholder = "it";
@@ -677,14 +527,6 @@ presentationMode.addEventListener("change", () => {
   document.getElementById("scenarioPicker").open = !presentationMode.checked;
   document.getElementById("touchpointDetails").open = !presentationMode.checked;
 });
-document.getElementById("liveDemoToggle").addEventListener("click", () => {
-  if (!selectedDemoId) return;
-  stopAuto();
-  liveDemoId = liveDemoId ? null : selectedDemoId;
-  renderLiveDemo(stages[sIndex], personas[pIndex].id);
-  document.getElementById("liveDemoToggle").focus({ preventScroll: true });
-});
-
 populateScenarioCards();
 buildNodes();
 render();
