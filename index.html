@@ -28,7 +28,7 @@
         <div class="hero-text">
           <p class="eyebrow">One Partner. Every Language Access Need.</p>
           <h2>Patient Engagement Timeline + AMN Connecting Points</h2>
-          <p class="hero-copy">Select a patient scenario, walk the timeline, and show exactly where AMN services connect. Built-in live demo handoffs keep presenter transitions smooth.</p>
+          <p class="hero-copy">Select a patient scenario, walk the timeline, and show exactly where AMN services connect across the care journey.</p>
         </div>
       </section>
 
@@ -53,7 +53,6 @@
             <div class="nodes" id="nodes"></div>
           </div>
         </div>
-        <p class="hint">Tip: use arrow keys to move steps. Presentation Mode reveals speaker handoff cues.</p>
       </section>
 
       <section class="panel stage-panel" id="stagePanel">
@@ -82,8 +81,14 @@
         <div class="connection-grid" id="connectionGrid"></div>
       </section>
 
+      <section class="panel">
+        <h2>4. What matters to your team</h2>
+        <div class="stakeholder-strip" id="stakeholderStrip"></div>
+        <p class="stakeholder-detail" id="stakeholderDetail"></p>
+      </section>
+
       <section class="panel" id="demoPanel">
-        <h2>4. Live Demo at This Step</h2>
+        <h2>5. AMN in Action at This Step</h2>
 
         <div class="demo-status-row">
           <span class="demo-badge" id="demoBadge"></span>
@@ -92,13 +97,12 @@
 
         <div class="demo-simple-grid">
           <article class="demo-card">
-            <h3>What we'll show</h3>
+            <h3 id="demoLeftTitle"></h3>
             <ul id="demoSee"></ul>
           </article>
           <article class="demo-card">
             <h3>Why it matters</h3>
             <p id="demoWhy"></p>
-            <p class="demo-time"><strong>Time:</strong> <span id="demoTime"></span></p>
           </article>
         </div>
 
@@ -107,6 +111,7 @@
           <div class="demo-script">
             <p><strong>Now presenting:</strong> <span id="demoOwner"></span></p>
             <p><strong>Demo focus:</strong> <span id="demoFocus"></span></p>
+            <p><strong>Time:</strong> <span id="demoTime"></span></p>
             <p><strong>Cue:</strong> <span id="demoCue"></span></p>
             <p><strong>Return cue:</strong> <span id="demoReturn"></span></p>
           </div>
