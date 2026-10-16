@@ -1,25 +1,35 @@
 const scenarios = [
   {
     id: "scheduled",
-    title: "Scheduled Outpatient Visit",
+    title: "Scheduled Outpatient Visit (Maria)",
     description:
-      "Language need captured during scheduling and reinforced through reminders, check-in, and visit documentation.",
-    emphasis: "Pre-visit access, scheduled interpreter workflows, and patient notifications.",
+      "Maria's language need is captured during scheduling and reinforced through reminders, check-in, and visit documentation.",
+    emphasis:
+      "Pre-visit access, scheduled interpreter workflows, and patient notifications.",
   },
   {
     id: "urgent",
-    title: "Emergency / Urgent Care",
+    title: "Emergency / Urgent Care (Abdi)",
     description:
-      "Patient arrives with immediate clinical needs and limited English proficiency requiring rapid interpreter access.",
-    emphasis: "Fast interpreter matching, consent support, discharge comprehension, and follow-up coordination.",
+      "Abdi arrives with urgent clinical needs and limited English proficiency requiring rapid interpreter access.",
+    emphasis:
+      "Fast interpreter matching, consent support, discharge comprehension, and follow-up coordination.",
   },
   {
     id: "telehealth",
     title: "Telehealth Encounter",
     description:
       "Virtual visit with three-way communication across clinician, patient mobile device, and interpreter.",
-    emphasis: "Connection resiliency, handoff process, and fallback to audio interpretation.",
+    emphasis:
+      "Connection resiliency, handoff process, and fallback to audio interpretation.",
   },
+];
+
+const lenses = [
+  { id: "patient", label: "Patient Lens" },
+  { id: "clinician", label: "Clinician Lens" },
+  { id: "interpreter", label: "Interpreter Lens" },
+  { id: "admin", label: "Admin Lens" },
 ];
 
 const stages = [
@@ -29,7 +39,14 @@ const stages = [
     color: "blue",
     summary:
       "Patients identify care options and language support channels before they schedule or arrive.",
-    touchpoints: ["Website", "Call Center", "Appointment Scheduling", "Patient Portal", "Text/Email Reminders", "Pre-Visit Instructions"],
+    touchpoints: [
+      "Website",
+      "Call Center",
+      "Appointment Scheduling",
+      "Patient Portal",
+      "Text/Email Reminders",
+      "Pre-Visit Instructions",
+    ],
     actions: [
       "Offer language preference capture in digital and phone intake",
       "Trigger interpreter requests during scheduling",
@@ -40,6 +57,35 @@ const stages = [
       "Improves show rates and preparedness",
       "Builds trust early in the patient journey",
     ],
+    lensContent: {
+      patient: [
+        "I can request language support while booking.",
+        "I receive reminders I can understand.",
+      ],
+      clinician: [
+        "Language needs are visible before the encounter.",
+        "Interpreter can be scheduled in advance.",
+      ],
+      interpreter: [
+        "Requests include context and appointment timing.",
+        "Matching can occur ahead of visit day.",
+      ],
+      admin: [
+        "Track pre-visit language request completion.",
+        "Measure no-show reduction by language support.",
+      ],
+    },
+    decision: {
+      prompt:
+        "Maria requests Spanish support while scheduling. What should happen next?",
+      options: [
+        "A) Note language in free text only",
+        "B) Capture preferred language + schedule interpreter + send translated reminders",
+        "C) Ask family member to interpret at visit",
+      ],
+      recommended:
+        "Recommended: B — structured language capture plus scheduled support and accessible reminders.",
+    },
   },
   {
     id: "checkin",
@@ -58,6 +104,35 @@ const stages = [
       "Lower risk of miscommunication",
       "Consistent documentation and compliance",
     ],
+    lensContent: {
+      patient: [
+        "I don’t have to repeat my language needs.",
+        "I can understand registration and triage questions.",
+      ],
+      clinician: [
+        "One-click interpreter launch from workflow.",
+        "Triage can proceed without communication delays.",
+      ],
+      interpreter: [
+        "Session starts with proper patient context.",
+        "Can escalate modality based on clinical need.",
+      ],
+      admin: [
+        "Monitor wait times and abandoned requests.",
+        "Audit interpreter usage at registration/triage.",
+      ],
+    },
+    decision: {
+      prompt:
+        "Abdi arrives in urgent care and triage needs immediate communication support. Best response?",
+      options: [
+        "A) Delay triage until in-person interpreter arrives",
+        "B) Start VRI/audio immediately, escalate as needed",
+        "C) Proceed with limited communication",
+      ],
+      recommended:
+        "Recommended: B — immediate modality activation protects safety and throughput.",
+    },
   },
   {
     id: "clinical",
@@ -76,6 +151,35 @@ const stages = [
       "Higher patient comprehension",
       "Improved care team confidence",
     ],
+    lensContent: {
+      patient: [
+        "I understand diagnosis and options clearly.",
+        "I can ask questions in my preferred language.",
+      ],
+      clinician: [
+        "Accurate history and informed consent conversation.",
+        "Care planning is clearer and more efficient.",
+      ],
+      interpreter: [
+        "Specialty-aligned assignments improve communication quality.",
+        "Documented handoffs support continuity.",
+      ],
+      admin: [
+        "Quality metrics tied to encounter outcomes.",
+        "Compliance support for interpreted consent.",
+      ],
+    },
+    decision: {
+      prompt:
+        "During a complex consent discussion, video quality drops. What should the team do?",
+      options: [
+        "A) Continue without interpreter",
+        "B) Pause care indefinitely",
+        "C) Switch to audio immediately and continue with documented fallback",
+      ],
+      recommended:
+        "Recommended: C — preserve communication continuity using fallback workflow.",
+    },
   },
   {
     id: "discharge",
@@ -83,7 +187,13 @@ const stages = [
     color: "teal",
     summary:
       "Language access extends into instructions, medications, billing, and follow-up planning.",
-    touchpoints: ["Discharge Instructions", "Medication Education", "Follow-Up Calls", "Billing", "Portal Messaging"],
+    touchpoints: [
+      "Discharge Instructions",
+      "Medication Education",
+      "Follow-Up Calls",
+      "Billing",
+      "Portal Messaging",
+    ],
     actions: [
       "Translate discharge and medication materials",
       "Use interpreter-assisted follow-up scheduling",
@@ -94,126 +204,35 @@ const stages = [
       "Improved adherence",
       "Stronger continuity of care",
     ],
-  },
-];
-
-const ecosystem = [
-  {
-    id: "interpreter-workforce",
-    title: "Interpreter Workforce",
-    category: "services",
-    summary: "In-person, video, and audio interpreting for clinical, complex, and sensitive interactions.",
-    stages: ["Arrival & Check-In", "Clinical Encounter", "Treatment/Inpatient Stay", "Discharge"],
-    users: ["Registration teams", "Nurses", "Physicians", "Care coordinators"],
-    talkingPoints: [
-      "Rapid access to medically qualified interpreters",
-      "Language and specialty matching",
-      "Consistent documentation for interpreted encounters",
-    ],
-  },
-  {
-    id: "jaide-translation",
-    title: "Jaide Translation",
-    category: "services",
-    summary: "AI-enabled written translation and routine communication support.",
-    stages: ["Pre-Visit", "Clinical Encounter", "Discharge", "Post Visit"],
-    users: ["Patient access", "Clinical educators", "Discharge teams"],
-    talkingPoints: [
-      "Supports forms, consent documents, and instructions",
-      "Translation memory and terminology consistency",
-      "Human + machine workflow options by turnaround need",
-    ],
-  },
-  {
-    id: "patient-line",
-    title: "Patient Line",
-    category: "services",
-    summary: "Language assistance from the first patient call through follow-up interactions.",
-    stages: ["Awareness & Access", "Scheduling", "Follow-Up"],
-    users: ["Call center reps", "Patient access teams", "Care coordinators"],
-    talkingPoints: [
-      "Supports referrals, billing, and care coordination",
-      "Warm transfer and continuity",
-      "Reduced abandonment and clearer communication",
-    ],
-  },
-  {
-    id: "equipment-program",
-    title: "Equipment Program",
-    category: "services",
-    summary: "Purpose-built access points across care settings (workstations, carts, tablets, smart TVs).",
-    stages: ["Arrival & Check-In", "Clinical Encounter", "Inpatient Stay"],
-    users: ["Unit leaders", "Nursing", "IT/Biomed"],
-    talkingPoints: [
-      "Right device in the right care context",
-      "Optimized clinician workflow access",
-      "Deployment planning by service line/facility",
-    ],
-  },
-  {
-    id: "any-device",
-    title: "Any Device, Anywhere",
-    category: "tech",
-    summary: "Interpreter access across mobile, workstation, smart TVs, and clinical devices.",
-    stages: ["All stages"],
-    users: ["Clinicians", "Patient access", "Virtual care teams"],
-    talkingPoints: [
-      "Supports bedside, clinic, and virtual contexts",
-      "Improves adoption by meeting teams where they work",
-      "Consistent access experience across settings",
-    ],
-  },
-  {
-    id: "ehr-integration",
-    title: "EHR Integration",
-    category: "tech",
-    summary: "Interpreter access and data exchange embedded within clinical workflows.",
-    stages: ["Check-In", "Clinical Encounter", "Documentation", "Reporting"],
-    users: ["Providers", "Nurses", "Informatics", "Compliance teams"],
-    talkingPoints: [
-      "Launch interpretation from chart context",
-      "Capture interpreter details and encounter metadata",
-      "Supports HL7/FHIR/API integration patterns",
-    ],
-  },
-  {
-    id: "telehealth-integration",
-    title: "Telehealth Integration",
-    category: "tech",
-    summary: "Interpreter access embedded into supported virtual-care encounters.",
-    stages: ["Virtual intake", "Virtual encounter", "Post-visit"],
-    users: ["Virtual clinicians", "Patients on mobile", "Interpreters"],
-    talkingPoints: [
-      "Three-way video/audio workflow",
-      "Interpreter handoff for continuity",
-      "Fallback from video to audio if connection degrades",
-    ],
-  },
-  {
-    id: "apis-interoperability",
-    title: "APIs & Interoperability",
-    category: "tech",
-    summary: "Configurable connections with customer and third-party applications.",
-    stages: ["Architecture", "Integration", "Administration"],
-    users: ["IT integration teams", "Enterprise architects", "Product owners"],
-    talkingPoints: [
-      "Supports APIs, SDKs, and webhooks",
-      "Flexible ecosystem integration approach",
-      "Enables future workflow expansion",
-    ],
-  },
-  {
-    id: "strategic-partnership",
-    title: "Strategic Partnership Solutions",
-    category: "strategy",
-    summary: "Program strategy, implementation, training, adoption, optimization, and governance.",
-    stages: ["Implementation", "Rollout", "Optimization", "Governance"],
-    users: ["Executive sponsors", "Operations", "IT", "Clinical leadership"],
-    talkingPoints: [
-      "Phased rollout by facility/service line",
-      "Training and change management support",
-      "Continuous performance optimization and governance",
-    ],
+    lensContent: {
+      patient: [
+        "I leave with instructions I can understand.",
+        "I know who to call and when to follow up.",
+      ],
+      clinician: [
+        "Teach-back confirms patient understanding.",
+        "Discharge risk is reduced through clearer communication.",
+      ],
+      interpreter: [
+        "Supports high-risk discharge counseling.",
+        "Ensures key medication/follow-up details are clear.",
+      ],
+      admin: [
+        "Track readmission/no-show trends by language support.",
+        "Demonstrate ROI and quality impact.",
+      ],
+    },
+    decision: {
+      prompt:
+        "At discharge, the patient appears to nod but is unsure about medication timing. Best next step?",
+      options: [
+        "A) Proceed and rely on printed English instructions",
+        "B) Re-engage interpreter, provide translated instructions, complete teach-back",
+        "C) Ask family to explain later",
+      ],
+      recommended:
+        "Recommended: B — ensure comprehension before discharge completion.",
+    },
   },
 ];
 
@@ -242,7 +261,9 @@ const endToEnd = [
 
 let selectedScenario = scenarios[0].id;
 let selectedStage = stages[0].id;
-let selectedEco = ecosystem[0].id;
+let selectedLens = lenses[0].id;
+let presenterTimer = null;
+let seconds = 0;
 
 const scenarioGrid = document.getElementById("scenarioGrid");
 const timeline = document.getElementById("timeline");
@@ -253,13 +274,50 @@ const actionsEl = document.getElementById("actions");
 const impactEl = document.getElementById("impact");
 const agendaList = document.getElementById("agendaList");
 const endToEndList = document.getElementById("endToEndList");
-const ecosystemGrid = document.getElementById("ecosystemGrid");
-const ecoTitle = document.getElementById("ecoTitle");
-const ecoSummary = document.getElementById("ecoSummary");
-const ecoStages = document.getElementById("ecoStages");
-const ecoUsers = document.getElementById("ecoUsers");
-const ecoTalkingPoints = document.getElementById("ecoTalkingPoints");
 const resetBtn = document.getElementById("resetBtn");
+
+const lensMount = document.createElement("section");
+lensMount.className = "panel";
+lensMount.innerHTML = `
+  <h2>Role Lens + Decision Moment</h2>
+  <div id="lensButtons" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem;"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+    <article style="border:1px solid #d7e3ef;border-radius:10px;padding:.7rem;background:#fcfeff;">
+      <h3 style="margin-top:0;">What this looks like in this lens</h3>
+      <ul id="lensPoints"></ul>
+    </article>
+    <article style="border:1px solid #d7e3ef;border-radius:10px;padding:.7rem;background:#fcfeff;">
+      <h3 style="margin-top:0;">What would you do?</h3>
+      <p id="decisionPrompt" style="margin:.3rem 0 .5rem;"></p>
+      <ul id="decisionOptions"></ul>
+      <p id="decisionRecommended" style="margin-top:.6rem;font-weight:600;color:#4a2d86;"></p>
+    </article>
+  </div>
+`;
+document.querySelector(".stage-panel").after(lensMount);
+
+const presenterMount = document.createElement("section");
+presenterMount.className = "panel";
+presenterMount.innerHTML = `
+  <h2>Presenter Mode</h2>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.75rem;">
+    <button id="startTimer" class="ghost-btn" type="button">Start Timer</button>
+    <button id="pauseTimer" class="ghost-btn" type="button">Pause Timer</button>
+    <button id="resetTimer" class="ghost-btn" type="button">Reset Timer</button>
+    <strong id="timerReadout">00:00</strong>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+    <article style="border:1px solid #d7e3ef;border-radius:10px;padding:.7rem;background:#fcfeff;">
+      <h3 style="margin-top:0;">Speaker Notes</h3>
+      <textarea id="speakerNotes" rows="7" style="width:100%;padding:.5rem;border:1px solid #d7e3ef;border-radius:8px;" placeholder="Add your demo talking points here..."></textarea>
+    </article>
+    <article style="border:1px solid #d7e3ef;border-radius:10px;padding:.7rem;background:#fcfeff;">
+      <h3 style="margin-top:0;">Parking Lot</h3>
+      <textarea id="parkingLot" rows="7" style="width:100%;padding:.5rem;border:1px solid #d7e3ef;border-radius:8px;" placeholder="Capture client questions and follow-ups..."></textarea>
+    </article>
+  </div>
+`;
+document.querySelector(".agenda-panel").before(presenterMount);
 
 function renderScenarios() {
   scenarioGrid.innerHTML = "";
@@ -288,6 +346,7 @@ function renderTimeline() {
       selectedStage = s.id;
       renderTimeline();
       renderStageDetail();
+      renderLens();
     });
     timeline.appendChild(btn);
   });
@@ -305,42 +364,37 @@ function renderList(el, values) {
 function renderStageDetail() {
   const stage = stages.find((s) => s.id === selectedStage);
   const scenario = scenarios.find((s) => s.id === selectedScenario);
-
   stageTitle.textContent = `${stage.label} — ${scenario.title}`;
   stageSummary.textContent = `${stage.summary} Scenario focus: ${scenario.emphasis}`;
-
   renderList(touchpointsEl, stage.touchpoints);
   renderList(actionsEl, stage.actions);
   renderList(impactEl, stage.impact);
 }
 
-function renderEcosystem() {
-  ecosystemGrid.innerHTML = "";
-  ecosystem.forEach((item) => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = `ecosystem-card ${item.id === selectedEco ? "active" : ""}`;
-    card.innerHTML = `
-      <h3>${item.title}</h3>
-      <p>${item.summary}</p>
-      <span class="pill ${item.category}">${item.category === "tech" ? "Technology & Connectivity" : item.category === "strategy" ? "Strategic Partnership" : "Services & Access"}</span>
-    `;
-    card.addEventListener("click", () => {
-      selectedEco = item.id;
-      renderEcosystem();
-      renderEcosystemDetail();
+function renderLensButtons() {
+  const mount = document.getElementById("lensButtons");
+  mount.innerHTML = "";
+  lenses.forEach((l) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "ghost-btn";
+    b.style.fontWeight = l.id === selectedLens ? "700" : "500";
+    b.textContent = l.label;
+    b.addEventListener("click", () => {
+      selectedLens = l.id;
+      renderLens();
     });
-    ecosystemGrid.appendChild(card);
+    mount.appendChild(b);
   });
 }
 
-function renderEcosystemDetail() {
-  const item = ecosystem.find((e) => e.id === selectedEco);
-  ecoTitle.textContent = item.title;
-  ecoSummary.textContent = item.summary;
-  renderList(ecoStages, item.stages);
-  renderList(ecoUsers, item.users);
-  renderList(ecoTalkingPoints, item.talkingPoints);
+function renderLens() {
+  const stage = stages.find((s) => s.id === selectedStage);
+  renderLensButtons();
+  renderList(document.getElementById("lensPoints"), stage.lensContent[selectedLens]);
+  document.getElementById("decisionPrompt").textContent = stage.decision.prompt;
+  renderList(document.getElementById("decisionOptions"), stage.decision.options);
+  document.getElementById("decisionRecommended").textContent = stage.decision.recommended;
 }
 
 function renderAgenda() {
@@ -362,22 +416,48 @@ function renderEndToEnd() {
   });
 }
 
+function formatTime(total) {
+  const m = String(Math.floor(total / 60)).padStart(2, "0");
+  const s = String(total % 60).padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+function bindPresenterTimer() {
+  const readout = document.getElementById("timerReadout");
+  document.getElementById("startTimer").addEventListener("click", () => {
+    if (presenterTimer) return;
+    presenterTimer = setInterval(() => {
+      seconds += 1;
+      readout.textContent = formatTime(seconds);
+    }, 1000);
+  });
+  document.getElementById("pauseTimer").addEventListener("click", () => {
+    clearInterval(presenterTimer);
+    presenterTimer = null;
+  });
+  document.getElementById("resetTimer").addEventListener("click", () => {
+    clearInterval(presenterTimer);
+    presenterTimer = null;
+    seconds = 0;
+    readout.textContent = "00:00";
+  });
+}
+
 resetBtn.addEventListener("click", () => {
   selectedScenario = scenarios[0].id;
   selectedStage = stages[0].id;
-  selectedEco = ecosystem[0].id;
+  selectedLens = lenses[0].id;
   renderScenarios();
   renderTimeline();
   renderStageDetail();
-  renderEcosystem();
-  renderEcosystemDetail();
+  renderLens();
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 renderScenarios();
 renderTimeline();
 renderStageDetail();
-renderEcosystem();
-renderEcosystemDetail();
+renderLens();
 renderAgenda();
 renderEndToEnd();
+bindPresenterTimer();
