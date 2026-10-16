@@ -482,6 +482,34 @@ button {
   margin-top: 0.6rem;
 }
 
+.live-demo-checkpoint {
+  border: 1px solid #c8cffc;
+  border-left: 4px solid var(--purple);
+  border-radius: 10px;
+  background: #f8fbff;
+  padding: 0.85rem;
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+.live-demo-checkpoint h3, .live-demo-card h4 {
+  margin: 0 0 0.5rem;
+  color: var(--navy);
+}
+.live-demo-checkpoint h3 { scroll-margin-top: 10rem; }
+.live-demo-card + .live-demo-card {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+.live-demo-details summary { cursor: pointer; font-weight: 700; }
+.live-demo-state:not(:empty) { font-weight: 700; color: var(--navy); }
+.live-demo-stage-cue { margin-bottom: 0.75rem; }
+.live-demo-checkpoint button { max-width: 100%; white-space: normal; }
+.live-demo-checkpoint :focus-visible, .live-demo-stage-cue:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 3px;
+}
+
 .impact-band {
   border: 1px solid #cde0f4;
   background: linear-gradient(180deg, #f4f9ff 0%, #edf5ff 100%);
