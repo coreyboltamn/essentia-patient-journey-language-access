@@ -1,42 +1,632 @@
 const personas = [
-  { id: "maria", initial: "M", name: "Maria", title: "Scheduled Outpatient Visit", lang: "Spanish", desc: "Needs language support from scheduling through follow-up." },
-  { id: "abdi", initial: "A", name: "Abdi", title: "Urgent Care Visit", lang: "Somali", desc: "Arrives with immediate communication needs in a high-acuity setting." },
-  { id: "tele", initial: "T", name: "Tran", title: "Virtual Follow-Up", lang: "Vietnamese", desc: "Uses telehealth via Teladoc with integrated interpreter access." },
-  { id: "joanna", initial: "J", name: "Joanna", title: "ASL Communication Journey", lang: "ASL", desc: "Requires qualified ASL interpretation across in-person and digital touchpoints." },
+  {
+    id: "span",
+    name: "Claudia",
+    age: 62,
+    language: "Spanish",
+    situation: "Managing diabetes and hypertension",
+    style: "linear-gradient(135deg,#4fa3dc,#7dc8f3)",
+    opening: "\"I understand my care better when information is in Spanish and someone can answer questions in real time.\"",
+  },
+  {
+    id: "som",
+    name: "Anna",
+    age: 29,
+    language: "Somali",
+    situation: "First pregnancy with recurring prenatal visits",
+    style: "linear-gradient(135deg,#5bbf88,#87dca9)",
+    opening: "\"I want to feel calm and informed at each prenatal step, especially when decisions are made quickly.\"",
+  },
+  {
+    id: "tele",
+    name: "Roland",
+    age: 41,
+    language: "Vietnamese",
+    situation: "Post-op follow-up via telehealth",
+    style: "linear-gradient(135deg,#5c6fd6,#8a9af2)",
+    opening: "\"Virtual visits are easier for me, but only if language support is immediate and clear.\"",
+  },
+  {
+    id: "joanna",
+    name: "Ezra",
+    age: 33,
+    language: "ASL",
+    situation: "Emergency department visit requiring immediate communication",
+    style: "linear-gradient(135deg,#7b5ad5,#a082f0)",
+    opening: "\"In urgent moments, I need communication that is direct, visual, and immediate.\"",
+  },
 ];
 
-const stakeholderOrder = ["IT", "Clinical", "Patient Experience", "Compliance", "Clinical Applications", "Administration", "Physician Services", "Data Analytics", "Informatics", "Digital Health"];
-
-const connectionCatalog = { workforce:{name:"Interpreter Workforce",desc:"In-person, video, and audio medical interpreting, including ASL support."}, jaide:{name:"Jaide Translation",desc:"AI-assisted written translation and routine communication."}, patientline:{name:"Patient Line",desc:"Phone-based language support at first contact."}, equipment:{name:"Equipment Program",desc:"Purpose-built devices and access points across care settings."}, device:{name:"Any Device, Anywhere",desc:"Access from workstations, mobile, carts, and clinical devices."}, ehr:{name:"EHR Integration",desc:"Interpreter access embedded into clinical workflows."}, telehealth:{name:"Telehealth Integration",desc:"Interpreter access embedded in virtual encounters (including Teladoc pathway)."}, apis:{name:"APIs & Interoperability",desc:"Configurable integration with customer and third-party apps."}, vriopi:{name:"VRI/OPI Interface",desc:"Live remote interpreting for rapid point-of-care support."}, scheduler:{name:"Onsite Interpreter Scheduler",desc:"Pre-visit scheduling for planned in-person interpreter coverage."} };
-
-const icons={globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',checkin:'<path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/>',steth:'<circle cx="8" cy="6" r="3"/><path d="M8 9v4a4 4 0 008 0v-1"/><circle cx="18" cy="12" r="3"/>',bed:'<rect x="3" y="10" width="18" height="6" rx="1"/><path d="M5 10V7h4v3M3 17v2M21 17v2"/>',discharge:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>',followup:'<path d="M12 20a8 8 0 100-16 8 8 0 000 16z"/><path d="M12 8v5l3 2"/>'};
-
-/* stages unchanged for brevity in this diff; only persona-specific moments are extended below */
-const stages=[
-{label:"Awareness & Access to Care",phase:"Before the Visit",icon:"globe",modality:"Patient Line + intake workflows",amn:"Language Access Program",moment:{maria:"I need to know I can receive care safely in Spanish from the first contact.",abdi:"My family calls ahead and requests Somali support before arrival.",tele:"I need language help before deciding if virtual care is right for me.",joanna:"I want to confirm ASL support is available before I commit to the appointment."},behind:["Language needs identified at first contact","Preferred language captured in structured intake","Access barriers flagged early"],who:["Patient access team","Contact center","Family/caregiver"],outcome:["Improved trust at entry point","Fewer delays later in journey"],impact:"Reduce friction early by securing language support before care begins.",connections:["patientline","apis"],stakeholders:{"Patient Experience":"Sets tone for trust and accessibility at first touch.","Compliance":"Supports equitable access expectations and policy alignment.","Administration":"Reduces downstream operational friction.","Digital Health":"Ensures digital entry points support language needs."},demo:{type:"narrative",headline:"How language needs are identified at first contact.",why:"Prevents delays later and improves patient confidence.",see:["Preferred language capture","Early barrier flagging"],owner:"Journey Narrator",focus:"Context setup",time:"~1 min",cue:"This is where language needs first surface and get captured.",returnCue:"Now let’s show how planned support is secured pre-visit."}},
-{label:"Appointment Confirmation & Pre-Visit",phase:"Before the Visit",icon:"calendar",modality:"Scheduled support + translated reminders",amn:"Scheduling and translation",moment:{maria:"Scheduling confirmed my language and told me an interpreter would be ready.",abdi:"My language need was documented before I arrived.",tele:"I received a Teladoc-ready virtual prep workflow in my language.",joanna:"My appointment confirmed qualified ASL support and communication preferences."},behind:["Interpreter requests initiated in advance","Pre-visit instructions localized","Appointment reminders align to language preference"],who:["Schedulers","Interpreter coordinators","Digital messaging team"],outcome:["Lower no-show risk","Patient arrives prepared"],impact:"Prevent no-shows and confusion by preparing language support before arrival.",connections:["patientline","jaide","scheduler","apis"],stakeholders:{"Patient Experience":"Improves readiness and confidence before care.","Informatics":"Ensures language fields and routing are structured.","IT":"Supports scheduler and messaging integrations.","Digital Health":"Aligns pre-visit digital comms and virtual workflows."},demo:{type:"live",headline:"Live demo: pre-visit language support workflow.",why:"Proves support is secured before the encounter begins.",see:["Interpreter request and confirmation","Localized reminder workflow"],owner:"Access/Scheduling Team",focus:"Onsite Interpreter Scheduler Tool",time:"~3-4 min",cue:"For planned visits, we secure the right interpreter in advance.",returnCue:"With support planned, we move to day-of-arrival workflows."},scenarioOverrides:{tele:{connections:["patientline","jaide","telehealth","apis"],demo:{type:"live",headline:"Live demo: Teladoc telehealth language workflow.",why:"Shows how virtual visits use telehealth integration rather than onsite scheduling.",see:["Interpreter-enabled Teladoc prep path","Virtual appointment language readiness"],owner:"Digital Health / Virtual Care",focus:"Telehealth integration (Teladoc option)",time:"~3-4 min",cue:"For virtual care, language support is prepared directly through the telehealth pathway.",returnCue:"Now we’ll show day-of-visit virtual joining and clinical communication."}},joanna:{connections:["scheduler","workforce","apis"],demo:{type:"live",headline:"Live demo: ASL support scheduling workflow.",why:"Ensures ASL services are confirmed and prepared before the visit.",see:["ASL service request and confirmation","Accommodation notes in workflow"],owner:"Access/Scheduling Team",focus:"ASL scheduling + coordination",time:"~3-4 min",cue:"For ASL patients, communication support is coordinated before the visit.",returnCue:"Next, we’ll show day-of-visit communication access."}}}},
-{label:"Arrival & Check-In",phase:"At the Visit",icon:"checkin",modality:"Rapid access workflows",amn:"Point-of-care readiness",moment:{maria:"At check-in, they already knew my language and launched support quickly.",abdi:"I needed help immediately and support was available right away.",tele:"My virtual check-in confirmed language support before the clinician joined.",joanna:"At arrival, staff already knew ASL support needs and confirmed communication setup."},behind:["Language need verified at check-in","Interpreter launch options available","Staff use standardized workflows"],who:["Front desk","Registration","Clinical support staff"],outcome:["Faster throughput","Safer handoff into clinical encounter"],impact:"Move from intake to care with no communication gap at the front door.",connections:["device","ehr","equipment","vriopi"],stakeholders:{"Clinical":"Speeds safe triage and intake communication.","Clinical Applications":"Embeds one-touch access into frontline workflow.","IT":"Maintains uptime and access performance.","Patient Experience":"Reduces stress at arrival."},demo:{type:"narrative",headline:"How teams activate language support at check-in.",why:"Maintains throughput while reducing communication risk before triage.",see:["Launch options at intake","Escalation path to remote interpreting"],owner:"Front Desk / Operations",focus:"Workflow reference",time:"~1-2 min",cue:"At check-in, staff can launch language support without delay.",returnCue:"Next, we’ll demonstrate live clinical interpreting."}},
-{label:"Clinical Encounter",phase:"At the Visit",icon:"steth",modality:"VRI / OPI / onsite",amn:"Interpreter Workforce",moment:{maria:"The interpreter helped me understand treatment options clearly.",abdi:"In triage, language support connected fast so care could proceed safely.",tele:"Interpreter, clinician, and patient communicated in one virtual encounter.",joanna:"The clinician and ASL interpreter communicated clearly, and I could fully participate in decisions."},behind:["On-demand interpreter connection","Modality chosen based on acuity and need","Encounter communication is documented"],who:["Nurses","Providers","Qualified interpreters"],outcome:["Reduced risk of miscommunication","Higher patient comprehension"],impact:"Ensure safe, clear communication at the moment clinical decisions are made.",connections:["workforce","vriopi","device","ehr","equipment"],stakeholders:{"Clinical":"Supports safer diagnosis and treatment conversations.","Physician Services":"Improves provider efficiency and communication quality.","Clinical Applications":"Aligns interpreter access within encounter tools.","Compliance":"Strengthens communication documentation."},demo:{type:"live",headline:"Live demo: real-time clinical interpreting.",why:"Demonstrates immediate communication support during medical decision-making.",see:["Rapid interpreter connection","Clinician-patient-interpreter flow"],owner:"Clinical + Interpreter Operations",focus:"VRI/OPI Remote Interpreting Interface",time:"~4-5 min",cue:"When communication is needed immediately, we connect in real time.",returnCue:"After treatment, discharge understanding becomes the next priority."},scenarioOverrides:{tele:{connections:["workforce","telehealth","vriopi","apis"],demo:{type:"live",headline:"Live demo: interpreter-enabled Teladoc clinical interaction.",why:"Shows clinically safe communication inside a virtual encounter.",see:["Interpreter join in telehealth session","Provider-patient-interpreter virtual flow"],owner:"Clinical + Digital Health",focus:"Telehealth integration (Teladoc option)",time:"~4-5 min",cue:"In virtual care, interpreters are brought directly into the telehealth encounter.",returnCue:"Next, we transition to post-visit guidance and discharge clarity."}},joanna:{connections:["workforce","vriopi","device","ehr"],demo:{type:"live",headline:"Live demo: ASL-enabled clinical interaction.",why:"Shows direct, understandable communication for ASL patients during care decisions.",see:["Qualified ASL interpreter in encounter","Care team communication with patient inclusion"],owner:"Clinical + Interpreter Operations",focus:"ASL interpreting workflow",time:"~4-5 min",cue:"ASL communication support is integrated into the clinical interaction.",returnCue:"Next, we’ll move to discharge communication and follow-up clarity."}}}},
-{label:"Treatment / Inpatient Stay",phase:"At the Visit",icon:"bed",modality:"Continuous bedside support",amn:"Interpreter + equipment continuity",moment:{maria:"As care continued, support remained available whenever new questions came up.",abdi:"Across units, language support remained consistent.",tele:"Care plans were explained clearly in follow-up virtual touchpoints.",joanna:"During ongoing care, ASL communication support remained consistent across team handoffs."},behind:["Interpreter continuity through care transitions","Device availability across units","Team-wide language support alignment"],who:["Inpatient nursing","Hospitalists","Interpreter services"],outcome:["Consistent comprehension during treatment","Fewer communication-related delays"],impact:"Sustain communication quality throughout ongoing care.",connections:["workforce","vriopi","equipment","device"],stakeholders:{"Clinical":"Maintains clarity as treatment plans evolve.","Physician Services":"Supports multidisciplinary communication.","Administration":"Improves consistency across units/services."},demo:{type:"narrative",headline:"How language support stays consistent through continuing care.",why:"Prevents communication breakdowns during longer episodes of care.",see:["Consistent access model","Shared workflows across teams"],owner:"Inpatient Operations",focus:"Continuity reference",time:"~1-2 min",cue:"Language support continues across bedside and care planning interactions.",returnCue:"Next, we’ll show discharge communication and education."}},
-{label:"Discharge & Transition of Care",phase:"After the Visit",icon:"discharge",modality:"Translated instructions + teach-back",amn:"Jaide + interpreter support",moment:{maria:"I received discharge instructions in Spanish and understood next steps.",abdi:"Instructions were translated and explained clearly before leaving.",tele:"Medication and follow-up guidance came in my language.",joanna:"Discharge plans were communicated clearly with ASL support so I understood what comes next."},behind:["Discharge content translated","Teach-back supported by interpreter","Medication and follow-up clarity emphasized"],who:["Care transition team","Patient education","Interpreters"],outcome:["Improved adherence","Reduced avoidable return visits"],impact:"Improve safety after discharge with clear multilingual instructions.",connections:["jaide","workforce","ehr"],stakeholders:{"Clinical":"Improves patient understanding of next steps.","Patient Experience":"Builds confidence after discharge.","Compliance":"Supports understandable communication requirements.","Informatics":"Improves consistency of discharge communication content."},demo:{type:"live",headline:"Live demo: multilingual discharge communication.",why:"Strengthens adherence and reduces avoidable readmissions.",see:["Translated discharge workflow","Clear patient instructions and confirmation"],owner:"Care Transition / Patient Education",focus:"Jaide AI Translation Tool",time:"~3-4 min",cue:"Discharge understanding drives safety, adherence, and outcomes.",returnCue:"Finally, we continue language access in follow-up care."}},
-{label:"Post Visit & Ongoing Care",phase:"After the Visit",icon:"followup",modality:"Portal, telehealth, follow-up",amn:"Digital continuity",moment:{maria:"Follow-up communication stayed in Spanish, including portal and billing questions.",abdi:"My family could ask follow-up questions in Somali.",tele:"Virtual follow-up remained accessible in my language through telehealth.",joanna:"Follow-up touchpoints continued to include ASL-ready options and clear communication pathways."},behind:["Portal and outreach support multilingual content","Virtual follow-up includes interpreter pathways","Billing/non-clinical communication remains accessible"],who:["Digital health team","Contact center","Follow-up clinicians"],outcome:["Higher engagement after visit","More complete longitudinal communication"],impact:"Extend language access beyond discharge into long-term engagement.",connections:["jaide","telehealth","apis","patientline"],stakeholders:{"Digital Health":"Extends support across virtual channels.","Data Analytics":"Tracks utilization, response times, and outcomes.","Patient Experience":"Maintains trust after the encounter.","Administration":"Connects service impact to operational priorities."},demo:{type:"narrative",headline:"How multilingual support continues after the visit.",why:"Shows language access as a continuous service, not a one-time event.",see:["Follow-up channel coverage","Telehealth and portal continuity"],owner:"Digital / Follow-up Team",focus:"Continuity wrap-up",time:"~1-2 min",cue:"Language access extends into follow-up, portal, and virtual touchpoints.",returnCue:"That completes the end-to-end language access journey."}}
+const stages = [
+  {
+    phase: "Pre-Visit",
+    title: "1. Awareness & Access to Care",
+    icon: "🌐",
+    patient: {
+      span: "Claudia finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
+      som: "Anna learns about maternity services through community outreach and calls in Somali to ask what to expect.",
+      tele: "Roland receives discharge guidance and is offered telehealth follow-up options in Vietnamese.",
+      joanna: "Ezra seeks urgent care and needs clear ASL access information before arrival.",
+    },
+    behind: [
+      "Patient discovers care options and contact channels.",
+      "Essentia receives inquiries through digital and phone channels.",
+      "Language preference is captured early to shape next steps.",
+    ],
+    who: ["Patient / family", "Front-end access staff", "Call center", "Digital team"],
+    outcomes: [
+      "Patient feels welcomed at first touchpoint.",
+      "Care entry starts with fewer delays and less confusion.",
+      "Essentia captures demand signals by language and modality.",
+    ],
+    connections: {
+      span: ["Patient Line", "Jaide Website Translation", "Contact center interpreter access"],
+      som: ["Patient Line", "Bilingual outreach scripting", "Appointment language capture"],
+      tele: ["Discharge follow-up routing", "Telehealth language preference capture", "Patient Line"],
+      joanna: ["ASL access triage", "Video relay intake option", "Urgent access routing"],
+    },
+    stakeholder: {
+      it: "Ensure entry points are integrated so language preference data moves downstream.",
+      clinical: "Set clear intake prompts to avoid missed language needs.",
+      ops: "Align staffing and routing to demand by language.",
+      exec: "First-touch experience influences trust, retention, and equity outcomes.",
+    },
+    impact: "Early language alignment improves access and reduces abandonment before care begins.",
+    demo: {
+      owner: "AMN",
+      focus: "Patient Line + intake language capture",
+      time: "45 seconds",
+      cue: "Show how language needs are identified at first contact.",
+      return: "Return to timeline and advance to appointment.",
+      badge: "Front Door",
+      headline: "Language access begins before the first appointment.",
+      seeTitle: "What to show",
+      see: [
+        "How inbound requests trigger interpreter-ready pathways.",
+        "How preferred language is captured and retained.",
+        "How ASL or rare language needs can be escalated.",
+      ],
+      why: "Getting this right at intake reduces friction for both patients and staff throughout the journey.",
+    },
+  },
+  {
+    phase: "Pre-Visit",
+    title: "2. Appointment Confirmation & Pre-Visit",
+    icon: "🗓️",
+    patient: {
+      span: "Claudia schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
+      som: "Anna gets reminders and prenatal prep guidance, with Somali support for questions.",
+      tele: "Roland confirms his telehealth appointment and receives bilingual technical instructions.",
+      joanna: "Ezra’s appointment flag indicates ASL support is required at check-in.",
+    },
+    behind: [
+      "Appointments are created with language and modality needs attached.",
+      "Reminders and prep instructions are sent through preferred channels.",
+      "Interpreter demand is forecasted ahead of the visit.",
+    ],
+    who: ["Scheduling", "Patient access", "Interpreter operations", "Patient"],
+    outcomes: [
+      "Patient arrives informed and prepared.",
+      "Interpreter resources are better aligned to expected demand.",
+      "Reduced no-shows and day-of surprises.",
+    ],
+    connections: {
+      span: ["Scheduling language flags", "Pre-visit translated content", "Reminder workflows"],
+      som: ["Outbound interpreter support", "Prenatal education language support", "SMS/voice reminders"],
+      tele: ["Telehealth workflow alignment", "Bilingual setup instructions", "Interpreter pre-assignment"],
+      joanna: ["ASL scheduling flags", "Visual communication prep", "Visit readiness notes"],
+    },
+    stakeholder: {
+      it: "Support reliable data flow from scheduling to interpreter workflows.",
+      clinical: "Confirm pre-visit education is understood.",
+      ops: "Reduce avoidable delays through better prep and matching.",
+      exec: "Prepared visits improve quality metrics and efficiency.",
+    },
+    impact: "Preparation with language support improves readiness and operational predictability.",
+    demo: {
+      owner: "Essentia + AMN",
+      focus: "Pre-visit communication and interpreter planning",
+      time: "40 seconds",
+      cue: "Show reminder + prep flow and language-specific routing.",
+      return: "Advance to arrival/check-in stage.",
+      badge: "Readiness",
+      headline: "Pre-visit coordination reduces day-of delays.",
+      seeTitle: "What to show",
+      see: [
+        "Appointment records carrying language requirements.",
+        "How reminders and prep instructions are delivered.",
+        "How ASL and specialty needs are queued.",
+      ],
+      why: "When prep is clear, encounters start faster and with less stress.",
+    },
+  },
+  {
+    phase: "During Visit",
+    title: "3. Arrival & Check-In",
+    icon: "🏥",
+    patient: {
+      span: "Claudia checks in and confirms she will have Spanish interpretation before triage begins.",
+      som: "Anna arrives for prenatal care and confirms Somali support at registration.",
+      tele: "Roland arrives for any needed in-person follow-up and needs quick Vietnamese support.",
+      joanna: "Ezra needs immediate ASL-enabled communication during intake.",
+    },
+    behind: [
+      "Registration verifies identity, visit purpose, and communication preferences.",
+      "Interpreter request is initiated based on language and urgency.",
+      "Staff prepare the encounter to avoid delays in care start.",
+    ],
+    who: ["Front desk", "Nursing intake", "Interpreter operations", "Patient"],
+    outcomes: [
+      "Patient starts encounter with clear communication.",
+      "Staff avoid ad hoc workarounds.",
+      "Check-in throughput improves.",
+    ],
+    connections: {
+      span: ["Front-desk quick request tools", "On-demand interpreter dispatch", "Patient identity + language verification"],
+      som: ["Rapid request escalation", "Maternity workflow alignment", "Interpreter connection status"],
+      tele: ["Hybrid visit support", "Cross-channel interpreter continuity", "Queue visibility"],
+      joanna: ["ASL rapid connect", "Video device readiness", "Escalation path"],
+    },
+    stakeholder: {
+      it: "Maintain reliable endpoint and connectivity performance.",
+      clinical: "Start clinical intake with communication confidence.",
+      ops: "Protect check-in throughput and avoid bottlenecks.",
+      exec: "Fast, equitable intake improves experience and reduces risk.",
+    },
+    impact: "Reliable language support at arrival prevents downstream delays.",
+    demo: {
+      owner: "AMN",
+      focus: "Rapid interpreter request + connection",
+      time: "35 seconds",
+      cue: "Show how staff request and connect interpreter from intake.",
+      return: "Advance to clinical encounter.",
+      badge: "Activation",
+      headline: "Interpreter activation happens in operational real time.",
+      seeTitle: "What to show",
+      see: [
+        "One-touch request from check-in workflow.",
+        "Connection status and fallback options.",
+        "ASL/video readiness checks.",
+      ],
+      why: "Fast activation reduces time-to-care and staff burden.",
+    },
+  },
+  {
+    phase: "During Visit",
+    title: "4. Clinical Encounter",
+    icon: "🩺",
+    patient: {
+      span: "Claudia discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
+      som: "Anna reviews prenatal concerns and asks culturally sensitive questions in Somali.",
+      tele: "Roland completes telehealth follow-up with Vietnamese interpretation during provider discussion.",
+      joanna: "Ezra communicates directly with clinicians through ASL interpretation during urgent decision-making.",
+    },
+    behind: [
+      "Interpreter joins the clinical conversation in the chosen modality.",
+      "Clinical team completes assessment and care planning.",
+      "Clarifications are handled in real time to preserve safety.",
+    ],
+    who: ["Provider", "Nurse", "Interpreter", "Patient"],
+    outcomes: [
+      "Patient comprehension and trust increase.",
+      "Clinical decisions are made with fewer communication gaps.",
+      "Care plans are more accurately understood.",
+    ],
+    connections: {
+      span: ["VRI/OPI session controls", "Clinical workflow interoperability", "On-demand escalation"],
+      som: ["Specialty interpreter matching", "Complex counseling support", "Shared decision support"],
+      tele: ["Teladoc encounter support", "Virtual interpreter controls", "Visit continuity"],
+      joanna: ["ASL encounter excellence", "High-clarity video workflow", "Critical communication support"],
+    },
+    stakeholder: {
+      it: "Ensure stable, secure session performance across endpoints.",
+      clinical: "Maintain quality of communication during diagnostic and treatment decisions.",
+      ops: "Provide consistent support across modalities and departments.",
+      exec: "This is where communication quality most directly impacts outcomes.",
+    },
+    impact: "High-quality interpreted encounters support safer, better-informed care decisions.",
+    demo: {
+      owner: "AMN + Clinical team",
+      focus: "Live interpreted encounter controls",
+      time: "50 seconds",
+      cue: "Show active session controls and backup path.",
+      return: "Advance to treatment/inpatient stage.",
+      badge: "Clinical Core",
+      headline: "Interpretation is part of care delivery, not an add-on.",
+      seeTitle: "What to show",
+      see: [
+        "In-session controls for providers and interpreters.",
+        "How modality can shift if clinical context changes.",
+        "How backup escalation protects continuity.",
+      ],
+      why: "Clear communication here protects both quality and safety.",
+    },
+  },
+  {
+    phase: "During Visit",
+    title: "5. Treatment / Inpatient Stay",
+    icon: "💊",
+    patient: {
+      span: "Claudia receives inpatient updates and medication education in Spanish over multiple touchpoints.",
+      som: "Anna receives treatment and monitoring updates in Somali through different care teams.",
+      tele: "Roland has medication and recovery coaching that may alternate between in-person and virtual support.",
+      joanna: "Ezra requires continued ASL communication support as care transitions across units.",
+    },
+    behind: [
+      "Care teams hand off information through shifts and units.",
+      "Interpreter support is reused across repeated interactions.",
+      "Education and consent moments are reinforced over time.",
+    ],
+    who: ["Inpatient clinicians", "Interpreter services", "Care coordinators", "Patient/family"],
+    outcomes: [
+      "Reduced miscommunication during transitions.",
+      "Improved adherence to treatment plans.",
+      "Better patient confidence across longer stays.",
+    ],
+    connections: {
+      span: ["Continuity workflows", "Medication education support", "Interpreter reuse context"],
+      som: ["Shift-to-shift communication support", "Family-inclusive counseling", "High-demand language balancing"],
+      tele: ["Hybrid continuity", "Cross-modality tracking", "Recovery coaching support"],
+      joanna: ["ASL continuity", "Unit-to-unit handoff support", "Escalation safeguards"],
+    },
+    stakeholder: {
+      it: "Keep interoperability and endpoint reliability consistent across care settings.",
+      clinical: "Protect communication consistency through complex care episodes.",
+      ops: "Balance interpreter utilization while preserving continuity.",
+      exec: "Continuity in communication influences quality, satisfaction, and throughput.",
+    },
+    impact: "Sustained language support improves continuity and treatment adherence.",
+    demo: {
+      owner: "Essentia + AMN",
+      focus: "Continuity and handoff support",
+      time: "35 seconds",
+      cue: "Show repeated-session continuity and context carry-forward.",
+      return: "Advance to discharge and transition.",
+      badge: "Continuity",
+      headline: "Communication continuity matters most over longer care episodes.",
+      seeTitle: "What to show",
+      see: [
+        "How sessions are linked across teams.",
+        "How education touchpoints are reinforced.",
+        "How escalations are managed without breaking flow.",
+      ],
+      why: "Consistency prevents rework and improves patient readiness.",
+    },
+  },
+  {
+    phase: "Post-Visit",
+    title: "6. Discharge & Transition of Care",
+    icon: "📄",
+    patient: {
+      span: "Claudia reviews discharge instructions and medication plans in Spanish before going home.",
+      som: "Anna receives postpartum guidance and warning signs in Somali.",
+      tele: "Roland gets recovery instructions and telehealth follow-up details in Vietnamese.",
+      joanna: "Ezra reviews discharge and follow-up steps with ASL support to ensure clarity.",
+    },
+    behind: [
+      "Discharge documentation and education are delivered with language support.",
+      "Patient understanding is validated before transition.",
+      "Follow-up communication paths are set.",
+    ],
+    who: ["Discharge nurse", "Care coordinator", "Interpreter", "Patient/family"],
+    outcomes: [
+      "Patient leaves with clearer understanding.",
+      "Lower risk of avoidable complications.",
+      "Stronger transition into home or next-care setting.",
+    ],
+    connections: {
+      span: ["Translated discharge support", "Medication education interpretation", "Post-care messaging readiness"],
+      som: ["Postpartum instruction support", "Family-centered explanation", "Follow-up coordination"],
+      tele: ["Telehealth transition support", "Vietnamese discharge reinforcement", "Reminder setup"],
+      joanna: ["ASL discharge support", "Visual teach-back support", "Follow-up planning"],
+    },
+    stakeholder: {
+      it: "Support accurate documentation and communication handoff tools.",
+      clinical: "Ensure discharge understanding and safe self-management.",
+      ops: "Standardize transition workflows with language support.",
+      exec: "Clear discharge communication reduces downstream utilization risk.",
+    },
+    impact: "Effective interpreted discharge improves safety and continuity after leaving care.",
+    demo: {
+      owner: "AMN + care transition team",
+      focus: "Discharge communication quality",
+      time: "40 seconds",
+      cue: "Show interpreted discharge and patient teach-back support.",
+      return: "Advance to post-visit follow-up.",
+      badge: "Transition",
+      headline: "Discharge clarity is a major predictor of post-visit success.",
+      seeTitle: "What to show",
+      see: [
+        "How instructions are delivered with interpretation.",
+        "How comprehension is confirmed.",
+        "How follow-up channels are configured.",
+      ],
+      why: "Strong transition communication lowers avoidable returns.",
+    },
+  },
+  {
+    phase: "Post-Visit",
+    title: "7. Post Visit & Ongoing Care",
+    icon: "🔄",
+    patient: {
+      span: "Claudia receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",
+      som: "Anna receives postpartum follow-up and ongoing education support in Somali.",
+      tele: "Roland completes virtual check-ins and receives ongoing Vietnamese support for recovery.",
+      joanna: "Ezra continues care coordination and follow-up communication with ASL-accessible pathways.",
+    },
+    behind: [
+      "Follow-up calls, messages, and education continue after discharge.",
+      "Billing and patient feedback interactions occur.",
+      "Performance data informs continuous improvement.",
+    ],
+    who: ["Care management", "Patient experience", "Revenue cycle", "Interpreter quality teams"],
+    outcomes: [
+      "Higher follow-up completion and trust.",
+      "Improved patient-reported experience.",
+      "Data-driven optimization of language access operations.",
+    ],
+    connections: {
+      span: ["Portal messaging support", "Follow-up interpretation", "Quality analytics"],
+      som: ["Postpartum continuity outreach", "Survey language support", "Longitudinal engagement"],
+      tele: ["Telehealth follow-up interpretation", "Remote recovery support", "Performance insight"],
+      joanna: ["ASL follow-up pathways", "Accessible patient feedback", "Quality coaching loops"],
+    },
+    stakeholder: {
+      it: "Keep communication channels connected and measurable.",
+      clinical: "Support adherence and longitudinal care quality.",
+      ops: "Use data to optimize staffing, routing, and service levels.",
+      exec: "Post-visit engagement links experience to measurable outcomes.",
+    },
+    impact: "Ongoing interpreted engagement strengthens outcomes, loyalty, and operational learning.",
+    demo: {
+      owner: "Essentia + AMN",
+      focus: "Follow-up + quality loop",
+      time: "35 seconds",
+      cue: "Show post-visit messaging and quality/performance reporting.",
+      return: "Close with impact summary.",
+      badge: "Sustainment",
+      headline: "Language access continues after discharge, where long-term outcomes are shaped.",
+      seeTitle: "What to show",
+      see: [
+        "How follow-up interactions stay language-aligned.",
+        "How feedback data is captured.",
+        "How quality metrics drive service improvement.",
+      ],
+      why: "This is where operational maturity and patient trust compound over time.",
+    },
+  },
 ];
 
-let pIndex=0,sIndex=0,timer=null,activeStakeholder="";
-const $=(id)=>document.getElementById(id);
-const getCurrentStage=()=>{const base=stages[sIndex];const p=personas[pIndex];if(base.scenarioOverrides&&base.scenarioOverrides[p.id]){const ov=base.scenarioOverrides[p.id];return {...base,...ov,demo:{...base.demo,...(ov.demo||{})},connections:ov.connections||base.connections};}return base;};
-function setList(id,items){const el=$(id);el.innerHTML="";items.forEach(t=>{const li=document.createElement("li");li.textContent=t;el.appendChild(li);});}
-function renderPersonas(){const g=$("scenarioGrid");g.innerHTML="";personas.forEach((p,i)=>{const b=document.createElement("button");b.type="button";b.className="scenario-card"+(i===pIndex?" active":"");b.innerHTML=`<span class="badge">${p.initial}</span><span><h3>${p.name} — ${p.title}</h3><p>${p.desc}</p></span>`;b.onclick=()=>{pIndex=i;activeStakeholder="";renderPersonas();render();};g.appendChild(b);});}
-function nodePercent(i){return((i+0.5)/stages.length)*100;}
-function renderTrack(){const n=$("nodes");n.innerHTML="";stages.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.className="node"+(i<sIndex?" done":"")+(i===sIndex?" active":"");b.style.left=nodePercent(i)+"%";b.innerHTML=`<span class="dot"></span><span class="label">${i+1}. ${s.label}</span>`;b.onclick=()=>{sIndex=i;stopPlay();activeStakeholder="";render();};n.appendChild(b);});$("avatar").style.left=nodePercent(sIndex)+"%";$("trackFill").style.width=nodePercent(sIndex)+"%";}
-function renderStage(){const s=getCurrentStage(),p=personas[pIndex];$("stageIcon").innerHTML=`<svg viewBox="0 0 24 24">${icons[s.icon]}</svg>`;$("stagePhase").textContent=s.phase;$("stageTitle").textContent=s.label;$("stageCounter").textContent=`${sIndex+1} / ${stages.length}`;$("patientMoment").innerHTML=`<strong>${p.name} (${p.lang}):</strong> ${s.moment[p.id]}`;$("statusRow").innerHTML=`<span class="chip lang">Patient language: ${p.lang}</span><span class="chip mod">Modality: ${s.modality}</span><span class="chip amn">AMN: ${s.amn}</span>`;setList("behindList",s.behind);setList("whoList",s.who);setList("outcomeList",s.outcome);$("impactText").textContent=s.impact;}
-function renderConnections(){const s=getCurrentStage(),g=$("connectionGrid");g.innerHTML="";Object.keys(connectionCatalog).forEach(k=>{const c=connectionCatalog[k],a=s.connections.includes(k);const card=document.createElement("article");card.className="connection-card"+(a?" active":"");card.innerHTML=`<h3>${c.name}</h3><p>${c.desc}</p>`;g.appendChild(card);});}
-function renderStakeholders(){const s=getCurrentStage(),wrap=$("stakeholderStrip"),detail=$("stakeholderDetail");wrap.innerHTML="";const keys=stakeholderOrder.filter(k=>s.stakeholders&&s.stakeholders[k]);if(!activeStakeholder||!s.stakeholders[activeStakeholder])activeStakeholder=keys[0]||"";keys.forEach(k=>{const btn=document.createElement("button");btn.type="button";btn.className="stake-chip"+(k===activeStakeholder?" active":"");btn.textContent=k;btn.onclick=()=>{activeStakeholder=k;renderStakeholders();};wrap.appendChild(btn);});detail.textContent=activeStakeholder&&s.stakeholders[activeStakeholder]?`${activeStakeholder}: ${s.stakeholders[activeStakeholder]}`:"";}
-function renderDemo(){const d=getCurrentStage().demo,b=$("demoBadge");if(d.type==="live"){b.textContent="Live demo";b.classList.add("live");$("demoLeftTitle").textContent="What you'll see";}else{b.textContent="How it works";b.classList.remove("live");$("demoLeftTitle").textContent="Key capabilities";}$("demoHeadline").textContent=d.headline;$("demoWhy").textContent=d.why;setList("demoSee",d.see);$("demoOwner").textContent=d.owner;$("demoFocus").textContent=d.focus;$("demoTime").textContent=d.time;$("demoCue").textContent=d.cue;$("demoReturn").textContent=d.returnCue;}
-function render(){renderTrack();renderStage();renderConnections();renderStakeholders();renderDemo();$("prevBtn").disabled=sIndex===0;$("nextBtn").disabled=sIndex===stages.length-1;}
-function next(){if(sIndex<stages.length-1){sIndex++;activeStakeholder="";render();}else stopPlay();}
-function prev(){if(sIndex>0){sIndex--;activeStakeholder="";render();}}
-function stopPlay(){clearInterval(timer);timer=null;$("playBtn").innerHTML="&#9654; Auto-play";}
-function togglePlay(){if(timer){stopPlay();return;}$("playBtn").innerHTML="&#10074;&#10074; Pause";timer=setInterval(next,7000);}
-$("nextBtn").onclick=()=>{stopPlay();next();};$("prevBtn").onclick=()=>{stopPlay();prev();};$("playBtn").onclick=togglePlay;$("resetBtn").onclick=()=>{stopPlay();pIndex=0;sIndex=0;activeStakeholder="";renderPersonas();render();window.scrollTo({top:0,behavior:"smooth"});};$("presentationMode").onchange=(e)=>document.body.classList.toggle("presentation-mode",e.target.checked);document.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){stopPlay();next();}if(e.key==="ArrowLeft"){stopPlay();prev();}});
-renderPersonas();render();
+const stakeholders = [
+  { key: "it", label: "IT / Digital", icon: "💻" },
+  { key: "clinical", label: "Clinical Leaders", icon: "🩺" },
+  { key: "ops", label: "Operations", icon: "⚙️" },
+  { key: "exec", label: "Executive Sponsors", icon: "📊" },
+];
+
+const scenarioGrid = document.getElementById("scenarioGrid");
+const nodesWrap = document.getElementById("nodes");
+const trackFill = document.getElementById("trackFill");
+const avatar = document.getElementById("avatar");
+const stagePhase = document.getElementById("stagePhase");
+const stageTitle = document.getElementById("stageTitle");
+const stageIcon = document.getElementById("stageIcon");
+const stageCounter = document.getElementById("stageCounter");
+const patientMoment = document.getElementById("patientMoment");
+const behindList = document.getElementById("behindList");
+const whoList = document.getElementById("whoList");
+const outcomeList = document.getElementById("outcomeList");
+const connectionGrid = document.getElementById("connectionGrid");
+const stakeholderStrip = document.getElementById("stakeholderStrip");
+const stakeholderDetail = document.getElementById("stakeholderDetail");
+const impactText = document.getElementById("impactText");
+const demoBadge = document.getElementById("demoBadge");
+const demoHeadline = document.getElementById("demoHeadline");
+const demoLeftTitle = document.getElementById("demoLeftTitle");
+const demoSee = document.getElementById("demoSee");
+const demoWhy = document.getElementById("demoWhy");
+const demoOwner = document.getElementById("demoOwner");
+const demoFocus = document.getElementById("demoFocus");
+const demoTime = document.getElementById("demoTime");
+const demoCue = document.getElementById("demoCue");
+const demoReturn = document.getElementById("demoReturn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const playBtn = document.getElementById("playBtn");
+const resetBtn = document.getElementById("resetBtn");
+const presentationMode = document.getElementById("presentationMode");
+const body = document.body;
+
+let pIndex = 0;
+let sIndex = 0;
+let auto = null;
+let activeStakeholder = "it";
+
+function make(tag, cls, text) {
+  const el = document.createElement(tag);
+  if (cls) el.className = cls;
+  if (text) el.textContent = text;
+  return el;
+}
+
+function populateScenarioCards() {
+  personas.forEach((p, i) => {
+    const card = make("button", "scenario-card");
+    card.type = "button";
+    card.style.setProperty("--chip", p.style);
+    card.innerHTML = `
+      <div class="avatar-dot" aria-hidden="true"></div>
+      <h3>${p.name}, ${p.age}</h3>
+      <p><strong>Primary communication:</strong> ${p.language}</p>
+      <p>${p.situation}</p>
+    `;
+    card.addEventListener("click", () => {
+      pIndex = i;
+      sIndex = 0;
+      setScenarioActive();
+      render();
+      stopAuto();
+    });
+    scenarioGrid.appendChild(card);
+  });
+  setScenarioActive();
+}
+
+function setScenarioActive() {
+  [...scenarioGrid.children].forEach((card, i) => {
+    card.classList.toggle("active", i === pIndex);
+  });
+}
+
+function buildNodes() {
+  stages.forEach((s, i) => {
+    const node = make("button", "node");
+    node.type = "button";
+    node.setAttribute("aria-label", s.title);
+    node.innerHTML = `<span>${s.title}</span>`;
+    node.addEventListener("click", () => {
+      sIndex = i;
+      render();
+      stopAuto();
+    });
+    nodesWrap.appendChild(node);
+  });
+}
+
+function fillList(el, items) {
+  el.innerHTML = "";
+  items.forEach((item) => {
+    const li = make("li", "", item);
+    el.appendChild(li);
+  });
+}
+
+function renderConnections(stage, personaKey) {
+  connectionGrid.innerHTML = "";
+  stage.connections[personaKey].forEach((item) => {
+    const card = make("article", "connection-card");
+    card.innerHTML = `<h3>${item}</h3><p>Connected to this step of ${personas[pIndex].name}’s journey.</p>`;
+    connectionGrid.appendChild(card);
+  });
+}
+
+function renderStakeholders(stage) {
+  stakeholderStrip.innerHTML = "";
+  stakeholders.forEach((s) => {
+    const btn = make("button", "stake-chip", `${s.icon} ${s.label}`);
+    btn.type = "button";
+    btn.classList.toggle("active", s.key === activeStakeholder);
+    btn.addEventListener("click", () => {
+      activeStakeholder = s.key;
+      renderStakeholders(stage);
+    });
+    stakeholderStrip.appendChild(btn);
+  });
+  stakeholderDetail.textContent = stage.stakeholder[activeStakeholder];
+}
+
+function renderDemo(stage) {
+  const d = stage.demo;
+  demoBadge.textContent = d.badge;
+  demoHeadline.textContent = d.headline;
+  demoLeftTitle.textContent = d.seeTitle;
+  demoWhy.textContent = d.why;
+  demoOwner.textContent = d.owner;
+  demoFocus.textContent = d.focus;
+  demoTime.textContent = d.time;
+  demoCue.textContent = d.cue;
+  demoReturn.textContent = d.return;
+  fillList(demoSee, d.see);
+}
+
+function renderTimeline() {
+  const pct = (sIndex / (stages.length - 1)) * 100;
+  trackFill.style.width = `${pct}%`;
+  avatar.style.left = `calc(${pct}% - 21px)`;
+  [...nodesWrap.children].forEach((n, i) => {
+    n.classList.toggle("active", i <= sIndex);
+    n.classList.toggle("current", i === sIndex);
+  });
+}
+
+function render() {
+  const persona = personas[pIndex];
+  const stage = stages[sIndex];
+
+  stagePhase.textContent = stage.phase;
+  stageTitle.textContent = stage.title;
+  stageIcon.textContent = stage.icon;
+  stageCounter.textContent = `Step ${sIndex + 1} of ${stages.length}`;
+
+  patientMoment.textContent = stage.patient[persona.id];
+
+  fillList(behindList, stage.behind);
+  fillList(whoList, stage.who);
+  fillList(outcomeList, stage.outcomes);
+
+  renderConnections(stage, persona.id);
+  renderStakeholders(stage);
+  renderDemo(stage);
+
+  impactText.textContent = stage.impact;
+
+  renderTimeline();
+  prevBtn.disabled = sIndex === 0;
+  nextBtn.disabled = sIndex === stages.length - 1;
+}
+
+function next() {
+  if (sIndex < stages.length - 1) {
+    sIndex += 1;
+  } else {
+    sIndex = 0;
+  }
+  render();
+}
+
+function prev() {
+  if (sIndex > 0) sIndex -= 1;
+  render();
+}
+
+function toggleAuto() {
+  if (auto) {
+    stopAuto();
+  } else {
+    playBtn.textContent = "❚❚ Pause";
+    auto = setInterval(next, 3500);
+  }
+}
+
+function stopAuto() {
+  if (auto) {
+    clearInterval(auto);
+    auto = null;
+    playBtn.textContent = "▶ Auto-play";
+  }
+}
+
+prevBtn.addEventListener("click", () => {
+  prev();
+  stopAuto();
+});
+nextBtn.addEventListener("click", () => {
+  next();
+  stopAuto();
+});
+playBtn.addEventListener("click", toggleAuto);
+resetBtn.addEventListener("click", () => {
+  pIndex = 0;
+  sIndex = 0;
+  activeStakeholder = "it";
+  setScenarioActive();
+  render();
+  stopAuto();
+});
+presentationMode.addEventListener("change", () => {
+  body.classList.toggle("presentation-mode", presentationMode.checked);
+});
+
+populateScenarioCards();
+buildNodes();
+render();
