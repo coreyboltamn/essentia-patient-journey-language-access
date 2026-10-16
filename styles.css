@@ -435,65 +435,6 @@ button {
   color: #274562;
 }
 
-.live-demo-checkpoint {
-  border: 1px solid #c8cffc;
-  border-left: 4px solid var(--purple);
-  border-radius: 10px;
-  background: #f8fbff;
-  padding: 0.65rem;
-  margin-top: 0.5rem;
-  overflow-wrap: anywhere;
-}
-.live-demo-checkpoint h3 {
-  margin: 0 0 0.5rem;
-  color: var(--navy);
-  font-size: 0.95rem;
-}
-.live-demo-checkpoint p {
-  margin: 0.4rem 0;
-}
-.live-demo-checkpoint .connection-note {
-  margin-bottom: 0;
-}
-.demo-controls, .demo-choices {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.live-demo-details {
-  flex: 1 1 250px;
-  min-width: 0;
-  font-size: 0.85rem;
-}
-.live-demo-details summary {
-  padding: 0.5rem 0;
-}
-.node-demos {
-  padding: 0.4rem 0.2rem 0;
-}
-.demo-marker, .demo-chip {
-  border: 1px solid #c8cffc;
-  border-radius: 999px;
-  background: #f7f3fe;
-  color: #4b2881;
-  cursor: pointer;
-  padding: 0.35rem 0.5rem;
-  font-size: 0.75rem;
-}
-.demo-marker {
-  width: 100%;
-  margin-top: 0.2rem;
-}
-.demo-marker[aria-pressed="true"], .demo-chip[aria-pressed="true"] {
-  background: #e7def7;
-  border-color: var(--purple);
-}
-.demo-chip:disabled {
-  cursor: not-allowed;
-}
-.live-demo-state:not(:empty) { font-weight: 700; color: var(--navy); }
-.live-demo-checkpoint button { max-width: 100%; white-space: normal; }
 :focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: 3px;

@@ -5,99 +5,40 @@ Microsite demo for Essentia + AMN patient journey language access workflows.
 ## Live site
 https://coreyboltamn.github.io/essentia-patient-journey-language-access/
 
-## Live-demo presentation checkpoints
+## Screen-sharing presentations
 
-**Demo** markers now sit directly on the patient journey spine. Select one to
-choose its stage and reveal a compact **Live demo opportunity** beside the
-timeline, without scrolling to another section. The standalone section 5 and
-its action/interpreter tabs have been removed.
-This is a suggested presentation plan, not a claim about product availability
-or actual demo duration:
-
-| Journey step | Suggested demo | Suggested duration |
-| --- | --- | --- |
-| Awareness & Access | Jaide AI Translation and Live Speech: routine nonclinical written translation | 2 minutes |
-| Appointment Confirmation & Pre-Visit | In-person Interpreter using Interpreter Scheduling tool | 3 minutes |
-| Arrival & Check-In | VRI/OPI; **VRI / qualified ASL only** for Joanna | 3 minutes |
-| Clinical Encounter | Telehealth integration with Teladoc, for Tran only | 3 minutes |
-
-Jaide is not offered for Joanna; AI/live speech and audio-only telephony are not
-ASL substitutes. Other stages have no checkpoint. Use Tran’s scenario to include
-the telehealth demo rather than forcing it into an unrelated scenario.
+The live-demo callout, demo markers and presenter handoff controls have been
+removed for a cleaner shared-screen experience. Scenario selection, timeline
+navigation, stage details, AMN connections and stakeholders remain available.
 
 ### Presenter workflow
 
 1. Enable **Presentation Mode** for screen sharing. It hides the hero and
    collapses the scenario cards and touchpoint lists, keeping timeline navigation
-   and the compact demo cue together at laptop sizes. **Choose / change** always
+   compact at laptop sizes. **Choose / change** always
    shows the current persona and opens the scenario choices; **Common touchpoints**
    opens supporting detail. Both are keyboard-accessible disclosure controls.
    Leaving Presentation Mode expands these controls again. Other stage, solution
    and stakeholder content remains available below; nothing is fixed-height.
-2. Walk the spine or select a **Demo · technology** marker. At a checkpoint,
-   expand **Presenter handoff** for the script, suggested duration, demonstration
-   checklist and return cue. Multiple technologies at a stage appear as selectable
-   chips; only the selected demo's details are shown.
-3. Choose **Pause journey for live demo**. Autoplay stops, and an explicit
-   handoff state asks you to switch to your own demo application. This page
-   launches nothing, opens no external links and requires no credentials.
-4. Use fictional data in a prepared demo environment. Scheduling and telehealth
-   examples are configured illustrative workflows, not proof of live deployments.
-   Use qualified interpretation for clinical decisions/consent and appropriate
-   qualified review of translated content.
-5. Switch back and choose **Return to journey**. The exact persona and stage
-   stay unchanged, and focus stays on the local control without vertical scrolling.
-   Autoplay remains paused until you explicitly start it again.
-6. Back, Next, direct timeline/marker selection, scenario selection and Restart clear
-   the handoff state. Restart retains its existing first-scenario/first-step
-   behavior. Presentation Mode does not interrupt the handoff. Stages without
-   checkpoints have no demo cue. Normal stage progression does not scroll the page.
+2. Walk the spine or use **Back** and **Next** to explore each stage.
+   **Auto-play** advances the journey; **Pause** stops it.
+3. Scenario selection, direct timeline selection, Back, Next and Restart stop
+   autoplay. Restart returns to the first scenario and first step.
+   Normal stage progression does not scroll the page.
 
-### Editing the presentation plan
+Use fictional data for any separate demonstration. Scheduling and telehealth
+examples are configured illustrative workflows, not proof of live deployments.
+Use qualified interpretation for clinical decisions/consent and appropriate
+qualified review of translated content. AI/live speech and audio-only telephony
+are not ASL substitutes. Do not put credentials, PHI or invented demo URLs in this site.
 
-Edit `liveDemoCheckpoints` in `app.js`: `stageIndex` is the zero-based journey
-step; `id` references the existing `solutionCatalog` ID, which supplies the
-canonical name. `why`, `handoff`, `duration`, `show` and `returnCue` control the
-copy. `asl` provides explicit visual/qualified ASL variants. `checkpointsFor`
-also requires that solution to be available in the current stage/persona's
-connection mapping, preserving its ASL and Tran-only filters. Multiple entries
-may share a stage; while a demo is active, other start controls are disabled.
-
-External demo links are intentionally **not supported** by this version.
-Configure genuine links only in a future reviewed change with verified URLs,
-clear launch labels and appropriate security/accessibility handling; do not
-put credentials, PHI or invented demo URLs in this site.
-
-### Checkpoint regression checks
+### Journey regression checks
 
 Run `node --test tests/*.test.cjs` (Node 18+) and `node --check app.js`.
-The dependency-free tests cover the four technologies, stage/persona
-eligibility, ASL and nonclinical AI safeguards, pause/return focus, autoplay,
-navigation/reset/scenario cleanup, multiple-demo selection, missing DOM lookups,
-obsolete-section removal and spine markup placement. There is no
-build step or new dependency. Repeat the browser checks below when changing
-the journey or checkpoint controls.
-
-Validation of the spine-demo change: all **19 Node tests**, JavaScript syntax
-and diff whitespace checks passed. Installed headless Chromium/ChromeDriver
-passed **280 combinations** of four personas, seven stages, both presentation
-modes and sizes 1366×768, 1440×900, 768×1024, 375×812 and 320×740.
-Checks covered filtered markers/cues, unchanged solution-card counts, touchpoint
-updates, page overflow, local pause/return focus and laptop viewport fit.
-Native Enter/Space activation, multiple-demo chip selection, ASL details, real
-3.5-second autoplay advance/pause/return and six navigation cleanup paths passed.
-Normal-mode stage navigation and demo pause/return did not scroll vertically.
-
-Laptop, ASL and mobile screenshots were captured; the laptop screenshot was
-visually inspected (the image viewer limited further previews). There were no
-application JavaScript errors. Google Fonts could not resolve, so checks used
-fallback fonts; the existing absent favicon returned 404. The browser MCP
-connection was unavailable, so checks used installed ChromeDriver directly.
-Other browsers, physical devices, external demo apps and the public deployment
-were not verified.
-CodeQL found zero JavaScript alerts and changed-file secret scanning was clean.
-Automated code review was unavailable because its configured model was missing;
-an independent read-only review found no significant issues.
+The dependency-free tests cover callout removal, scenario/stage navigation,
+autoplay, restart, stakeholder selection, presentation-mode disclosures, AMN
+connection mapping, ASL and nonclinical AI safeguards. There is no build step.
+Repeat the browser checks below when changing the journey controls.
 
 **Merge this PR and complete GitHub Pages deployment to update the public site.**
 No live technology integration is added.
@@ -162,22 +103,19 @@ under `/essentia-patient-journey-language-access/`, not just at `/`.
 To repeat the checks in a browser:
 
 1. Check 1366×768 and 1440×900 laptops, plus widths 768, 375 and 320 pixels.
-   In Presentation Mode, the spine, navigation and active demo controls should
+   In Presentation Mode, the spine and navigation should
    fit together without scrolling. Cards and controls should fit on mobile;
    only the timeline should scroll horizontally.
 2. Select each of the four scenarios and all seven timeline steps. Check the
    patient details, highlighted touchpoints, and marker/line alignment, including
    the first and last steps.
-3. Select each demo marker with Enter/Space; verify stage/persona filters,
-   local details and pause/return focus. Joanna must see qualified ASL VRI,
-   never audio OPI or Jaide as ASL substitutes.
+3. Confirm no live-demo callout, demo markers or presenter handoff controls appear.
+   Joanna must see qualified ASL VRI, never audio OPI or Jaide as ASL substitutes.
 4. Exercise Back, Next, Restart Journey, all stakeholder buttons, and Auto-play
    followed by Pause. Restart should return to the first scenario and step.
-5. Expand/collapse **Choose / change**, **Common touchpoints** and **Presenter
-   handoff** using the keyboard. Detail remains available in both modes.
-6. Pause autoplay for a demo, switch away manually, and return: same persona
-   and stage, no vertical scroll and no automatic autoplay resume. Navigation,
-   scenario changes and Restart must clear the paused state and old details.
+5. Expand/collapse **Choose / change** and **Common touchpoints** using the
+   keyboard. Detail remains available in both modes.
+6. Confirm no console errors, layout gaps or orphaned callout borders remain.
 
 ### Deployment and limitations
 
