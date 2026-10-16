@@ -1,7 +1,7 @@
 const personas = [
   {
     id: "span",
-    name: "Claudia",
+    name: "Maria",
     age: 62,
     language: "Spanish",
     situation: "Managing diabetes and hypertension",
@@ -10,7 +10,7 @@ const personas = [
   },
   {
     id: "som",
-    name: "Anna",
+    name: "Abdi",
     age: 29,
     language: "Somali",
     situation: "First pregnancy with recurring prenatal visits",
@@ -19,7 +19,7 @@ const personas = [
   },
   {
     id: "tele",
-    name: "Roland",
+    name: "Tran",
     age: 41,
     language: "Vietnamese",
     situation: "Post-op follow-up via telehealth",
@@ -28,7 +28,7 @@ const personas = [
   },
   {
     id: "joanna",
-    name: "Ezra",
+    name: "Joanna",
     age: 33,
     language: "ASL",
     situation: "Emergency department visit requiring immediate communication",
@@ -43,10 +43,10 @@ const stages = [
     title: "1. Awareness & Access to Care",
     icon: "🌐",
     patient: {
-      span: "Claudia finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
-      som: "Anna learns about maternity services through community outreach and calls in Somali to ask what to expect.",
-      tele: "Roland receives discharge guidance and is offered telehealth follow-up options in Vietnamese.",
-      joanna: "Ezra seeks urgent care and needs clear ASL access information before arrival.",
+      span: "Maria finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
+      som: "Abdi learns about maternity services through community outreach and calls in Somali to ask what to expect.",
+      tele: "Tran receives discharge guidance and is offered telehealth follow-up options in Vietnamese.",
+      joanna: "Joanna seeks urgent care and needs clear ASL access information before arrival.",
     },
     behind: [
       "Patient discovers care options and contact channels.",
@@ -94,10 +94,10 @@ const stages = [
     title: "2. Appointment Confirmation & Pre-Visit",
     icon: "🗓️",
     patient: {
-      span: "Claudia schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
-      som: "Anna gets reminders and prenatal prep guidance, with Somali support for questions.",
-      tele: "Roland confirms his telehealth appointment and receives bilingual technical instructions.",
-      joanna: "Ezra’s appointment flag indicates ASL support is required at check-in.",
+      span: "Maria schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
+      som: "Abdi gets reminders and prenatal prep guidance, with Somali support for questions.",
+      tele: "Tran confirms his telehealth appointment and receives bilingual technical instructions.",
+      joanna: "Joanna’s appointment flag indicates ASL support is required at check-in.",
     },
     behind: [
       "Appointments are created with language and modality needs attached.",
@@ -145,10 +145,10 @@ const stages = [
     title: "3. Arrival & Check-In",
     icon: "🏥",
     patient: {
-      span: "Claudia checks in and confirms she will have Spanish interpretation before triage begins.",
-      som: "Anna arrives for prenatal care and confirms Somali support at registration.",
-      tele: "Roland arrives for any needed in-person follow-up and needs quick Vietnamese support.",
-      joanna: "Ezra needs immediate ASL-enabled communication during intake.",
+      span: "Maria checks in and confirms she will have Spanish interpretation before triage begins.",
+      som: "Abdi arrives for prenatal care and confirms Somali support at registration.",
+      tele: "Tran arrives for any needed in-person follow-up and needs quick Vietnamese support.",
+      joanna: "Joanna needs immediate ASL-enabled communication during intake.",
     },
     behind: [
       "Registration verifies identity, visit purpose, and communication preferences.",
@@ -196,10 +196,10 @@ const stages = [
     title: "4. Clinical Encounter",
     icon: "🩺",
     patient: {
-      span: "Claudia discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
-      som: "Anna reviews prenatal concerns and asks culturally sensitive questions in Somali.",
-      tele: "Roland completes telehealth follow-up with Vietnamese interpretation during provider discussion.",
-      joanna: "Ezra communicates directly with clinicians through ASL interpretation during urgent decision-making.",
+      span: "Maria discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
+      som: "Abdi reviews prenatal concerns and asks culturally sensitive questions in Somali.",
+      tele: "Tran completes telehealth follow-up with Vietnamese interpretation during provider discussion.",
+      joanna: "Joanna communicates directly with clinicians through ASL interpretation during urgent decision-making.",
     },
     behind: [
       "Interpreter joins the clinical conversation in the chosen modality.",
@@ -247,10 +247,10 @@ const stages = [
     title: "5. Treatment / Inpatient Stay",
     icon: "💊",
     patient: {
-      span: "Claudia receives inpatient updates and medication education in Spanish over multiple touchpoints.",
-      som: "Anna receives treatment and monitoring updates in Somali through different care teams.",
-      tele: "Roland has medication and recovery coaching that may alternate between in-person and virtual support.",
-      joanna: "Ezra requires continued ASL communication support as care transitions across units.",
+      span: "Maria receives inpatient updates and medication education in Spanish over multiple touchpoints.",
+      som: "Abdi receives treatment and monitoring updates in Somali through different care teams.",
+      tele: "Tran has medication and recovery coaching that may alternate between in-person and virtual support.",
+      joanna: "Joanna requires continued ASL communication support as care transitions across units.",
     },
     behind: [
       "Care teams hand off information through shifts and units.",
@@ -298,10 +298,10 @@ const stages = [
     title: "6. Discharge & Transition of Care",
     icon: "📄",
     patient: {
-      span: "Claudia reviews discharge instructions and medication plans in Spanish before going home.",
-      som: "Anna receives postpartum guidance and warning signs in Somali.",
-      tele: "Roland gets recovery instructions and telehealth follow-up details in Vietnamese.",
-      joanna: "Ezra reviews discharge and follow-up steps with ASL support to ensure clarity.",
+      span: "Maria reviews discharge instructions and medication plans in Spanish before going home.",
+      som: "Abdi receives postpartum guidance and warning signs in Somali.",
+      tele: "Tran gets recovery instructions and telehealth follow-up details in Vietnamese.",
+      joanna: "Joanna reviews discharge and follow-up steps with ASL support to ensure clarity.",
     },
     behind: [
       "Discharge documentation and education are delivered with language support.",
@@ -349,10 +349,10 @@ const stages = [
     title: "7. Post Visit & Ongoing Care",
     icon: "🔄",
     patient: {
-      span: "Claudia receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",
-      som: "Anna receives postpartum follow-up and ongoing education support in Somali.",
-      tele: "Roland completes virtual check-ins and receives ongoing Vietnamese support for recovery.",
-      joanna: "Ezra continues care coordination and follow-up communication with ASL-accessible pathways.",
+      span: "Maria receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",
+      som: "Abdi receives postpartum follow-up and ongoing education support in Somali.",
+      tele: "Tran completes virtual check-ins and receives ongoing Vietnamese support for recovery.",
+      joanna: "Joanna continues care coordination and follow-up communication with ASL-accessible pathways.",
     },
     behind: [
       "Follow-up calls, messages, and education continue after discharge.",
