@@ -72,22 +72,6 @@ const stages = [
       exec: "First-touch experience influences trust, retention, and equity outcomes.",
     },
     impact: "Early language alignment improves access and reduces abandonment before care begins.",
-    demo: {
-      owner: "AMN",
-      focus: "Patient Line + intake language capture",
-      time: "45 seconds",
-      cue: "Show how language needs are identified at first contact.",
-      return: "Return to timeline and advance to appointment.",
-      badge: "Front Door",
-      headline: "Language access begins before the first appointment.",
-      seeTitle: "What to show",
-      see: [
-        "How inbound requests trigger interpreter-ready pathways.",
-        "How preferred language is captured and retained.",
-        "How ASL or rare language needs can be escalated.",
-      ],
-      why: "Getting this right at intake reduces friction for both patients and staff throughout the journey.",
-    },
   },
   {
     phase: "Pre-Visit",
@@ -124,22 +108,6 @@ const stages = [
       exec: "Prepared visits improve quality metrics and efficiency.",
     },
     impact: "Preparation with language support improves readiness and operational predictability.",
-    demo: {
-      owner: "Essentia + AMN",
-      focus: "Pre-visit communication and interpreter planning",
-      time: "40 seconds",
-      cue: "Show reminder + prep flow and language-specific routing.",
-      return: "Advance to arrival/check-in stage.",
-      badge: "Readiness",
-      headline: "Pre-visit coordination reduces day-of delays.",
-      seeTitle: "What to show",
-      see: [
-        "Appointment records carrying language requirements.",
-        "How reminders and prep instructions are delivered.",
-        "How ASL and specialty needs are queued.",
-      ],
-      why: "When prep is clear, encounters start faster and with less stress.",
-    },
   },
   {
     phase: "During Visit",
@@ -175,22 +143,6 @@ const stages = [
       exec: "Fast, equitable intake improves experience and reduces risk.",
     },
     impact: "Reliable language support at arrival prevents downstream delays.",
-    demo: {
-      owner: "AMN",
-      focus: "Rapid interpreter request + connection",
-      time: "35 seconds",
-      cue: "Show how staff request and connect interpreter from intake.",
-      return: "Advance to clinical encounter.",
-      badge: "Activation",
-      headline: "Interpreter activation happens in operational real time.",
-      seeTitle: "What to show",
-      see: [
-        "One-touch request from check-in workflow.",
-        "Connection status and fallback options.",
-        "ASL/video readiness checks.",
-      ],
-      why: "Fast activation reduces time-to-care and staff burden.",
-    },
   },
   {
     phase: "During Visit",
@@ -227,22 +179,6 @@ const stages = [
       exec: "This is where communication quality most directly impacts outcomes.",
     },
     impact: "High-quality interpreted encounters support safer, better-informed care decisions.",
-    demo: {
-      owner: "AMN + Clinical team",
-      focus: "Live interpreted encounter controls",
-      time: "50 seconds",
-      cue: "Show active session controls and backup path.",
-      return: "Advance to treatment/inpatient stage.",
-      badge: "Clinical Core",
-      headline: "Interpretation is part of care delivery, not an add-on.",
-      seeTitle: "What to show",
-      see: [
-        "In-session controls for providers and interpreters.",
-        "How modality can shift if clinical context changes.",
-        "How backup escalation protects continuity.",
-      ],
-      why: "Clear communication here protects both quality and safety.",
-    },
   },
   {
     phase: "During Visit",
@@ -279,22 +215,6 @@ const stages = [
       exec: "Continuity in communication influences quality, satisfaction, and throughput.",
     },
     impact: "Sustained language support improves continuity and treatment adherence.",
-    demo: {
-      owner: "Essentia + AMN",
-      focus: "Continuity and handoff support",
-      time: "35 seconds",
-      cue: "Show repeated-session continuity and context carry-forward.",
-      return: "Advance to discharge and transition.",
-      badge: "Continuity",
-      headline: "Communication continuity matters most over longer care episodes.",
-      seeTitle: "What to show",
-      see: [
-        "How sessions are linked across teams.",
-        "How education touchpoints are reinforced.",
-        "How escalations are managed without breaking flow.",
-      ],
-      why: "Consistency prevents rework and improves patient readiness.",
-    },
   },
   {
     phase: "Post-Visit",
@@ -331,22 +251,6 @@ const stages = [
       exec: "Clear discharge communication reduces downstream utilization risk.",
     },
     impact: "Effective interpreted discharge improves safety and continuity after leaving care.",
-    demo: {
-      owner: "AMN + care transition team",
-      focus: "Discharge communication quality",
-      time: "40 seconds",
-      cue: "Show interpreted discharge and patient teach-back support.",
-      return: "Advance to post-visit follow-up.",
-      badge: "Transition",
-      headline: "Discharge clarity is a major predictor of post-visit success.",
-      seeTitle: "What to show",
-      see: [
-        "How instructions are delivered with interpretation.",
-        "How comprehension is confirmed.",
-        "How follow-up channels are configured.",
-      ],
-      why: "Strong transition communication lowers avoidable returns.",
-    },
   },
   {
     phase: "Post-Visit",
@@ -384,22 +288,6 @@ const stages = [
       exec: "Post-visit engagement links experience to measurable outcomes.",
     },
     impact: "Ongoing interpreted engagement strengthens outcomes, loyalty, and operational learning.",
-    demo: {
-      owner: "Essentia + AMN",
-      focus: "Follow-up + quality loop",
-      time: "35 seconds",
-      cue: "Show post-visit messaging and quality/performance reporting.",
-      return: "Close with impact summary.",
-      badge: "Sustainment",
-      headline: "Language access continues after discharge, where long-term outcomes are shaped.",
-      seeTitle: "What to show",
-      see: [
-        "How follow-up interactions stay language-aligned.",
-        "How feedback data is captured.",
-        "How quality metrics drive service improvement.",
-      ],
-      why: "This is where operational maturity and patient trust compound over time.",
-    },
   },
 ];
 
@@ -435,7 +323,7 @@ const stakeholders = [
 // Suggested presentation plan, not product availability or timing claims.
 const liveDemoCheckpoints = [
   {
-    id: "jaide", stageIndex: 0,
+    id: "jaide", stageIndex: 0, demoLabel: "Jaide Translation",
     why: "Pause as the patient looks for routine service information, before clinical discussions.",
     handoff: "Let’s switch to a fictional, nonclinical translation example to show how access information could be prepared.",
     duration: "2 minutes",
@@ -443,7 +331,7 @@ const liveDemoCheckpoints = [
     returnCue: "Return to access planning, then continue to appointment preparation.",
   },
   {
-    id: "in-person", stageIndex: 1,
+    id: "in-person", stageIndex: 1, demoLabel: "Interpreter Scheduler",
     why: "Interpreter needs are known and can be planned before the appointment.",
     handoff: "Let’s pause to walk through a fictional interpreter request and confirmation.",
     duration: "3 minutes",
@@ -455,7 +343,7 @@ const liveDemoCheckpoints = [
     },
   },
   {
-    id: "vri-opi", stageIndex: 2,
+    id: "vri-opi", stageIndex: 2, demoLabel: "VRI/OPI",
     why: "Check-in is the handoff from planned support to a qualified interpreter connection.",
     handoff: "Let’s switch to a sample qualified video or phone interpreter connection for check-in.",
     duration: "3 minutes",
@@ -468,7 +356,7 @@ const liveDemoCheckpoints = [
     },
   },
   {
-    id: "teladoc", stageIndex: 3,
+    id: "teladoc", stageIndex: 3, demoLabel: "Telehealth / Teladoc",
     why: "Tran’s virtual encounter is the point to show the patient, clinician and qualified interpreter joining.",
     handoff: "Let’s pause for a configured illustrative telehealth workflow, not proof of a live deployment.",
     duration: "3 minutes",
@@ -505,16 +393,6 @@ const connectionGrid = document.getElementById("connectionGrid");
 const stakeholderStrip = document.getElementById("stakeholderStrip");
 const stakeholderDetail = document.getElementById("stakeholderDetail");
 const impactText = document.getElementById("impactText");
-const demoBadge = document.getElementById("demoBadge");
-const demoHeadline = document.getElementById("demoHeadline");
-const demoLeftTitle = document.getElementById("demoLeftTitle");
-const demoSee = document.getElementById("demoSee");
-const demoWhy = document.getElementById("demoWhy");
-const demoOwner = document.getElementById("demoOwner");
-const demoFocus = document.getElementById("demoFocus");
-const demoTime = document.getElementById("demoTime");
-const demoCue = document.getElementById("demoCue");
-const demoReturn = document.getElementById("demoReturn");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const playBtn = document.getElementById("playBtn");
@@ -527,6 +405,13 @@ let sIndex = 0;
 let auto = null;
 let activeStakeholder = "it";
 let liveDemoId = null;
+let selectedDemoId = null;
+
+function clearLiveDemo() {
+  liveDemoId = null;
+  selectedDemoId = null;
+  document.getElementById("liveDemoDetails").open = false;
+}
 
 function make(tag, cls, text) {
   const el = document.createElement(tag);
@@ -547,7 +432,7 @@ function populateScenarioCards() {
       <p>${p.situation}</p>
     `;
     card.addEventListener("click", () => {
-      liveDemoId = null;
+      clearLiveDemo();
       pIndex = i;
       sIndex = 0;
       setScenarioActive();
@@ -560,24 +445,54 @@ function populateScenarioCards() {
 }
 
 function setScenarioActive() {
+  document.getElementById("scenarioName").textContent = `${personas[pIndex].name} · ${personas[pIndex].language}`;
   [...scenarioGrid.children].forEach((card, i) => {
     card.classList.toggle("active", i === pIndex);
+    card.setAttribute("aria-pressed", String(i === pIndex));
   });
 }
 
 function buildNodes() {
   stages.forEach((s, i) => {
+    const stop = make("div", "journey-stop");
     const node = make("button", "node");
     node.type = "button";
     node.setAttribute("aria-label", s.title);
     node.innerHTML = `<span>${s.title}</span>`;
     node.addEventListener("click", () => {
-      liveDemoId = null;
+      clearLiveDemo();
       sIndex = i;
       render();
       stopAuto();
     });
-    nodesWrap.appendChild(node);
+    stop.appendChild(node);
+    stop.appendChild(make("div", "node-demos"));
+    nodesWrap.appendChild(stop);
+  });
+}
+
+function renderDemoMarkers(personaKey) {
+  [...nodesWrap.children].forEach((stop, i) => {
+    const markers = stop.children[1];
+    markers.innerHTML = "";
+    checkpointsFor(stages[i], personaKey).forEach((checkpoint) => {
+      const label = checkpoint.variant || checkpoint.demoLabel;
+      const marker = make("button", "demo-marker", `Demo · ${label}`);
+      marker.type = "button";
+      marker.id = `demo-marker-${i}-${checkpoint.id}`;
+      marker.dataset.solutionId = checkpoint.id;
+      marker.setAttribute("aria-label", `Live demo opportunity: ${label} at ${stages[i].title}`);
+      marker.setAttribute("aria-pressed", String(i === sIndex && checkpoint.id === selectedDemoId));
+      marker.addEventListener("click", () => {
+        stopAuto();
+        clearLiveDemo();
+        sIndex = i;
+        selectedDemoId = checkpoint.id;
+        render();
+        document.getElementById(marker.id).focus({ preventScroll: true });
+      });
+      markers.appendChild(marker);
+    });
   });
 }
 
@@ -616,75 +531,65 @@ function renderStakeholders(stage) {
   stakeholderDetail.textContent = stage.stakeholder[activeStakeholder];
 }
 
-function renderDemo(stage) {
-  const d = stage.demo;
-  demoBadge.textContent = d.badge;
-  demoHeadline.textContent = d.headline;
-  demoLeftTitle.textContent = d.seeTitle;
-  demoWhy.textContent = d.why;
-  demoOwner.textContent = d.owner;
-  demoFocus.textContent = d.focus;
-  demoTime.textContent = d.time;
-  demoCue.textContent = d.cue;
-  demoReturn.textContent = d.return;
-  fillList(demoSee, d.see);
-}
-
 function renderLiveDemo(stage, personaKey) {
   const checkpoints = checkpointsFor(stage, personaKey);
   const panel = document.getElementById("liveDemoCheckpoint");
-  const list = document.getElementById("liveDemoList");
+  const choices = document.getElementById("liveDemoChoices");
   panel.hidden = checkpoints.length === 0;
-  list.innerHTML = "";
-  const badge = document.getElementById("liveDemoStageCue");
-  badge.hidden = checkpoints.length === 0;
-  badge.textContent = `Live Demo Checkpoint${checkpoints.length > 1 ? "s" : ""} ↓`;
+  choices.innerHTML = "";
+  choices.hidden = checkpoints.length < 2;
   playBtn.disabled = liveDemoId !== null;
+  const checkpoint = checkpoints.find(({ id }) => id === selectedDemoId) || checkpoints[0];
+  selectedDemoId = checkpoint ? checkpoint.id : null;
+  document.getElementById("liveDemoState").textContent = "";
+  if (!checkpoint) {
+    for (const id of ["liveDemoHeading", "liveDemoWhy", "liveDemoSummary", "liveDemoHandoff", "liveDemoReturn"]) {
+      document.getElementById(id).textContent = "";
+    }
+    fillList(document.getElementById("liveDemoShow"), []);
+    return;
+  }
+
   checkpoints.forEach((checkpoint) => {
-    const active = liveDemoId === checkpoint.id;
-    const card = make("article", "live-demo-card");
-    card.dataset.solutionId = checkpoint.id;
-    card.appendChild(make("h4", "", checkpoint.variant || checkpoint.label));
-    card.appendChild(make("p", "", checkpoint.why));
-    const details = make("details", "live-demo-details");
-    details.appendChild(make("summary", "", `Presenter handoff · Suggested ${checkpoint.duration}`));
-    details.appendChild(make("p", "", `Say: “${checkpoint.handoff}”`));
-    const show = make("ul", "");
-    fillList(show, checkpoint.show);
-    details.appendChild(show);
-    card.appendChild(details);
-    card.appendChild(make("p", "", `Return cue: ${checkpoint.returnCue}`));
-    const state = make("p", "live-demo-state");
-    state.setAttribute("role", "status");
-    state.textContent = active
-      ? `Journey paused at ${personas[pIndex].name} · ${stage.title}. Switch to your demo application, then return here. No technology is launched by this page.`
-      : "";
-    card.appendChild(state);
-    const button = make("button", active ? "primary-btn" : "ghost-btn",
-      active ? "Return to journey" : "Pause journey for live demo");
-    button.type = "button";
-    button.id = `live-demo-${checkpoint.id}`;
-    button.disabled = liveDemoId !== null && !active;
-    button.addEventListener("click", () => {
-      stopAuto();
-      liveDemoId = active ? null : checkpoint.id;
+    const chip = make("button", "demo-chip", checkpoint.variant || checkpoint.demoLabel);
+    chip.type = "button";
+    chip.id = `demo-choice-${checkpoint.id}`;
+    chip.dataset.solutionId = checkpoint.id;
+    chip.setAttribute("aria-pressed", String(checkpoint.id === selectedDemoId));
+    chip.disabled = liveDemoId !== null;
+    chip.addEventListener("click", () => {
+      selectedDemoId = checkpoint.id;
+      document.getElementById("liveDemoDetails").open = false;
       renderLiveDemo(stage, personaKey);
-      const target = document.getElementById(button.id);
-      target.focus({ preventScroll: true });
-      target.scrollIntoView({ block: "center" });
+      renderDemoMarkers(personaKey);
+      document.getElementById(chip.id).focus({ preventScroll: true });
     });
-    card.appendChild(button);
-    list.appendChild(card);
+    choices.appendChild(chip);
   });
+  document.getElementById("liveDemoHeading").textContent =
+    `Live demo opportunity · ${checkpoint.variant || checkpoint.demoLabel}`;
+  document.getElementById("liveDemoWhy").textContent = checkpoint.why;
+  document.getElementById("liveDemoSummary").textContent = `Presenter handoff · Suggested ${checkpoint.duration}`;
+  document.getElementById("liveDemoHandoff").textContent = `Say: “${checkpoint.handoff}”`;
+  fillList(document.getElementById("liveDemoShow"), checkpoint.show);
+  document.getElementById("liveDemoReturn").textContent = `Return cue: ${checkpoint.returnCue}`;
+  document.getElementById("liveDemoState").textContent = liveDemoId
+    ? `Journey paused at ${personas[pIndex].name} · ${stage.title}. Switch manually to your own demo application, then return here.`
+    : "";
+  const toggle = document.getElementById("liveDemoToggle");
+  toggle.textContent = liveDemoId ? "Return to journey" : "Pause journey for live demo";
+  toggle.className = liveDemoId ? "primary-btn" : "ghost-btn";
 }
 
 function renderTimeline() {
   const pct = (sIndex / (stages.length - 1)) * 100;
   trackFill.style.width = `${pct}%`;
   avatar.style.left = `${((sIndex + 0.5) / stages.length) * 100}%`;
-  [...nodesWrap.children].forEach((n, i) => {
+  [...nodesWrap.children].forEach((stop, i) => {
+    const n = stop.children[0];
     n.classList.toggle("active", i <= sIndex);
     n.classList.toggle("current", i === sIndex);
+    n.setAttribute("aria-current", i === sIndex ? "step" : "false");
   });
 }
 
@@ -705,8 +610,8 @@ function render() {
 
   renderConnections(stage, persona.id);
   renderStakeholders(stage);
-  renderDemo(stage);
   renderLiveDemo(stage, persona.id);
+  renderDemoMarkers(persona.id);
 
   impactText.textContent = stage.impact;
 
@@ -716,7 +621,7 @@ function render() {
 }
 
 function next() {
-  liveDemoId = null;
+  clearLiveDemo();
   if (sIndex < stages.length - 1) {
     sIndex += 1;
   } else {
@@ -726,7 +631,7 @@ function next() {
 }
 
 function prev() {
-  liveDemoId = null;
+  clearLiveDemo();
   if (sIndex > 0) sIndex -= 1;
   render();
 }
@@ -759,7 +664,7 @@ nextBtn.addEventListener("click", () => {
 });
 playBtn.addEventListener("click", toggleAuto);
 resetBtn.addEventListener("click", () => {
-  liveDemoId = null;
+  clearLiveDemo();
   pIndex = 0;
   sIndex = 0;
   activeStakeholder = "it";
@@ -769,11 +674,15 @@ resetBtn.addEventListener("click", () => {
 });
 presentationMode.addEventListener("change", () => {
   body.classList.toggle("presentation-mode", presentationMode.checked);
+  document.getElementById("scenarioPicker").open = !presentationMode.checked;
+  document.getElementById("touchpointDetails").open = !presentationMode.checked;
 });
-document.getElementById("liveDemoStageCue").addEventListener("click", () => {
-  const heading = document.getElementById("liveDemoHeading");
-  heading.focus({ preventScroll: true });
-  heading.scrollIntoView({ block: "start" });
+document.getElementById("liveDemoToggle").addEventListener("click", () => {
+  if (!selectedDemoId) return;
+  stopAuto();
+  liveDemoId = liveDemoId ? null : selectedDemoId;
+  renderLiveDemo(stages[sIndex], personas[pIndex].id);
+  document.getElementById("liveDemoToggle").focus({ preventScroll: true });
 });
 
 populateScenarioCards();

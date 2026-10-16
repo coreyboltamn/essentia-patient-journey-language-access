@@ -7,8 +7,10 @@ https://coreyboltamn.github.io/essentia-patient-journey-language-access/
 
 ## Live-demo presentation checkpoints
 
-The **Live Demo Checkpoint** inside “AMN in Action at This Step” stays visible
-in both tabs and in Presentation Mode. A small stage cue scrolls to it.
+**Demo** markers now sit directly on the patient journey spine. Select one to
+choose its stage and reveal a compact **Live demo opportunity** beside the
+timeline, without scrolling to another section. The standalone section 5 and
+its action/interpreter tabs have been removed.
 This is a suggested presentation plan, not a claim about product availability
 or actual demo duration:
 
@@ -25,21 +27,31 @@ the telehealth demo rather than forcing it into an unrelated scenario.
 
 ### Presenter workflow
 
-1. Walk the journey normally. At a checkpoint, expand **Presenter handoff** for
-   the short script, suggested duration and demonstration checklist.
-2. Choose **Pause journey for live demo**. Autoplay stops, and an explicit
+1. Enable **Presentation Mode** for screen sharing. It hides the hero and
+   collapses the scenario cards and touchpoint lists, keeping timeline navigation
+   and the compact demo cue together at laptop sizes. **Choose / change** always
+   shows the current persona and opens the scenario choices; **Common touchpoints**
+   opens supporting detail. Both are keyboard-accessible disclosure controls.
+   Leaving Presentation Mode expands these controls again. Other stage, solution
+   and stakeholder content remains available below; nothing is fixed-height.
+2. Walk the spine or select a **Demo · technology** marker. At a checkpoint,
+   expand **Presenter handoff** for the script, suggested duration, demonstration
+   checklist and return cue. Multiple technologies at a stage appear as selectable
+   chips; only the selected demo's details are shown.
+3. Choose **Pause journey for live demo**. Autoplay stops, and an explicit
    handoff state asks you to switch to your own demo application. This page
    launches nothing, opens no external links and requires no credentials.
-3. Use fictional data in a prepared demo environment. Scheduling and telehealth
+4. Use fictional data in a prepared demo environment. Scheduling and telehealth
    examples are configured illustrative workflows, not proof of live deployments.
    Use qualified interpretation for clinical decisions/consent and appropriate
    qualified review of translated content.
-4. Switch back and choose **Return to journey**. The scenario, stage and selected
-   tab stay unchanged, and focus returns to the checkpoint control. Autoplay
-   remains paused until you explicitly start it again.
-5. Back, Next, direct timeline selection, scenario selection and Restart clear
+5. Switch back and choose **Return to journey**. The exact persona and stage
+   stay unchanged, and focus stays on the local control without vertical scrolling.
+   Autoplay remains paused until you explicitly start it again.
+6. Back, Next, direct timeline/marker selection, scenario selection and Restart clear
    the handoff state. Restart retains its existing first-scenario/first-step
-   behavior. Presentation Mode and tab changes do not interrupt the handoff.
+   behavior. Presentation Mode does not interrupt the handoff. Stages without
+   checkpoints have no demo cue. Normal stage progression does not scroll the page.
 
 ### Editing the presentation plan
 
@@ -59,26 +71,30 @@ put credentials, PHI or invented demo URLs in this site.
 ### Checkpoint regression checks
 
 Run `node --test tests/*.test.cjs` (Node 18+) and `node --check app.js`.
-The new dependency-free tests cover the four technologies, stage/persona
+The dependency-free tests cover the four technologies, stage/persona
 eligibility, ASL and nonclinical AI safeguards, pause/return focus, autoplay,
-navigation/reset/scenario cleanup and stage-wide markup placement. There is no
+navigation/reset/scenario cleanup, multiple-demo selection, missing DOM lookups,
+obsolete-section removal and spine markup placement. There is no
 build step or new dependency. Repeat the browser checks below when changing
 the journey or checkpoint controls.
 
-Validation for this change: all 16 Node tests, JavaScript syntax and diff
-whitespace checks passed. Local headless Chromium passed all 112 combinations
-of four scenarios, seven stages and widths 1440/768/375/320, checking both tabs,
-both presentation modes, checkpoint visibility, solution-card counts,
-pause/return state and focus, sticky-header scroll clearance and page overflow.
-Actual timed autoplay advance/pause, navigation cleanup and native Enter-key
-activation also passed. No application JavaScript errors occurred. Google
-Fonts failed DNS resolution (fallback fonts were used), and a first-load
-favicon request returned 404. The browser-tool connection was unavailable, so
-checks used installed Chromium directly. Other browsers, physical devices,
-external demo applications and the public deployment were not verified.
-CodeQL reported zero JavaScript alerts and the changed-file secret scan was
-clean. Automated code review was unavailable because of a model-configuration
-error; an independent read-only review found no significant issues.
+Validation of the spine-demo change: all **19 Node tests**, JavaScript syntax
+and diff whitespace checks passed. Installed headless Chromium/ChromeDriver
+passed **280 combinations** of four personas, seven stages, both presentation
+modes and sizes 1366×768, 1440×900, 768×1024, 375×812 and 320×740.
+Checks covered filtered markers/cues, unchanged solution-card counts, touchpoint
+updates, page overflow, local pause/return focus and laptop viewport fit.
+Native Enter/Space activation, multiple-demo chip selection, ASL details, real
+3.5-second autoplay advance/pause/return and six navigation cleanup paths passed.
+Normal-mode stage navigation and demo pause/return did not scroll vertically.
+
+Laptop, ASL and mobile screenshots were captured; the laptop screenshot was
+visually inspected (the image viewer limited further previews). There were no
+application JavaScript errors. Google Fonts could not resolve, so checks used
+fallback fonts; the existing absent favicon returned 404. The browser MCP
+connection was unavailable, so checks used installed ChromeDriver directly.
+Other browsers, physical devices, external demo apps and the public deployment
+were not verified.
 
 **Merge this PR and complete GitHub Pages deployment to update the public site.**
 No live technology integration is added.
@@ -99,8 +115,8 @@ workflows for mobile/TV endpoints. AI is not a substitute for qualified medical
 interpretation; written clinical materials require appropriate qualified review.
 These are editorial examples, not validated integration or language availability.
 No APIs, credentials, PHI collection, automatic Epic synchronization or deployed
-capabilities were added. The repaired layout, scenarios, controls, tabs and
-presentation mode are retained.
+capabilities were added. The approved palette, journey visuals, stage mapping,
+scenarios and stakeholder sections are retained.
 
 ### Connection regression checks
 
@@ -112,18 +128,6 @@ virtual-visit filtering and AI review safeguards. `node --check app.js` and
 CodeQL reported zero JavaScript alerts. Automated code review was unavailable
 because of a model configuration error; a separate read-only review found no
 significant issues.
-
-Local headless Chromium checks served the site under
-`/essentia-patient-journey-language-access/`. All 112 combinations of four
-personas, seven stages and widths 1440/768/375/320 passed card-content,
-text-wrapping and page-overflow checks. Both tabs, touchpoint/interpreter
-extensions, Next/Back, timeline selection, restart, stakeholder buttons,
-presentation mode and autoplay (including wraparound, pause and cancellation)
-passed. All eight local CSS/JS assets returned HTTP 200; no JavaScript exceptions
-or application console errors occurred. Google Fonts failed DNS resolution, so
-checks used the fallback font; Chromium also requested an absent favicon (404).
-Other browsers, physical devices and the public deployment were not verified.
-Repeat the manual interaction checks below when editing the mappings.
 
 The latest existing Pages deployment (`38948324313`, commit `b08191ac`) succeeded,
 as confirmed by its deployment logs. **This PR must still be merged and deployed
@@ -144,33 +148,33 @@ centers of its seven steps, and its line, dots, and avatar used different height
 Presenter-note visibility was reversed from the reference design.
 
 The repair restores those styles and visibility rules, aligns the timeline,
-lets header/journey controls wrap, stacks touchpoint cards on mobile, and
-allows interpreter cards to fit narrow screens. Only the timeline intentionally
-scrolls sideways.
+lets header/journey controls wrap and stacks touchpoint cards on mobile.
+Only the timeline intentionally scrolls sideways.
 
 ### Regression checks
 
-This is a static HTML/CSS/JavaScript site with no existing test runner or build
-dependencies. Browser checks were performed with local Chromium, serving the
-site under `/essentia-patient-journey-language-access/`, not just at `/`.
+This is a static HTML/CSS/JavaScript site using Node's built-in test runner,
+with no build dependencies. Serve the repository with a static server and check
+under `/essentia-patient-journey-language-access/`, not just at `/`.
 To repeat the checks in a browser:
 
-1. Check widths of 1440, 768, 375, and 320 pixels. Cards and controls should fit;
+1. Check 1366×768 and 1440×900 laptops, plus widths 768, 375 and 320 pixels.
+   In Presentation Mode, the spine, navigation and active demo controls should
+   fit together without scrolling. Cards and controls should fit on mobile;
    only the timeline should scroll horizontally.
 2. Select each of the four scenarios and all seven timeline steps. Check the
    patient details, highlighted touchpoints, and marker/line alignment, including
    the first and last steps.
-3. Switch between both demo tabs at each step. Only the selected view should be
-   visible; Interpreter Experience should show the matching step and summary.
+3. Select each demo marker with Enter/Space; verify stage/persona filters,
+   local details and pause/return focus. Joanna must see qualified ASL VRI,
+   never audio OPI or Jaide as ASL substitutes.
 4. Exercise Back, Next, Restart Journey, all stakeholder buttons, and Auto-play
    followed by Pause. Restart should return to the first scenario and step.
-5. Presenter Notes should be hidden normally and available in Presentation Mode.
-
-All 112 scenario/stage/width combinations passed overflow, timeline geometry,
-and tab/extension synchronization checks. The other controls passed, all eight
-local CSS/JS assets returned HTTP 200, and no JavaScript exceptions occurred.
-JavaScript syntax and diff whitespace checks also passed. No new testing
-dependencies were added.
+5. Expand/collapse **Choose / change**, **Common touchpoints** and **Presenter
+   handoff** using the keyboard. Detail remains available in both modes.
+6. Pause autoplay for a demo, switch away manually, and return: same persona
+   and stage, no vertical scroll and no automatic autoplay resume. Navigation,
+   scenario changes and Restart must clear the paused state and old details.
 
 ### Deployment and limitations
 
