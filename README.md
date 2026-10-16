@@ -31,6 +31,9 @@ canonical names/IDs, all seven stages, representation of all eight solutions,
 stage-specific descriptions across all four personas, ASL-safe variants,
 virtual-visit filtering and AI review safeguards. `node --check app.js` and
 `git diff --check` also passed. No dependencies or build tools were added.
+CodeQL reported zero JavaScript alerts. Automated code review was unavailable
+because of a model configuration error; a separate read-only review found no
+significant issues.
 
 Local headless Chromium checks served the site under
 `/essentia-patient-journey-language-access/`. All 112 combinations of four
