@@ -95,6 +95,9 @@ fallback fonts; the existing absent favicon returned 404. The browser MCP
 connection was unavailable, so checks used installed ChromeDriver directly.
 Other browsers, physical devices, external demo apps and the public deployment
 were not verified.
+CodeQL found zero JavaScript alerts and changed-file secret scanning was clean.
+Automated code review was unavailable because its configured model was missing;
+an independent read-only review found no significant issues.
 
 **Merge this PR and complete GitHub Pages deployment to update the public site.**
 No live technology integration is added.
