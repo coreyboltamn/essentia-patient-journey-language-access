@@ -362,6 +362,8 @@ button {
 }
 
 .connection-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
   border: 1px solid #d7e4f4;
   border-radius: 10px;
   background: #f9fcff;
@@ -375,6 +377,18 @@ button {
 
 .connection-card p {
   margin: 0.34rem 0 0;
+  color: #516b84;
+}
+
+.connection-context {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.connection-note {
+  margin: 0 0 0.65rem;
+  font-size: 0.82rem;
   color: #516b84;
 }
 

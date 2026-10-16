@@ -1,0 +1,93 @@
+const assert = require("node:assert/strict");
+const { readFileSync } = require("node:fs");
+const { resolve } = require("node:path");
+const { test } = require("node:test");
+const vm = require("node:vm");
+
+// Evaluate only the data and selectors, before the browser DOM bindings.
+const source = readFileSync(resolve(__dirname, "../app.js"), "utf8");
+const context = vm.createContext({});
+vm.runInContext(source.slice(0, source.indexOf("const scenarioGrid ="))
+  + "\nthis.data = { personas, stages, solutionCatalog, connectionsFor };", context);
+const { personas, stages, solutionCatalog, connectionsFor } = context.data;
+
+test("catalog contains the eight canonical solutions with stable IDs", () => {
+  assert.deepEqual({ ...solutionCatalog }, {
+    "vri-opi": "VRI/OPI",
+    "in-person": "In-person Interpreter using Interpreter Scheduling tool",
+    jaide: "Jaide AI Translation and Live Speech",
+    teladoc: "Telehealth integration with Teladoc",
+    epic: "Epic integration",
+    "patient-line": "Patient Line",
+    mobile: "Mobile Device Access",
+    "smart-tv": "Smart TV integration",
+  });
+});
+
+test("all seven stages map valid, unique IDs and collectively show all eight solutions", () => {
+  assert.equal(stages.length, 7);
+  const represented = new Set();
+  for (const stage of stages) {
+    const ids = stage.connections.map(({ id }) => id);
+    assert.equal(new Set(ids).size, ids.length);
+    for (const connection of stage.connections) {
+      assert.ok(Object.hasOwn(solutionCatalog, connection.id), connection.id);
+      represented.add(connection.id);
+      for (const personaKey of connection.personas || []) {
+        assert.ok(personas.some(({ id }) => id === personaKey));
+      }
+    }
+  }
+  assert.deepEqual([...represented].sort(), Object.keys(solutionCatalog).sort());
+});
+
+for (const persona of personas) {
+  test(`${persona.name}: meaningful stage-specific cards at every step`, () => {
+    const descriptions = new Set();
+    const selections = new Set();
+    for (const stage of stages) {
+      const cards = connectionsFor(stage, persona.id);
+      assert.ok(cards.length >= 2 && cards.length <= 6, stage.title);
+      selections.add(cards.map(({ id }) => id).join(","));
+      for (const card of cards) {
+        assert.equal(card.label, solutionCatalog[card.id]);
+        assert.ok(card.description.length > 70, `${stage.title}: ${card.id}`);
+        assert.doesNotMatch(card.description, /Connected to this step/);
+        assert.ok(!descriptions.has(card.description), `Repeated copy: ${card.id}`);
+        descriptions.add(card.description);
+      }
+    }
+    assert.ok(selections.size > 3, "Selections should vary with the stage");
+  });
+}
+
+test("ASL cards exclude audio and AI options and require qualified visual workflows", () => {
+  for (const stage of stages) {
+    const cards = connectionsFor(stage, "joanna");
+    assert.ok(!cards.some(({ id }) => ["patient-line", "jaide", "teladoc"].includes(id)));
+    for (const card of cards) {
+      if (card.id === "epic") continue;
+      assert.match(card.description, /qualified.*ASL/i);
+      if (card.id === "vri-opi") assert.match(card.description, /VRI/);
+      if (["mobile", "smart-tv"].includes(card.id)) {
+        assert.match(card.description, /configured accessible video|configured accessible mobile video/);
+      }
+    }
+  }
+});
+
+test("Teladoc is tied to Tran's virtual stages and all clinical AI materials require review", () => {
+  for (const [index, stage] of stages.entries()) {
+    for (const persona of personas) {
+      assert.equal(
+        connectionsFor(stage, persona.id).some(({ id }) => id === "teladoc"),
+        persona.id === "tele" && [1, 3, 6].includes(index),
+      );
+    }
+    const ai = connectionsFor(stage, "span").find(({ id }) => id === "jaide");
+    if (ai && index !== 0) assert.match(ai.description, /qualified review/);
+  }
+  const html = readFileSync(resolve(__dirname, "../index.html"), "utf8");
+  assert.match(html, /AI translation\/live speech does not replace qualified interpreters/);
+  assert.match(html, /availability depends on configured services/);
+});
