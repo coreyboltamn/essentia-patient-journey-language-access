@@ -186,10 +186,25 @@ test("checkpoint lives beside the spine and obsolete section, tabs and extension
   assert.ok(start > html.indexOf('class="panel journey-panel"'));
   assert.ok(end < html.indexOf('id="stagePanel"'));
   assert.doesNotMatch(html.slice(start, end), /presentation-only/);
-  assert.match(html.slice(start, end), /does not launch or connect/);
+  assert.doesNotMatch(html.slice(start, end), /Switch manually to your own demo app|does not launch or connect|AI is not a replacement/);
   assert.doesNotMatch(html, /demoPanel|viewActionBtn|viewInterpBtn|actionView|interpView|interpreter\.(js|css)|polish\.(js|css)|5\. AMN in Action/);
   assert.doesNotMatch(source, /renderDemo\(|stage\.demo|liveDemoStageCue|scrollIntoView|scrollTo|scrollBy/);
   assert.match(html, /src="touchpoints.js"/);
+});
+
+test("audience-facing checkpoint retains its accessible cue, chips and demo controls", () => {
+  const checkpoint = html.slice(html.indexOf('<section id="liveDemoCheckpoint"'));
+  const markup = checkpoint.slice(0, checkpoint.indexOf("</section>"));
+  assert.match(markup, /aria-labelledby="liveDemoHeading"/);
+  assert.match(markup, /<h3 id="liveDemoHeading">Live demo opportunity<\/h3>/);
+  assert.match(markup, /id="liveDemoChoices".*role="group" aria-label="Demo technology"/);
+  assert.match(markup, /<p id="liveDemoWhy"><\/p>/);
+  assert.match(markup, /<button id="liveDemoToggle".*>Pause journey for live demo<\/button>/);
+  assert.match(markup, /<summary id="liveDemoSummary">Presenter handoff<\/summary>/);
+  assert.match(markup, /id="liveDemoState".*role="status" aria-live="polite"/);
+  const app = journey();
+  assert.match(app.el("liveDemoHeading").textContent, /Live demo opportunity/);
+  assert.equal(app.el("liveDemoWhy").textContent, checkpointsFor(stages[0], personas[0].id)[0].why);
 });
 
 test("spine markers follow every stage/persona filter and select local cues without scrolling", () => {
