@@ -13,9 +13,9 @@ const personas = [
     name: "Abdi",
     age: 29,
     language: "Somali",
-    situation: "First pregnancy with recurring prenatal visits",
+    situation: "Pregnancy progressing from prenatal visits to inpatient maternity care",
     style: "linear-gradient(135deg,#5bbf88,#87dca9)",
-    opening: "\"I want to feel calm and informed at each prenatal step, especially when decisions are made quickly.\"",
+    opening: "\"I’m pregnant and want Somali-language support as I prepare for care, move from prenatal visits into an inpatient stay, and plan follow-up.\"",
   },
   {
     id: "tele",
@@ -40,11 +40,11 @@ const personas = [
 const stages = [
   {
     phase: "Pre-Visit",
-    title: "1. Awareness & Access to Care",
+    title: "Awareness & Access to Care",
     icon: "🌐",
     patient: {
       span: "Maria finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
-      som: "Abdi learns about maternity services through community outreach and calls in Somali to ask what to expect.",
+      som: "Abdi learns about prenatal maternity care through community outreach and asks questions in Somali with a qualified interpreter.",
       tele: "Tran receives discharge guidance and is offered telehealth follow-up options in Vietnamese.",
       joanna: "Joanna seeks urgent care and needs clear ASL access information before arrival.",
     },
@@ -65,21 +65,15 @@ const stages = [
       { id: "jaide", description: "Staff prepare approved written, nonclinical service information for patients; AI translation is not medical interpretation.", asl: null },
       { id: "in-person", personas: ["joanna"], description: "Access staff plan qualified in-person ASL interpreter support for arrival when video access is unsuitable, subject to local staffing workflows." },
     ],
-    stakeholder: {
-      it: "Ensure entry points are integrated so language preference data moves downstream.",
-      clinical: "Set clear intake prompts to avoid missed language needs.",
-      ops: "Align staffing and routing to demand by language.",
-      exec: "First-touch experience influences trust, retention, and equity outcomes.",
-    },
     impact: "Early language alignment improves access and reduces abandonment before care begins.",
   },
   {
     phase: "Pre-Visit",
-    title: "2. Appointment Confirmation & Pre-Visit",
+    title: "Appointment Confirmation & Pre-Visit",
     icon: "🗓️",
     patient: {
       span: "Maria schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
-      som: "Abdi gets reminders and prenatal prep guidance, with Somali support for questions.",
+      som: "Abdi receives prenatal visit reminders and preparation information, with a qualified Somali interpreter available for questions.",
       tele: "Tran confirms his telehealth appointment and receives bilingual technical instructions.",
       joanna: "Joanna’s appointment flag indicates ASL support is required at check-in.",
     },
@@ -101,21 +95,15 @@ const stages = [
       { id: "jaide", description: "Staff prepare translated prep content for approval; written clinical materials require appropriate qualified review before patient use.", asl: null },
       { id: "teladoc", personas: ["tele"], description: "For Tran’s virtual visit, staff plan qualified interpreter participation and check the configured Teladoc joining workflow before the appointment." },
     ],
-    stakeholder: {
-      it: "Support reliable data flow from scheduling to interpreter workflows.",
-      clinical: "Confirm pre-visit education is understood.",
-      ops: "Reduce avoidable delays through better prep and matching.",
-      exec: "Prepared visits improve quality metrics and efficiency.",
-    },
     impact: "Preparation with language support improves readiness and operational predictability.",
   },
   {
     phase: "During Visit",
-    title: "3. Arrival & Check-In",
+    title: "Arrival & Check-In",
     icon: "🏥",
     patient: {
       span: "Maria checks in and confirms she will have Spanish interpretation before triage begins.",
-      som: "Abdi arrives for prenatal care and confirms Somali support at registration.",
+      som: "Abdi arrives for a prenatal visit and asks registration to connect a qualified Somali interpreter.",
       tele: "Tran arrives for any needed in-person follow-up and needs quick Vietnamese support.",
       joanna: "Joanna needs immediate ASL-enabled communication during intake.",
     },
@@ -136,21 +124,15 @@ const stages = [
       { id: "epic", description: "Registration staff verify communication preferences in the configured Epic intake workflow before handing off to the care team." },
       { id: "in-person", description: "Staff confirm arrival of the scheduled qualified in-person interpreter or arrange an appropriate backup.", asl: "Staff confirm the scheduled qualified in-person ASL interpreter or arrange a qualified visual backup for urgent intake." },
     ],
-    stakeholder: {
-      it: "Maintain reliable endpoint and connectivity performance.",
-      clinical: "Start clinical intake with communication confidence.",
-      ops: "Protect check-in throughput and avoid bottlenecks.",
-      exec: "Fast, equitable intake improves experience and reduces risk.",
-    },
     impact: "Reliable language support at arrival prevents downstream delays.",
   },
   {
     phase: "During Visit",
-    title: "4. Clinical Encounter",
+    title: "Clinical Encounter",
     icon: "🩺",
     patient: {
       span: "Maria discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
-      som: "Abdi reviews prenatal concerns and asks culturally sensitive questions in Somali.",
+      som: "Abdi takes part in a prenatal assessment and discusses questions with the care team in Somali through a qualified interpreter.",
       tele: "Tran completes telehealth follow-up with Vietnamese interpretation during provider discussion.",
       joanna: "Joanna communicates directly with clinicians through ASL interpretation during urgent decision-making.",
     },
@@ -172,21 +154,15 @@ const stages = [
       { id: "mobile", description: "Staff position a configured mobile device for the patient, clinician and qualified remote interpreter during the encounter.", asl: "Staff position a mobile device only with a configured accessible video workflow and qualified ASL interpreter; the device alone does not provide ASL access." },
       { id: "teladoc", personas: ["tele"], description: "Tran and the clinician include a qualified interpreter in the virtual follow-up using the configured Teladoc workflow." },
     ],
-    stakeholder: {
-      it: "Ensure stable, secure session performance across endpoints.",
-      clinical: "Maintain quality of communication during diagnostic and treatment decisions.",
-      ops: "Provide consistent support across modalities and departments.",
-      exec: "This is where communication quality most directly impacts outcomes.",
-    },
     impact: "High-quality interpreted encounters support safer, better-informed care decisions.",
   },
   {
     phase: "During Visit",
-    title: "5. Treatment / Inpatient Stay",
+    title: "Treatment / Inpatient Stay",
     icon: "💊",
     patient: {
       span: "Maria receives inpatient updates and medication education in Spanish over multiple touchpoints.",
-      som: "Abdi receives treatment and monitoring updates in Somali through different care teams.",
+      som: "Abdi’s journey moves from prenatal visits to inpatient maternity care, where a qualified Somali interpreter supports admission, care-team conversations, and updates throughout the stay.",
       tele: "Tran has medication and recovery coaching that may alternate between in-person and virtual support.",
       joanna: "Joanna requires continued ASL communication support as care transitions across units.",
     },
@@ -208,21 +184,15 @@ const stages = [
       { id: "in-person", description: "Staff schedule a qualified in-person interpreter for planned care conferences and complex inpatient discussions.", asl: "Staff schedule a qualified in-person ASL interpreter for care conferences and complex discussions across units." },
       { id: "epic", description: "Care teams use the configured Epic workflow to document communication preferences and interpreter needs for the next shift." },
     ],
-    stakeholder: {
-      it: "Keep interoperability and endpoint reliability consistent across care settings.",
-      clinical: "Protect communication consistency through complex care episodes.",
-      ops: "Balance interpreter utilization while preserving continuity.",
-      exec: "Continuity in communication influences quality, satisfaction, and throughput.",
-    },
     impact: "Sustained language support improves continuity and treatment adherence.",
   },
   {
     phase: "Post-Visit",
-    title: "6. Discharge & Transition of Care",
+    title: "Discharge & Transition of Care",
     icon: "📄",
     patient: {
       span: "Maria reviews discharge instructions and medication plans in Spanish before going home.",
-      som: "Abdi receives postpartum guidance and warning signs in Somali.",
+      som: "When leaving inpatient maternity care, Abdi reviews postpartum and follow-up information in Somali with a qualified interpreter.",
       tele: "Tran gets recovery instructions and telehealth follow-up details in Vietnamese.",
       joanna: "Joanna reviews discharge and follow-up steps with ASL support to ensure clarity.",
     },
@@ -244,21 +214,15 @@ const stages = [
       { id: "jaide", description: "Staff may draft translated written discharge instructions for appropriate qualified review and approval before use; AI does not replace a qualified interpreter for clinical decisions or consent.", asl: null },
       { id: "patient-line", description: "Staff explain the configured spoken-language Patient Line workflow for contacting the care team with questions after discharge.", asl: null },
     ],
-    stakeholder: {
-      it: "Support accurate documentation and communication handoff tools.",
-      clinical: "Ensure discharge understanding and safe self-management.",
-      ops: "Standardize transition workflows with language support.",
-      exec: "Clear discharge communication reduces downstream utilization risk.",
-    },
     impact: "Effective interpreted discharge improves safety and continuity after leaving care.",
   },
   {
     phase: "Post-Visit",
-    title: "7. Post Visit & Ongoing Care",
+    title: "Post Visit & Ongoing Care",
     icon: "🔄",
     patient: {
       span: "Maria receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",
-      som: "Abdi receives postpartum follow-up and ongoing education support in Somali.",
+      som: "After discharge, Abdi receives postpartum follow-up information and ongoing education in Somali with qualified interpreter support.",
       tele: "Tran completes virtual check-ins and receives ongoing Vietnamese support for recovery.",
       joanna: "Joanna continues care coordination and follow-up communication with ASL-accessible pathways.",
     },
@@ -281,12 +245,6 @@ const stages = [
       { id: "epic", description: "Care coordinators use the configured Epic follow-up workflow to document communication needs and interpreted outreach." },
       { id: "jaide", description: "Staff prepare appropriate translated written follow-up messages for approval; clinical content requires appropriate qualified review, and clinical questions go to the care team with a qualified interpreter.", asl: null },
     ],
-    stakeholder: {
-      it: "Keep communication channels connected and measurable.",
-      clinical: "Support adherence and longitudinal care quality.",
-      ops: "Use data to optimize staffing, routing, and service levels.",
-      exec: "Post-visit engagement links experience to measurable outcomes.",
-    },
     impact: "Ongoing interpreted engagement strengthens outcomes, loyalty, and operational learning.",
   },
 ];
@@ -313,13 +271,6 @@ function connectionsFor(stage, personaKey) {
     }));
 }
 
-const stakeholders = [
-  { key: "it", label: "IT / Digital", icon: "💻" },
-  { key: "clinical", label: "Clinical Leaders", icon: "🩺" },
-  { key: "ops", label: "Operations", icon: "⚙️" },
-  { key: "exec", label: "Executive Sponsors", icon: "📊" },
-];
-
 const scenarioGrid = document.getElementById("scenarioGrid");
 const nodesWrap = document.getElementById("nodes");
 const trackFill = document.getElementById("trackFill");
@@ -333,8 +284,6 @@ const behindList = document.getElementById("behindList");
 const whoList = document.getElementById("whoList");
 const outcomeList = document.getElementById("outcomeList");
 const connectionGrid = document.getElementById("connectionGrid");
-const stakeholderStrip = document.getElementById("stakeholderStrip");
-const stakeholderDetail = document.getElementById("stakeholderDetail");
 const impactText = document.getElementById("impactText");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
@@ -346,7 +295,6 @@ const body = document.body;
 let pIndex = 0;
 let sIndex = 0;
 let auto = null;
-let activeStakeholder = "it";
 function make(tag, cls, text) {
   const el = document.createElement(tag);
   if (cls) el.className = cls;
@@ -422,21 +370,6 @@ function renderConnections(stage, personaKey) {
   });
 }
 
-function renderStakeholders(stage) {
-  stakeholderStrip.innerHTML = "";
-  stakeholders.forEach((s) => {
-    const btn = make("button", "stake-chip", `${s.icon} ${s.label}`);
-    btn.type = "button";
-    btn.classList.toggle("active", s.key === activeStakeholder);
-    btn.addEventListener("click", () => {
-      activeStakeholder = s.key;
-      renderStakeholders(stage);
-    });
-    stakeholderStrip.appendChild(btn);
-  });
-  stakeholderDetail.textContent = stage.stakeholder[activeStakeholder];
-}
-
 function renderTimeline() {
   const pct = (sIndex / (stages.length - 1)) * 100;
   trackFill.style.width = `${pct}%`;
@@ -465,7 +398,6 @@ function render() {
   fillList(outcomeList, stage.outcomes);
 
   renderConnections(stage, persona.id);
-  renderStakeholders(stage);
 
   impactText.textContent = stage.impact;
 
@@ -517,7 +449,6 @@ playBtn.addEventListener("click", toggleAuto);
 resetBtn.addEventListener("click", () => {
   pIndex = 0;
   sIndex = 0;
-  activeStakeholder = "it";
   setScenarioActive();
   render();
   stopAuto();
