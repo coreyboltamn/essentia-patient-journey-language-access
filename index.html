@@ -9,8 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="touchpoints.css" />
-    <link rel="stylesheet" href="interpreter.css" />
-    <link rel="stylesheet" href="polish.css" />
   </head>
   <body>
     <header class="topbar">
@@ -36,8 +34,10 @@
       </section>
 
       <section class="panel">
-        <h2>1. Choose your patient scenario</h2>
-        <div class="scenario-grid" id="scenarioGrid"></div>
+        <details id="scenarioPicker" open>
+          <summary>1. Patient scenario · <span id="scenarioName"></span> · Choose / change</summary>
+          <div class="scenario-grid" id="scenarioGrid"></div>
+        </details>
       </section>
 
       <section class="panel journey-panel">
@@ -50,7 +50,9 @@
           </div>
         </div>
 
-        <div class="touchpoint-bands" aria-label="Common touchpoints by journey phase">
+        <details id="touchpointDetails" open>
+          <summary>Common touchpoints by journey phase</summary>
+          <div class="touchpoint-bands">
           <article class="touchpoint-card pre">
             <h3>Common Touchpoints: Pre-Visit</h3>
             <ul>
@@ -84,7 +86,8 @@
               <li>Portal Messaging</li>
             </ul>
           </article>
-        </div>
+          </div>
+        </details>
 
         <div class="track-wrap">
           <div class="track" id="track">
@@ -93,6 +96,23 @@
             <div class="nodes" id="nodes"></div>
           </div>
         </div>
+
+        <section id="liveDemoCheckpoint" class="live-demo-checkpoint" aria-labelledby="liveDemoHeading" hidden>
+          <h3 id="liveDemoHeading">Live demo opportunity</h3>
+          <div id="liveDemoChoices" class="demo-choices" role="group" aria-label="Demo technology"></div>
+          <p id="liveDemoWhy"></p>
+          <div class="demo-controls">
+            <button id="liveDemoToggle" class="ghost-btn" type="button">Pause journey for live demo</button>
+            <details id="liveDemoDetails" class="live-demo-details">
+              <summary id="liveDemoSummary">Presenter handoff</summary>
+              <p id="liveDemoHandoff"></p>
+              <ul id="liveDemoShow"></ul>
+              <p id="liveDemoReturn"></p>
+            </details>
+          </div>
+          <p id="liveDemoState" class="live-demo-state" role="status" aria-live="polite"></p>
+          <p class="connection-note">Switch manually to your own demo app with fictional data. This page does not launch or connect to technology. Configured workflows are illustrative only; AI is not a replacement for qualified clinical interpretation.</p>
+        </section>
       </section>
 
       <section class="panel stage-panel" id="stagePanel">
@@ -106,7 +126,6 @@
         </div>
 
         <blockquote class="patient-moment" id="patientMoment"></blockquote>
-        <button id="liveDemoStageCue" class="ghost-btn live-demo-stage-cue" type="button" hidden></button>
 
         <div class="status-row" id="statusRow"></div>
 
@@ -130,64 +149,6 @@
         <p class="stakeholder-detail" id="stakeholderDetail"></p>
       </section>
 
-      <section class="panel" id="demoPanel">
-        <h2 id="demoTitle">5. AMN in Action at This Step</h2>
-
-        <section id="liveDemoCheckpoint" class="live-demo-checkpoint" aria-labelledby="liveDemoHeading" hidden>
-          <h3 id="liveDemoHeading" tabindex="-1">Live Demo Checkpoint</h3>
-          <p class="connection-note">Suggested presentation pause only. Switch to your own demo application using fictional data; this page does not launch or connect to a technology.</p>
-          <div id="liveDemoList"></div>
-        </section>
-
-        <div class="view-toggle" role="tablist" aria-label="Step view">
-          <button id="viewActionBtn" class="active" type="button" role="tab">AMN in Action</button>
-          <button id="viewInterpBtn" type="button" role="tab">Interpreter Experience</button>
-        </div>
-
-        <div id="actionView">
-          <div class="demo-status-row">
-            <span class="demo-badge" id="demoBadge"></span>
-            <p class="demo-headline" id="demoHeadline"></p>
-          </div>
-
-          <div class="demo-simple-grid">
-            <article class="demo-card">
-              <h3 id="demoLeftTitle"></h3>
-              <ul id="demoSee"></ul>
-            </article>
-            <article class="demo-card">
-              <h3>Why it matters</h3>
-              <p id="demoWhy"></p>
-            </article>
-          </div>
-
-          <details id="presenterNotes" class="presentation-only">
-            <summary>Presenter Notes (internal)</summary>
-            <div class="demo-script">
-              <p><strong>Now presenting:</strong> <span id="demoOwner"></span></p>
-              <p><strong>Demo focus:</strong> <span id="demoFocus"></span></p>
-              <p><strong>Time:</strong> <span id="demoTime"></span></p>
-              <p><strong>Cue:</strong> <span id="demoCue"></span></p>
-              <p><strong>Return cue:</strong> <span id="demoReturn"></span></p>
-            </div>
-          </details>
-        </div>
-
-        <div id="interpView" hidden>
-          <div class="interp-head">
-            <span class="interp-status" id="interpStatus"></span>
-            <p class="interp-step" id="interpStep"></p>
-          </div>
-          <div class="interp-grid">
-            <article class="interp-card"><h3>What the interpreter sees</h3><p id="interpSees"></p></article>
-            <article class="interp-card"><h3>What the system does</h3><p id="interpSystem"></p></article>
-            <article class="interp-card"><h3>Risk controlled</h3><p id="interpRisk"></p></article>
-            <article class="interp-card"><h3>Capabilities in play</h3><ul id="interpFocus"></ul></article>
-          </div>
-          <div class="interp-rail" id="interpRail" aria-label="Interpreter experience capabilities"></div>
-        </div>
-      </section>
-
       <section class="impact-band">
         <strong>The Impact:</strong>
         <span id="impactText"></span>
@@ -200,7 +161,5 @@
 
     <script src="app.js"></script>
     <script src="touchpoints.js"></script>
-    <script src="interpreter.js"></script>
-    <script src="polish.js"></script>
   </body>
 </html>
