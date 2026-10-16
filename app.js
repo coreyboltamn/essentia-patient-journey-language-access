@@ -59,12 +59,12 @@ const stages = [
       "Care entry starts with fewer delays and less confusion.",
       "Essentia captures demand signals by language and modality.",
     ],
-    connections: {
-      span: ["Patient Line", "Jaide Website Translation", "Contact center interpreter access"],
-      som: ["Patient Line", "Bilingual outreach scripting", "Appointment language capture"],
-      tele: ["Discharge follow-up routing", "Telehealth language preference capture", "Patient Line"],
-      joanna: ["ASL access triage", "Video relay intake option", "Urgent access routing"],
-    },
+    connections: [
+      { id: "patient-line", description: "Patients contact access staff about care options through a configured spoken-language phone workflow.", asl: null },
+      { id: "vri-opi", description: "Access staff involve a qualified interpreter for spoken-language questions about starting care.", asl: "Access staff arrange qualified ASL interpretation by VRI through a configured accessible video workflow to discuss care entry." },
+      { id: "jaide", description: "Staff prepare approved written, nonclinical service information for patients; AI translation is not medical interpretation.", asl: null },
+      { id: "in-person", personas: ["joanna"], description: "Access staff plan qualified in-person ASL interpreter support for arrival when video access is unsuitable, subject to local staffing workflows." },
+    ],
     stakeholder: {
       it: "Ensure entry points are integrated so language preference data moves downstream.",
       clinical: "Set clear intake prompts to avoid missed language needs.",
@@ -110,12 +110,13 @@ const stages = [
       "Interpreter resources are better aligned to expected demand.",
       "Reduced no-shows and day-of surprises.",
     ],
-    connections: {
-      span: ["Scheduling language flags", "Pre-visit translated content", "Reminder workflows"],
-      som: ["Outbound interpreter support", "Prenatal education language support", "SMS/voice reminders"],
-      tele: ["Telehealth workflow alignment", "Bilingual setup instructions", "Interpreter pre-assignment"],
-      joanna: ["ASL scheduling flags", "Visual communication prep", "Visit readiness notes"],
-    },
+    connections: [
+      { id: "in-person", description: "Scheduling staff request a qualified in-person interpreter and confirm visit time, location and communication preferences.", asl: "Scheduling staff request a qualified in-person ASL interpreter and confirm visual communication preferences." },
+      { id: "epic", description: "Staff use the configured Epic workflow to record language and interpreter needs for appointment preparation; this demo does not synchronize records." },
+      { id: "patient-line", description: "Patients use the configured spoken-language phone workflow to confirm appointment details and ask preparation questions with staff.", asl: null },
+      { id: "jaide", description: "Staff prepare translated prep content for approval; written clinical materials require appropriate qualified review before patient use.", asl: null },
+      { id: "teladoc", personas: ["tele"], description: "For Tran’s virtual visit, staff plan qualified interpreter participation and check the configured Teladoc joining workflow before the appointment." },
+    ],
     stakeholder: {
       it: "Support reliable data flow from scheduling to interpreter workflows.",
       clinical: "Confirm pre-visit education is understood.",
@@ -161,12 +162,12 @@ const stages = [
       "Staff avoid ad hoc workarounds.",
       "Check-in throughput improves.",
     ],
-    connections: {
-      span: ["Front-desk quick request tools", "On-demand interpreter dispatch", "Patient identity + language verification"],
-      som: ["Rapid request escalation", "Maternity workflow alignment", "Interpreter connection status"],
-      tele: ["Hybrid visit support", "Cross-channel interpreter continuity", "Queue visibility"],
-      joanna: ["ASL rapid connect", "Video device readiness", "Escalation path"],
-    },
+    connections: [
+      { id: "vri-opi", description: "Registration staff request qualified video or phone interpretation to confirm check-in details.", asl: "Registration staff request qualified ASL interpretation by VRI, checking sightlines and video readiness rather than using audio-only OPI." },
+      { id: "mobile", description: "Staff bring a configured mobile device to registration so the patient can join a qualified interpreter during intake.", asl: "Staff check that the mobile device has a configured accessible video workflow for a qualified ASL interpreter, with clear sightlines." },
+      { id: "epic", description: "Registration staff verify communication preferences in the configured Epic intake workflow before handing off to the care team." },
+      { id: "in-person", description: "Staff confirm arrival of the scheduled qualified in-person interpreter or arrange an appropriate backup.", asl: "Staff confirm the scheduled qualified in-person ASL interpreter or arrange a qualified visual backup for urgent intake." },
+    ],
     stakeholder: {
       it: "Maintain reliable endpoint and connectivity performance.",
       clinical: "Start clinical intake with communication confidence.",
@@ -212,12 +213,13 @@ const stages = [
       "Clinical decisions are made with fewer communication gaps.",
       "Care plans are more accurately understood.",
     ],
-    connections: {
-      span: ["VRI/OPI session controls", "Clinical workflow interoperability", "On-demand escalation"],
-      som: ["Specialty interpreter matching", "Complex counseling support", "Shared decision support"],
-      tele: ["Teladoc encounter support", "Virtual interpreter controls", "Visit continuity"],
-      joanna: ["ASL encounter excellence", "High-clarity video workflow", "Critical communication support"],
-    },
+    connections: [
+      { id: "vri-opi", description: "Clinicians use a qualified interpreter by video or phone for assessment, treatment discussions and patient questions.", asl: "Clinicians use a qualified ASL interpreter by VRI with clear video and sightlines for assessment and clinical decisions; audio-only OPI is not ASL interpretation." },
+      { id: "in-person", description: "A scheduled qualified in-person interpreter supports complex discussions, consent and shared decisions with the clinical team.", asl: "A qualified in-person ASL interpreter supports urgent decisions and consent with appropriate positioning and pacing." },
+      { id: "epic", description: "Clinicians document interpreter participation through the configured Epic encounter workflow; no automatic data transfer is demonstrated." },
+      { id: "mobile", description: "Staff position a configured mobile device for the patient, clinician and qualified remote interpreter during the encounter.", asl: "Staff position a mobile device only with a configured accessible video workflow and qualified ASL interpreter; the device alone does not provide ASL access." },
+      { id: "teladoc", personas: ["tele"], description: "Tran and the clinician include a qualified interpreter in the virtual follow-up using the configured Teladoc workflow." },
+    ],
     stakeholder: {
       it: "Ensure stable, secure session performance across endpoints.",
       clinical: "Maintain quality of communication during diagnostic and treatment decisions.",
@@ -263,12 +265,13 @@ const stages = [
       "Improved adherence to treatment plans.",
       "Better patient confidence across longer stays.",
     ],
-    connections: {
-      span: ["Continuity workflows", "Medication education support", "Interpreter reuse context"],
-      som: ["Shift-to-shift communication support", "Family-inclusive counseling", "High-demand language balancing"],
-      tele: ["Hybrid continuity", "Cross-modality tracking", "Recovery coaching support"],
-      joanna: ["ASL continuity", "Unit-to-unit handoff support", "Escalation safeguards"],
-    },
+    connections: [
+      { id: "smart-tv", description: "Where configured, staff use a bedside Smart TV workflow to connect the patient with a qualified video interpreter for inpatient updates.", asl: "Use a bedside Smart TV only where a configured accessible video workflow supports a qualified ASL interpreter and suitable sightlines; a TV alone does not provide ASL access." },
+      { id: "mobile", description: "Care teams bring a configured mobile device with qualified interpreter access to bedside education and shift handoffs.", asl: "Care teams bring a mobile device with a configured accessible video workflow and qualified ASL interpreter to bedside updates, checking visual access at each handoff." },
+      { id: "vri-opi", description: "Nurses request qualified video or phone interpretation for repeated treatment updates and medication education.", asl: "Nurses request qualified ASL interpretation by VRI for treatment updates and medication education, maintaining visual access across shifts." },
+      { id: "in-person", description: "Staff schedule a qualified in-person interpreter for planned care conferences and complex inpatient discussions.", asl: "Staff schedule a qualified in-person ASL interpreter for care conferences and complex discussions across units." },
+      { id: "epic", description: "Care teams use the configured Epic workflow to document communication preferences and interpreter needs for the next shift." },
+    ],
     stakeholder: {
       it: "Keep interoperability and endpoint reliability consistent across care settings.",
       clinical: "Protect communication consistency through complex care episodes.",
@@ -314,12 +317,13 @@ const stages = [
       "Lower risk of avoidable complications.",
       "Stronger transition into home or next-care setting.",
     ],
-    connections: {
-      span: ["Translated discharge support", "Medication education interpretation", "Post-care messaging readiness"],
-      som: ["Postpartum instruction support", "Family-centered explanation", "Follow-up coordination"],
-      tele: ["Telehealth transition support", "Vietnamese discharge reinforcement", "Reminder setup"],
-      joanna: ["ASL discharge support", "Visual teach-back support", "Follow-up planning"],
-    },
+    connections: [
+      { id: "vri-opi", description: "Discharge staff use a qualified video or phone interpreter to review instructions, medication plans and patient teach-back.", asl: "Discharge staff use qualified ASL interpretation by VRI to review instructions and visual teach-back, not an audio-only call." },
+      { id: "in-person", description: "Where appropriate, staff arrange a qualified in-person interpreter for complex discharge education with the patient and caregivers.", asl: "Staff arrange a qualified in-person ASL interpreter where appropriate for discharge education and follow-up planning." },
+      { id: "epic", description: "Staff document interpreted discharge education and follow-up communication needs through the configured Epic discharge workflow." },
+      { id: "jaide", description: "Staff may draft translated written discharge instructions for appropriate qualified review and approval before use; AI does not replace a qualified interpreter for clinical decisions or consent.", asl: null },
+      { id: "patient-line", description: "Staff explain the configured spoken-language Patient Line workflow for contacting the care team with questions after discharge.", asl: null },
+    ],
     stakeholder: {
       it: "Support accurate documentation and communication handoff tools.",
       clinical: "Ensure discharge understanding and safe self-management.",
@@ -365,12 +369,14 @@ const stages = [
       "Improved patient-reported experience.",
       "Data-driven optimization of language access operations.",
     ],
-    connections: {
-      span: ["Portal messaging support", "Follow-up interpretation", "Quality analytics"],
-      som: ["Postpartum continuity outreach", "Survey language support", "Longitudinal engagement"],
-      tele: ["Telehealth follow-up interpretation", "Remote recovery support", "Performance insight"],
-      joanna: ["ASL follow-up pathways", "Accessible patient feedback", "Quality coaching loops"],
-    },
+    connections: [
+      { id: "patient-line", description: "Patients reconnect with staff through the configured spoken-language phone workflow for follow-up coordination and questions.", asl: null },
+      { id: "teladoc", personas: ["tele"], description: "Staff plan qualified interpreter participation for Tran’s ongoing virtual check-ins through the configured Teladoc follow-up workflow." },
+      { id: "vri-opi", description: "Care managers involve a qualified video or phone interpreter when discussing recovery questions and next steps.", asl: "Care managers arrange qualified ASL interpretation by VRI for ongoing care discussions through a configured accessible video workflow." },
+      { id: "mobile", description: "For follow-up, staff check the configured mobile access workflow with the patient before arranging a qualified remote interpreter.", asl: "For follow-up, staff check a configured accessible mobile video workflow with Joanna before arranging a qualified ASL interpreter; mobile access alone is not ASL interpretation." },
+      { id: "epic", description: "Care coordinators use the configured Epic follow-up workflow to document communication needs and interpreted outreach." },
+      { id: "jaide", description: "Staff prepare appropriate translated written follow-up messages for approval; clinical content requires appropriate qualified review, and clinical questions go to the care team with a qualified interpreter.", asl: null },
+    ],
     stakeholder: {
       it: "Keep communication channels connected and measurable.",
       clinical: "Support adherence and longitudinal care quality.",
@@ -396,6 +402,28 @@ const stages = [
     },
   },
 ];
+
+const solutionCatalog = {
+  "vri-opi": "VRI/OPI",
+  "in-person": "In-person Interpreter using Interpreter Scheduling tool",
+  jaide: "Jaide AI Translation and Live Speech",
+  teladoc: "Telehealth integration with Teladoc",
+  epic: "Epic integration",
+  "patient-line": "Patient Line",
+  mobile: "Mobile Device Access",
+  "smart-tv": "Smart TV integration",
+};
+
+function connectionsFor(stage, personaKey) {
+  return stage.connections
+    .filter((connection) => (!connection.personas || connection.personas.includes(personaKey))
+      && !(personaKey === "joanna" && connection.asl === null))
+    .map((connection) => ({
+      id: connection.id,
+      label: solutionCatalog[connection.id],
+      description: personaKey === "joanna" && connection.asl ? connection.asl : connection.description,
+    }));
+}
 
 const stakeholders = [
   { key: "it", label: "IT / Digital", icon: "💻" },
@@ -503,9 +531,12 @@ function fillList(el, items) {
 
 function renderConnections(stage, personaKey) {
   connectionGrid.innerHTML = "";
-  stage.connections[personaKey].forEach((item) => {
+  document.getElementById("connectionContext").textContent = `${personas[pIndex].name} · ${stage.title}`;
+  connectionsFor(stage, personaKey).forEach((item) => {
     const card = make("article", "connection-card");
-    card.innerHTML = `<h3>${item}</h3><p>Connected to this step of ${personas[pIndex].name}’s journey.</p>`;
+    card.dataset.solutionId = item.id;
+    card.appendChild(make("h3", "", item.label));
+    card.appendChild(make("p", "", item.description));
     connectionGrid.appendChild(card);
   });
 }
