@@ -106,6 +106,7 @@
         </div>
 
         <blockquote class="patient-moment" id="patientMoment"></blockquote>
+        <button id="liveDemoStageCue" class="ghost-btn live-demo-stage-cue" type="button" hidden></button>
 
         <div class="status-row" id="statusRow"></div>
 
@@ -131,6 +132,12 @@
 
       <section class="panel" id="demoPanel">
         <h2 id="demoTitle">5. AMN in Action at This Step</h2>
+
+        <section id="liveDemoCheckpoint" class="live-demo-checkpoint" aria-labelledby="liveDemoHeading" hidden>
+          <h3 id="liveDemoHeading" tabindex="-1">Live Demo Checkpoint</h3>
+          <p class="connection-note">Suggested presentation pause only. Switch to your own demo application using fictional data; this page does not launch or connect to a technology.</p>
+          <div id="liveDemoList"></div>
+        </section>
 
         <div class="view-toggle" role="tablist" aria-label="Step view">
           <button id="viewActionBtn" class="active" type="button" role="tab">AMN in Action</button>
