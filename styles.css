@@ -35,7 +35,18 @@ h2 { margin: 0; color: var(--navy); font-size: 1.12rem; }
 .badge { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; background: linear-gradient(135deg, var(--blue), var(--purple)); }
 .journey-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
 .controls { display: flex; gap: 0.5rem; }
-.track-wrap { overflow-x: auto; padding: 1.4rem 0.5rem 0.5rem; }
+.touchpoint-bands { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.8rem; margin: 0.75rem 0 0.2rem; }
+.touchpoint-card { border: 2px solid #8ac9f3; border-radius: 24px; padding: 0.85rem 0.95rem; background: #ffffff; }
+.touchpoint-card h3 { margin: 0 0 0.45rem; font-size: 1.05rem; color: #4aa3dd; }
+.touchpoint-card ul { margin: 0; padding-left: 1.05rem; }
+.touchpoint-card li { margin: 0.28rem 0; color: #2f6e97; }
+.touchpoint-card.visit { border-color: #6c3eb4; }
+.touchpoint-card.visit h3 { color: #6c3eb4; }
+.touchpoint-card.visit li { color: #5a3297; }
+.touchpoint-card.post { border-color: #008d95; }
+.touchpoint-card.post h3 { color: #008d95; }
+.touchpoint-card.post li { color: #0b6f74; }
+.track-wrap { overflow-x: auto; padding: 1.1rem 0.5rem 0.5rem; }
 .track { position: relative; min-width: 980px; height: 128px; }
 .track-line { position: absolute; top: 44px; left: 0; right: 0; height: 6px; background: #e3ecf5; border-radius: 6px; }
 .track-fill { height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--blue), var(--purple), var(--teal)); transition: width 0.6s ease; }
