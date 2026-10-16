@@ -24,11 +24,13 @@ body {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.7rem 1.2rem;
 }
-.brand-block { display: flex; align-items: center; gap: 0.75rem; }
+.brand-block { display: flex; align-items: center; gap: 0.85rem; }
 .logo-fallback { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; }
 .logo.essentia { color: var(--navy); }
 .logo.amn { color: var(--purple); }
-.logo img { height: 30px; display: block; }
+.logo img { display: block; width: auto; object-fit: contain; }
+.logo.essentia img { height: 40px; }
+.logo.amn img { height: 52px; }
 .partner-plus { font-weight: 800; color: #6a7f94; }
 
 .ghost-btn, .primary-btn {
@@ -135,4 +137,6 @@ footer { text-align: center; color: #4e6377; padding: 0.8rem 1rem 1.3rem; font-s
 
 @media (max-width: 760px) {
   .hero { grid-template-columns: 1fr; }
+  .logo.essentia img { height: 34px; }
+  .logo.amn img { height: 44px; }
 }
