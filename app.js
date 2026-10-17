@@ -374,7 +374,11 @@ function renderConnections(stage, personaKey) {
     card.dataset.solutionId = item.id;
     card.appendChild(make("h3", "", item.label));
     if (item.preferred) {
-      card.appendChild(make("span", "connection-badge", `Used by ${personas[pIndex].name}`));
+      const personaName = personas[pIndex].name;
+      const badgeLabel = personas[pIndex].id === "span"
+        ? personaName
+        : `Used by ${personaName}`;
+      card.appendChild(make("span", "connection-badge", badgeLabel));
     }
     card.appendChild(make("p", "", item.description));
     connectionGrid.appendChild(card);
