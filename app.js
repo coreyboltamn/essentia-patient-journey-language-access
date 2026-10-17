@@ -41,7 +41,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Awareness & Access to Care",
-    preferredConnections: { span: ["patient-line"], som: ["patient-line"], tele: ["patient-line"] },
+    preferredConnections: { span: ["patient-line"], som: ["patient-line"], tele: ["patient-line"], joanna: ["website"] },
     icon: "🌐",
     patient: {
       span: "Maria finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
@@ -61,6 +61,7 @@ const stages = [
       "Essentia captures demand signals by language and modality.",
     ],
     connections: [
+      { id: "website", personas: ["joanna"], description: "Joanna uses the website to find care options and qualified ASL interpreter access information before arrival; staff confirm availability through local workflows." },
       { id: "patient-line", description: "Patients contact access staff about care options through a configured spoken-language phone workflow.", asl: null },
       { id: "vri-opi", description: "Access staff involve a qualified interpreter for spoken-language questions about starting care.", asl: "Access staff arrange qualified ASL interpretation by VRI through a configured accessible video workflow to discuss care entry." },
       { id: "jaide", description: "Staff prepare approved written, nonclinical service information for patients; AI translation is not medical interpretation.", asl: null },
@@ -71,7 +72,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Appointment Confirmation & Pre-Visit",
-    preferredConnections: { span: ["patient-line"], som: ["in-person"], tele: ["teladoc"] },
+    preferredConnections: { span: ["patient-line"], som: ["in-person"], tele: ["teladoc"], joanna: ["in-person"] },
     icon: "🗓️",
     patient: {
       span: "Maria schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
@@ -102,7 +103,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Arrival & Check-In",
-    preferredConnections: { span: ["vri-opi"], som: ["in-person"], tele: ["teladoc"] },
+    preferredConnections: { span: ["vri-opi"], som: ["in-person"], tele: ["teladoc"], joanna: ["vri-opi", "in-person"] },
     icon: "🏥",
     patient: {
       span: "Maria checks in and confirms she will have Spanish interpretation before triage begins.",
@@ -133,7 +134,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Clinical Encounter",
-    preferredConnections: { span: ["vri-opi"], som: ["in-person"], tele: ["teladoc"] },
+    preferredConnections: { span: ["vri-opi"], som: ["in-person"], tele: ["teladoc"], joanna: ["vri-opi", "in-person"] },
     icon: "🩺",
     patient: {
       span: "Maria discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
@@ -164,7 +165,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Treatment / Inpatient Stay",
-    preferredConnections: { span: ["smart-tv", "vri-opi", "epic"], som: ["smart-tv", "epic"], tele: ["mobile", "vri-opi", "in-person", "epic"] },
+    preferredConnections: { span: ["smart-tv", "vri-opi", "epic"], som: ["smart-tv", "epic"], tele: ["mobile", "vri-opi", "in-person", "epic"], joanna: ["vri-opi", "in-person", "epic"] },
     icon: "💊",
     patient: {
       span: "Maria receives inpatient updates and medication education in Spanish over multiple touchpoints.",
@@ -195,7 +196,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Discharge & Transition of Care",
-    preferredConnections: { span: ["jaide"], som: ["jaide"], tele: ["jaide"] },
+    preferredConnections: { span: ["jaide"], som: ["jaide"], tele: ["jaide"], joanna: ["vri-opi", "jaide"] },
     icon: "📄",
     patient: {
       span: "Maria reviews discharge instructions and medication plans in Spanish before going home.",
@@ -218,7 +219,7 @@ const stages = [
       { id: "vri-opi", description: "Discharge staff use a qualified video or phone interpreter to review instructions, medication plans and patient teach-back.", asl: "Discharge staff use qualified ASL interpretation by VRI to review instructions and visual teach-back, not an audio-only call." },
       { id: "in-person", description: "Where appropriate, staff arrange a qualified in-person interpreter for complex discharge education with the patient and caregivers.", asl: "Staff arrange a qualified in-person ASL interpreter where appropriate for discharge education and follow-up planning." },
       { id: "epic", description: "Staff document interpreted discharge education and follow-up communication needs through the configured Epic discharge workflow." },
-      { id: "jaide", description: "Staff may draft translated written discharge instructions for appropriate qualified review and approval before use; AI does not replace a qualified interpreter for clinical decisions or consent.", asl: null },
+      { id: "jaide", description: "Staff may draft translated written discharge instructions for appropriate qualified review and approval before use; AI does not replace a qualified interpreter for clinical decisions or consent.", asl: "Staff may prepare written discharge materials for appropriate qualified review alongside qualified ASL interpretation; Jaide AI Translation and Live Speech do not provide ASL interpretation or replace a qualified interpreter for clinical decisions or consent." },
       { id: "patient-line", description: "Staff explain the configured spoken-language Patient Line workflow for contacting the care team with questions after discharge.", asl: null },
     ],
     impact: "Effective interpreted discharge improves safety and continuity after leaving care.",
@@ -226,7 +227,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Post Visit & Ongoing Care",
-    preferredConnections: { span: ["patient-line"], som: ["patient-line"], tele: ["patient-line", "teladoc"] },
+    preferredConnections: { span: ["patient-line"], som: ["patient-line"], tele: ["patient-line", "teladoc"], joanna: ["vri-opi", "mobile", "in-person"] },
     icon: "🔄",
     patient: {
       span: "Maria receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",
@@ -252,6 +253,7 @@ const stages = [
       { id: "mobile", description: "For follow-up, staff check the configured mobile access workflow with the patient before arranging a qualified remote interpreter.", asl: "For follow-up, staff check a configured accessible mobile video workflow with Joanna before arranging a qualified ASL interpreter; mobile access alone is not ASL interpretation." },
       { id: "epic", description: "Care coordinators use the configured Epic follow-up workflow to document communication needs and interpreted outreach." },
       { id: "jaide", description: "Staff prepare appropriate translated written follow-up messages for approval; clinical content requires appropriate qualified review, and clinical questions go to the care team with a qualified interpreter.", asl: null },
+      { id: "in-person", personas: ["joanna"], description: "Care coordinators arrange a qualified in-person ASL interpreter for ongoing appointments and follow-up questions, subject to local scheduling and availability." },
     ],
     impact: "Ongoing interpreted engagement strengthens outcomes, loyalty, and operational learning.",
   },
@@ -266,6 +268,7 @@ const solutionCatalog = {
   "patient-line": "Patient Line",
   mobile: "Mobile Device Access",
   "smart-tv": "Smart TV integration",
+  website: "Website",
 };
 
 function connectionsFor(stage, personaKey) {
@@ -375,11 +378,7 @@ function renderConnections(stage, personaKey) {
     card.dataset.solutionId = item.id;
     card.appendChild(make("h3", "", item.label));
     if (item.preferred) {
-      const personaName = personas[pIndex].name;
-      const badgeLabel = ["span", "som", "tele"].includes(personas[pIndex].id)
-        ? personaName
-        : `Used by ${personaName}`;
-      card.appendChild(make("span", "connection-badge", badgeLabel));
+      card.appendChild(make("span", "connection-badge", personas[pIndex].name));
     }
     card.appendChild(make("p", "", item.description));
     connectionGrid.appendChild(card);
