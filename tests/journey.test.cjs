@@ -178,7 +178,7 @@ test(`${personaId} highlights follow navigation, autoplay, presentation mode and
       assert.equal(card.children.length, preferred ? 3 : 2);
       assert.equal(card.children[0].textContent, connections.find(({ id }) => id === card.dataset.solutionId).label);
       if (preferred) {
-        assert.equal(card.children[1].textContent, persona.id === "span" ? "Maria" : "Used by Abdi");
+        assert.equal(card.children[1].textContent, persona.id === "span" ? "Maria" : "Abdi");
         assert.equal(card.children[1].className, "connection-badge");
       }
       assert.ok(card.children.at(-1).textContent.length > 70);

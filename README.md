@@ -83,7 +83,7 @@ both normal and Presentation Mode.
 ### Abdi's highlighted connections
 
 Abdi uses the same highlighting via `stage.preferredConnections.som`, with a
-**Used by Abdi** badge. Non-highlighted options remain visible and readable.
+**Abdi** badge. Non-highlighted options remain visible and readable.
 Maria's mappings and badge wording are unchanged. Highlights follow navigation,
 autoplay and persona switching in normal and Presentation Mode.
 

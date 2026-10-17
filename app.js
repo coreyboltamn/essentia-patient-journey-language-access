@@ -375,7 +375,7 @@ function renderConnections(stage, personaKey) {
     card.appendChild(make("h3", "", item.label));
     if (item.preferred) {
       const personaName = personas[pIndex].name;
-      const badgeLabel = personas[pIndex].id === "span"
+      const badgeLabel = ["span", "som"].includes(personas[pIndex].id)
         ? personaName
         : `Used by ${personaName}`;
       card.appendChild(make("span", "connection-badge", badgeLabel));
