@@ -62,6 +62,24 @@ No APIs, credentials, PHI collection, automatic Epic synchronization or deployed
 capabilities were added. The approved palette, journey visuals, stage mapping,
 scenarios are retained.
 
+### Maria's highlighted connections
+
+Maria's per-stage preferences use stable solution IDs in `stage.preferredConnections.span`.
+Matching cards have a purple border, tinted background, bold heading and a visible
+**Used by Maria** badge. Other options stay readable; other personas are unchanged.
+Highlights update with timeline selection, Back/Next, autoplay and Restart in
+both normal and Presentation Mode.
+
+| Stage | Highlighted connection(s) |
+| --- | --- |
+| Awareness & Access to Care | Patient Line |
+| Appointment Confirmation & Pre-Visit | Patient Line |
+| Arrival & Check-In | VRI/OPI |
+| Clinical Encounter | VRI/OPI |
+| Treatment / Inpatient Stay | Smart TV integration, VRI/OPI, Epic integration |
+| Discharge & Transition of Care | Jaide AI Translation and Live Speech (one combined catalog card) |
+| Post Visit & Ongoing Care | Patient Line |
+
 ### Connection regression checks
 
 Run `node --test tests/connections.test.cjs` (Node 18+). All eight tests passed:
