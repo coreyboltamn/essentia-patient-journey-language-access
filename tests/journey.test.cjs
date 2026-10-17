@@ -152,32 +152,39 @@ test("Back, Next, scenario selection, timeline selection and restart stop autopl
   }
 });
 
-test("Maria highlights follow navigation, autoplay, presentation mode and scenario switching", () => {
+["span", "som"].forEach((personaId) =>
+test(`${personaId} highlights follow navigation, autoplay, presentation mode and scenario switching`, () => {
   const app = journey();
-  const expected = [
+  const expected = { span: [
     ["patient-line"], ["patient-line"], ["vri-opi"], ["vri-opi"],
     ["smart-tv", "vri-opi", "epic"], ["jaide"], ["patient-line"],
-  ];
-  function checkHighlights(index, maria = true) {
+  ], som: [
+    ["patient-line"], ["in-person"], ["in-person"], ["in-person"],
+    ["smart-tv", "epic"], ["jaide"], ["patient-line"],
+  ] };
+  function checkHighlights(index) {
+    const persona = personas[app.state().pIndex];
+    const preferredIds = expected[persona.id]?.[index] || [];
     const cards = app.el("connectionGrid").children;
-    const connections = connectionsFor(stages[index], personas[app.state().pIndex].id);
+    const connections = connectionsFor(stages[index], persona.id);
     assert.deepEqual(cards.map((card) => card.dataset.solutionId), Array.from(connections, ({ id }) => id));
     assert.deepEqual(
       cards.filter((card) => card.className.includes("connection-preferred"))
         .map((card) => card.dataset.solutionId),
-      maria ? expected[index] : [],
+      preferredIds,
     );
     for (const card of cards) {
-      const preferred = maria && expected[index].includes(card.dataset.solutionId);
+      const preferred = preferredIds.includes(card.dataset.solutionId);
       assert.equal(card.children.length, preferred ? 3 : 2);
       assert.equal(card.children[0].textContent, connections.find(({ id }) => id === card.dataset.solutionId).label);
       if (preferred) {
-        assert.equal(card.children[1].textContent, "Maria");
+        assert.equal(card.children[1].textContent, persona.id === "span" ? "Maria" : "Used by Abdi");
         assert.equal(card.children[1].className, "connection-badge");
       }
       assert.ok(card.children.at(-1).textContent.length > 70);
     }
   }
+  app.el("scenarioGrid").children[personas.findIndex(({ id }) => id === personaId)].click();
   checkHighlights(0);
   for (let index = 1; index < stages.length; index++) {
     app.el("nextBtn").click();
@@ -195,7 +202,7 @@ test("Maria highlights follow navigation, autoplay, presentation mode and scenar
       checkHighlights(index);
     });
   }
-  app.el("resetBtn").click();
+  app.el("scenarioGrid").children[personas.findIndex(({ id }) => id === personaId)].click();
   app.el("playBtn").click();
   for (let index = 1; index <= stages.length; index++) {
     app.tick();
@@ -205,12 +212,12 @@ test("Maria highlights follow navigation, autoplay, presentation mode and scenar
     app.el("scenarioGrid").children[pIndex].click();
     stages.forEach((stage, index) => {
       app.node(index).click();
-      checkHighlights(index, persona.id === "span");
+      checkHighlights(index);
     });
   });
   app.el("resetBtn").click();
   checkHighlights(0);
-});
+}));
 
 test("autoplay advances, wraps and pauses without demo state", () => {
   const app = journey();
