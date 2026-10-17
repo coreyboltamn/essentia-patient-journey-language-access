@@ -41,6 +41,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Awareness & Access to Care",
+    preferredConnections: { span: ["patient-line"] },
     icon: "🌐",
     patient: {
       span: "Maria finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
@@ -70,6 +71,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Appointment Confirmation & Pre-Visit",
+    preferredConnections: { span: ["patient-line"] },
     icon: "🗓️",
     patient: {
       span: "Maria schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
@@ -100,6 +102,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Arrival & Check-In",
+    preferredConnections: { span: ["vri-opi"] },
     icon: "🏥",
     patient: {
       span: "Maria checks in and confirms she will have Spanish interpretation before triage begins.",
@@ -129,6 +132,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Clinical Encounter",
+    preferredConnections: { span: ["vri-opi"] },
     icon: "🩺",
     patient: {
       span: "Maria discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
@@ -159,6 +163,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Treatment / Inpatient Stay",
+    preferredConnections: { span: ["smart-tv", "vri-opi", "epic"] },
     icon: "💊",
     patient: {
       span: "Maria receives inpatient updates and medication education in Spanish over multiple touchpoints.",
@@ -189,6 +194,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Discharge & Transition of Care",
+    preferredConnections: { span: ["jaide"] },
     icon: "📄",
     patient: {
       span: "Maria reviews discharge instructions and medication plans in Spanish before going home.",
@@ -219,6 +225,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Post Visit & Ongoing Care",
+    preferredConnections: { span: ["patient-line"] },
     icon: "🔄",
     patient: {
       span: "Maria receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",
@@ -268,6 +275,7 @@ function connectionsFor(stage, personaKey) {
       id: connection.id,
       label: solutionCatalog[connection.id],
       description: personaKey === "joanna" && connection.asl ? connection.asl : connection.description,
+      preferred: stage.preferredConnections?.[personaKey]?.includes(connection.id) ?? false,
     }));
 }
 
@@ -362,9 +370,12 @@ function renderConnections(stage, personaKey) {
   connectionGrid.innerHTML = "";
   document.getElementById("connectionContext").textContent = `${personas[pIndex].name} · ${stage.title}`;
   connectionsFor(stage, personaKey).forEach((item) => {
-    const card = make("article", "connection-card");
+    const card = make("article", item.preferred ? "connection-card connection-preferred" : "connection-card");
     card.dataset.solutionId = item.id;
     card.appendChild(make("h3", "", item.label));
+    if (item.preferred) {
+      card.appendChild(make("span", "connection-badge", `Used by ${personas[pIndex].name}`));
+    }
     card.appendChild(make("p", "", item.description));
     connectionGrid.appendChild(card);
   });

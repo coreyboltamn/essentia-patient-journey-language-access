@@ -76,6 +76,30 @@ test("ASL cards exclude audio and AI options and require qualified visual workfl
   }
 });
 
+test("Maria's explicit stage preferences use valid visible solution IDs without affecting other personas", () => {
+  const expected = [
+    ["patient-line"],
+    ["patient-line"],
+    ["vri-opi"],
+    ["vri-opi"],
+    ["smart-tv", "vri-opi", "epic"],
+    ["jaide"],
+    ["patient-line"],
+  ];
+  stages.forEach((stage, index) => {
+    assert.deepEqual(Array.from(stage.preferredConnections.span), expected[index]);
+    for (const persona of personas) {
+      const cards = connectionsFor(stage, persona.id);
+      assert.deepEqual(
+        Array.from(cards.filter(({ preferred }) => preferred), ({ id }) => id),
+        persona.id === "span" ? expected[index] : [],
+      );
+    }
+  });
+  const { preferredConnections, ...unmappedStage } = stages[0];
+  assert.ok(connectionsFor(unmappedStage, "span").every(({ preferred }) => preferred === false));
+});
+
 test("Teladoc is tied to Tran's virtual stages and all clinical AI materials require review", () => {
   for (const [index, stage] of stages.entries()) {
     for (const persona of personas) {

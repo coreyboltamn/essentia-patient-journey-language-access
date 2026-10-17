@@ -399,6 +399,28 @@ button {
   color: #516b84;
 }
 
+.connection-card.connection-preferred {
+  border-color: var(--purple);
+  box-shadow: inset 0 0 0 2px var(--purple);
+  background: #f3edfc;
+}
+
+.connection-preferred h3 {
+  color: #432477;
+  font-weight: 800;
+}
+
+.connection-badge {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+  background: var(--purple);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .connection-context {
   margin: 0 0 0.35rem;
   font-weight: 600;

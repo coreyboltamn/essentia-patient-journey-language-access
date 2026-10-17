@@ -152,6 +152,66 @@ test("Back, Next, scenario selection, timeline selection and restart stop autopl
   }
 });
 
+test("Maria highlights follow navigation, autoplay, presentation mode and scenario switching", () => {
+  const app = journey();
+  const expected = [
+    ["patient-line"], ["patient-line"], ["vri-opi"], ["vri-opi"],
+    ["smart-tv", "vri-opi", "epic"], ["jaide"], ["patient-line"],
+  ];
+  function checkHighlights(index, maria = true) {
+    const cards = app.el("connectionGrid").children;
+    const connections = connectionsFor(stages[index], personas[app.state().pIndex].id);
+    assert.deepEqual(cards.map((card) => card.dataset.solutionId), Array.from(connections, ({ id }) => id));
+    assert.deepEqual(
+      cards.filter((card) => card.className.includes("connection-preferred"))
+        .map((card) => card.dataset.solutionId),
+      maria ? expected[index] : [],
+    );
+    for (const card of cards) {
+      const preferred = maria && expected[index].includes(card.dataset.solutionId);
+      assert.equal(card.children.length, preferred ? 3 : 2);
+      assert.equal(card.children[0].textContent, connections.find(({ id }) => id === card.dataset.solutionId).label);
+      if (preferred) {
+        assert.equal(card.children[1].textContent, "Used by Maria");
+        assert.equal(card.children[1].className, "connection-badge");
+      }
+      assert.ok(card.children.at(-1).textContent.length > 70);
+    }
+  }
+  checkHighlights(0);
+  for (let index = 1; index < stages.length; index++) {
+    app.el("nextBtn").click();
+    checkHighlights(index);
+  }
+  for (let index = stages.length - 2; index >= 0; index--) {
+    app.el("prevBtn").click();
+    checkHighlights(index);
+  }
+  for (const checked of [true, false]) {
+    app.el("presentationMode").checked = checked;
+    app.el("presentationMode").handlers.change();
+    stages.forEach((stage, index) => {
+      app.node(index).click();
+      checkHighlights(index);
+    });
+  }
+  app.el("resetBtn").click();
+  app.el("playBtn").click();
+  for (let index = 1; index <= stages.length; index++) {
+    app.tick();
+    checkHighlights(index % stages.length);
+  }
+  personas.forEach((persona, pIndex) => {
+    app.el("scenarioGrid").children[pIndex].click();
+    stages.forEach((stage, index) => {
+      app.node(index).click();
+      checkHighlights(index, persona.id === "span");
+    });
+  });
+  app.el("resetBtn").click();
+  checkHighlights(0);
+});
+
 test("autoplay advances, wraps and pauses without demo state", () => {
   const app = journey();
   app.el("playBtn").click();
