@@ -41,7 +41,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Awareness & Access to Care",
-    preferredConnections: { span: ["patient-line"], som: ["patient-line"] },
+    preferredConnections: { span: ["patient-line"], som: ["patient-line"], tele: ["patient-line"] },
     icon: "🌐",
     patient: {
       span: "Maria finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
@@ -71,7 +71,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Appointment Confirmation & Pre-Visit",
-    preferredConnections: { span: ["patient-line"], som: ["in-person"] },
+    preferredConnections: { span: ["patient-line"], som: ["in-person"], tele: ["teladoc"] },
     icon: "🗓️",
     patient: {
       span: "Maria schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
@@ -102,7 +102,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Arrival & Check-In",
-    preferredConnections: { span: ["vri-opi"], som: ["in-person"] },
+    preferredConnections: { span: ["vri-opi"], som: ["in-person"], tele: ["teladoc"] },
     icon: "🏥",
     patient: {
       span: "Maria checks in and confirms she will have Spanish interpretation before triage begins.",
@@ -126,13 +126,14 @@ const stages = [
       { id: "mobile", description: "Staff bring a configured mobile device to registration so the patient can join a qualified interpreter during intake.", asl: "Staff check that the mobile device has a configured accessible video workflow for a qualified ASL interpreter, with clear sightlines." },
       { id: "epic", description: "Registration staff verify communication preferences in the configured Epic intake workflow before handing off to the care team." },
       { id: "in-person", description: "Staff confirm arrival of the scheduled qualified in-person interpreter or arrange an appropriate backup.", asl: "Staff confirm the scheduled qualified in-person ASL interpreter or arrange a qualified visual backup for urgent intake." },
+      { id: "teladoc", personas: ["tele"], description: "For Tran’s virtual check-in, registration staff confirm qualified interpreter access through the configured Teladoc workflow before the encounter." },
     ],
     impact: "Reliable language support at arrival prevents downstream delays.",
   },
   {
     phase: "During Visit",
     title: "Clinical Encounter",
-    preferredConnections: { span: ["vri-opi"], som: ["in-person"] },
+    preferredConnections: { span: ["vri-opi"], som: ["in-person"], tele: ["teladoc"] },
     icon: "🩺",
     patient: {
       span: "Maria discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
@@ -163,7 +164,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Treatment / Inpatient Stay",
-    preferredConnections: { span: ["smart-tv", "vri-opi", "epic"], som: ["smart-tv", "epic"] },
+    preferredConnections: { span: ["smart-tv", "vri-opi", "epic"], som: ["smart-tv", "epic"], tele: ["mobile", "vri-opi", "in-person", "epic"] },
     icon: "💊",
     patient: {
       span: "Maria receives inpatient updates and medication education in Spanish over multiple touchpoints.",
@@ -194,7 +195,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Discharge & Transition of Care",
-    preferredConnections: { span: ["jaide"], som: ["jaide"] },
+    preferredConnections: { span: ["jaide"], som: ["jaide"], tele: ["jaide"] },
     icon: "📄",
     patient: {
       span: "Maria reviews discharge instructions and medication plans in Spanish before going home.",
@@ -225,7 +226,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Post Visit & Ongoing Care",
-    preferredConnections: { span: ["patient-line"], som: ["patient-line"] },
+    preferredConnections: { span: ["patient-line"], som: ["patient-line"], tele: ["patient-line", "teladoc"] },
     icon: "🔄",
     patient: {
       span: "Maria receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",
@@ -375,7 +376,7 @@ function renderConnections(stage, personaKey) {
     card.appendChild(make("h3", "", item.label));
     if (item.preferred) {
       const personaName = personas[pIndex].name;
-      const badgeLabel = ["span", "som"].includes(personas[pIndex].id)
+      const badgeLabel = ["span", "som", "tele"].includes(personas[pIndex].id)
         ? personaName
         : `Used by ${personaName}`;
       card.appendChild(make("span", "connection-badge", badgeLabel));

@@ -152,7 +152,7 @@ test("Back, Next, scenario selection, timeline selection and restart stop autopl
   }
 });
 
-["span", "som"].forEach((personaId) =>
+["span", "som", "tele"].forEach((personaId) =>
 test(`${personaId} highlights follow navigation, autoplay, presentation mode and scenario switching`, () => {
   const app = journey();
   const expected = { span: [
@@ -161,6 +161,9 @@ test(`${personaId} highlights follow navigation, autoplay, presentation mode and
   ], som: [
     ["patient-line"], ["in-person"], ["in-person"], ["in-person"],
     ["smart-tv", "epic"], ["jaide"], ["patient-line"],
+  ], tele: [
+    ["patient-line"], ["teladoc"], ["teladoc"], ["teladoc"],
+    ["mobile", "vri-opi", "in-person", "epic"], ["jaide"], ["patient-line", "teladoc"],
   ] };
   function checkHighlights(index) {
     const persona = personas[app.state().pIndex];
@@ -178,7 +181,7 @@ test(`${personaId} highlights follow navigation, autoplay, presentation mode and
       assert.equal(card.children.length, preferred ? 3 : 2);
       assert.equal(card.children[0].textContent, connections.find(({ id }) => id === card.dataset.solutionId).label);
       if (preferred) {
-        assert.equal(card.children[1].textContent, persona.id === "span" ? "Maria" : "Abdi");
+        assert.equal(card.children[1].textContent, persona.name);
         assert.equal(card.children[1].className, "connection-badge");
       }
       assert.ok(card.children.at(-1).textContent.length > 70);
