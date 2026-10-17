@@ -172,7 +172,7 @@ test("Maria highlights follow navigation, autoplay, presentation mode and scenar
       assert.equal(card.children.length, preferred ? 3 : 2);
       assert.equal(card.children[0].textContent, connections.find(({ id }) => id === card.dataset.solutionId).label);
       if (preferred) {
-        assert.equal(card.children[1].textContent, "Used by Maria");
+        assert.equal(card.children[1].textContent, "Maria");
         assert.equal(card.children[1].className, "connection-badge");
       }
       assert.ok(card.children.at(-1).textContent.length > 70);

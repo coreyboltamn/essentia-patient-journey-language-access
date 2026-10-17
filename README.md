@@ -66,7 +66,7 @@ scenarios are retained.
 
 Maria's per-stage preferences use stable solution IDs in `stage.preferredConnections.span`.
 Matching cards have a purple border, tinted background, bold heading and a visible
-**Used by Maria** badge. Other options stay readable; other personas are unchanged.
+**Maria** badge. Other options stay readable; other personas are unchanged.
 Highlights update with timeline selection, Back/Next, autoplay and Restart in
 both normal and Presentation Mode.
 
