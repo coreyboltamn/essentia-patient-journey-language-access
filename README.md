@@ -66,7 +66,7 @@ scenarios are retained.
 
 Maria's per-stage preferences use stable solution IDs in `stage.preferredConnections.span`.
 Matching cards have a purple border, tinted background, bold heading and a visible
-**Maria** badge. Other options stay readable; other personas are unchanged.
+**Maria** badge. Other options stay readable; Tran and Joanna are unchanged.
 Highlights update with timeline selection, Back/Next, autoplay and Restart in
 both normal and Presentation Mode.
 
@@ -79,6 +79,34 @@ both normal and Presentation Mode.
 | Treatment / Inpatient Stay | Smart TV integration, VRI/OPI, Epic integration |
 | Discharge & Transition of Care | Jaide AI Translation and Live Speech (one combined catalog card) |
 | Post Visit & Ongoing Care | Patient Line |
+
+### Abdi's highlighted connections
+
+Abdi uses the same highlighting via `stage.preferredConnections.som`, with a
+**Used by Abdi** badge. Non-highlighted options remain visible and readable.
+Maria's mappings and badge wording are unchanged. Highlights follow navigation,
+autoplay and persona switching in normal and Presentation Mode.
+
+| Stage | Highlighted connection(s) |
+| --- | --- |
+| Awareness & Access to Care | Patient Line |
+| Appointment Confirmation & Pre-Visit | In-person Interpreter using Interpreter Scheduling tool |
+| Arrival & Check-In | In-person Interpreter using Interpreter Scheduling tool |
+| Clinical Encounter | In-person Interpreter using Interpreter Scheduling tool |
+| Treatment / Inpatient Stay | Smart TV integration, Epic integration |
+| Discharge & Transition of Care | Jaide AI Translation and Live Speech (one combined catalog card) |
+| Post Visit & Ongoing Care | Patient Line |
+
+Interpreter Scheduler uses the existing `in-person` ID and label; Jaide AI
+Translation and Live Speech remain the existing combined `jaide` card.
+
+Verification: `node --test tests/*.test.cjs` passed all 19 tests, including exact
+stage mappings, badge wording, Back/Next, timeline navigation, autoplay, persona
+switching, Restart and Presentation Mode. `node --check app.js` and
+`git diff --check` passed. Chromium checks covered every persona and stage in both
+modes at widths 1366, 1440, 768, 375 and 320: highlights and secondary cards
+rendered correctly without page overflow. Google Fonts was unavailable, so these
+checks used fallback fonts; the site also has no favicon.
 
 ### Connection regression checks
 

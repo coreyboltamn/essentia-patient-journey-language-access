@@ -41,7 +41,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Awareness & Access to Care",
-    preferredConnections: { span: ["patient-line"] },
+    preferredConnections: { span: ["patient-line"], som: ["patient-line"] },
     icon: "🌐",
     patient: {
       span: "Maria finds Essentia online and needs Spanish language support to understand services and decide where to start care.",
@@ -71,7 +71,7 @@ const stages = [
   {
     phase: "Pre-Visit",
     title: "Appointment Confirmation & Pre-Visit",
-    preferredConnections: { span: ["patient-line"] },
+    preferredConnections: { span: ["patient-line"], som: ["in-person"] },
     icon: "🗓️",
     patient: {
       span: "Maria schedules a visit and receives prep instructions in Spanish so she can arrive ready.",
@@ -102,7 +102,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Arrival & Check-In",
-    preferredConnections: { span: ["vri-opi"] },
+    preferredConnections: { span: ["vri-opi"], som: ["in-person"] },
     icon: "🏥",
     patient: {
       span: "Maria checks in and confirms she will have Spanish interpretation before triage begins.",
@@ -132,7 +132,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Clinical Encounter",
-    preferredConnections: { span: ["vri-opi"] },
+    preferredConnections: { span: ["vri-opi"], som: ["in-person"] },
     icon: "🩺",
     patient: {
       span: "Maria discusses symptoms, treatment options, and medication changes in Spanish with confidence.",
@@ -163,7 +163,7 @@ const stages = [
   {
     phase: "During Visit",
     title: "Treatment / Inpatient Stay",
-    preferredConnections: { span: ["smart-tv", "vri-opi", "epic"] },
+    preferredConnections: { span: ["smart-tv", "vri-opi", "epic"], som: ["smart-tv", "epic"] },
     icon: "💊",
     patient: {
       span: "Maria receives inpatient updates and medication education in Spanish over multiple touchpoints.",
@@ -194,7 +194,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Discharge & Transition of Care",
-    preferredConnections: { span: ["jaide"] },
+    preferredConnections: { span: ["jaide"], som: ["jaide"] },
     icon: "📄",
     patient: {
       span: "Maria reviews discharge instructions and medication plans in Spanish before going home.",
@@ -225,7 +225,7 @@ const stages = [
   {
     phase: "Post-Visit",
     title: "Post Visit & Ongoing Care",
-    preferredConnections: { span: ["patient-line"] },
+    preferredConnections: { span: ["patient-line"], som: ["patient-line"] },
     icon: "🔄",
     patient: {
       span: "Maria receives follow-up outreach, answers medication questions, and stays connected through portal messaging in Spanish.",

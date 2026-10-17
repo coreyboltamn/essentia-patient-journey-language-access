@@ -76,8 +76,8 @@ test("ASL cards exclude audio and AI options and require qualified visual workfl
   }
 });
 
-test("Maria's explicit stage preferences use valid visible solution IDs without affecting other personas", () => {
-  const expected = [
+test("Maria and Abdi's stage preferences use valid visible solution IDs without affecting other personas", () => {
+  const expected = { span: [
     ["patient-line"],
     ["patient-line"],
     ["vri-opi"],
@@ -85,19 +85,32 @@ test("Maria's explicit stage preferences use valid visible solution IDs without 
     ["smart-tv", "vri-opi", "epic"],
     ["jaide"],
     ["patient-line"],
-  ];
+  ], som: [
+    ["patient-line"],
+    ["in-person"],
+    ["in-person"],
+    ["in-person"],
+    ["smart-tv", "epic"],
+    ["jaide"],
+    ["patient-line"],
+  ] };
   stages.forEach((stage, index) => {
-    assert.deepEqual(Array.from(stage.preferredConnections.span), expected[index]);
     for (const persona of personas) {
+      const preferred = expected[persona.id]?.[index] || [];
+      assert.deepEqual(Array.from(stage.preferredConnections[persona.id] || []), preferred);
+      assert.equal(new Set(preferred).size, preferred.length);
+      for (const id of preferred) assert.ok(Object.hasOwn(solutionCatalog, id));
       const cards = connectionsFor(stage, persona.id);
       assert.deepEqual(
         Array.from(cards.filter(({ preferred }) => preferred), ({ id }) => id),
-        persona.id === "span" ? expected[index] : [],
+        preferred,
       );
     }
   });
   const { preferredConnections, ...unmappedStage } = stages[0];
-  assert.ok(connectionsFor(unmappedStage, "span").every(({ preferred }) => preferred === false));
+  for (const persona of personas) {
+    assert.ok(connectionsFor(unmappedStage, persona.id).every(({ preferred }) => preferred === false));
+  }
 });
 
 test("Teladoc is tied to Tran's virtual stages and all clinical AI materials require review", () => {
