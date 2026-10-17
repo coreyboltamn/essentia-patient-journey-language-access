@@ -152,7 +152,7 @@ test("Back, Next, scenario selection, timeline selection and restart stop autopl
   }
 });
 
-["span", "som", "tele"].forEach((personaId) =>
+["span", "som", "tele", "joanna"].forEach((personaId) =>
 test(`${personaId} highlights follow navigation, autoplay, presentation mode and scenario switching`, () => {
   const app = journey();
   const expected = { span: [
@@ -164,6 +164,9 @@ test(`${personaId} highlights follow navigation, autoplay, presentation mode and
   ], tele: [
     ["patient-line"], ["teladoc"], ["teladoc"], ["teladoc"],
     ["mobile", "vri-opi", "in-person", "epic"], ["jaide"], ["patient-line", "teladoc"],
+  ], joanna: [
+    ["website"], ["in-person"], ["vri-opi", "in-person"], ["vri-opi", "in-person"],
+    ["vri-opi", "in-person", "epic"], ["vri-opi", "jaide"], ["vri-opi", "mobile", "in-person"],
   ] };
   function checkHighlights(index) {
     const persona = personas[app.state().pIndex];

@@ -45,7 +45,7 @@ No live technology integration is added.
 
 ## AMN solution connections
 
-The existing connection section now uses one eight-solution catalog in `app.js`.
+The connection section uses one stable-ID solution catalog in `app.js`.
 Each stage has explicit solution IDs and patient/staff workflow descriptions.
 Patient Line and approved written content support access/preparation; qualified
 interpretation and configured endpoints support encounters; Smart TV appears
@@ -53,9 +53,11 @@ for inpatient care; discharge and follow-up emphasize reviewed instructions and
 continued communication. Teladoc cards appear only in Tran's virtual-visit
 preparation, check-in, encounter and ongoing-care stages.
 
-Joanna's cards omit Patient Line audio and AI options, use VRI rather than OPI
+Joanna's cards omit Patient Line audio, use VRI rather than OPI
 for ASL, and require qualified ASL interpreters and configured accessible video
-workflows for mobile/TV endpoints. AI is not a substitute for qualified medical
+workflows for mobile/TV endpoints. Her discharge Jaide card supports reviewed
+written materials alongside qualified ASL interpretation, not an ASL substitute.
+AI is not a substitute for qualified medical
 interpretation; written clinical materials require appropriate qualified review.
 These are editorial examples, not validated integration or language availability.
 No APIs, credentials, PHI collection, automatic Epic synchronization or deployed
@@ -129,6 +131,35 @@ switching, Restart and Presentation Mode. `node --check app.js` and
 modes at widths 1366, 1440, 768, 375 and 320: highlights and secondary cards
 rendered correctly without page overflow. Google Fonts was unavailable, so these
 checks used fallback fonts; the site also has no favicon.
+
+### Joanna's highlighted connections
+
+Joanna uses `stage.preferredConnections.joanna` and the same purple border,
+tinted background and bold heading as the other personas. Every highlighted
+card has exactly a **Joanna** badge; other available options remain visible.
+Highlights follow navigation, autoplay, persona switching, Restart and
+Presentation Mode.
+
+| Stage | Highlighted connection(s) |
+| --- | --- |
+| Awareness & Access to Care | Website |
+| Appointment Confirmation & Pre-Visit | In-person Interpreter using Interpreter Scheduling tool |
+| Arrival & Check-In | In-person Interpreter using Interpreter Scheduling tool, VRI/OPI |
+| Clinical Encounter | In-person Interpreter using Interpreter Scheduling tool, VRI/OPI |
+| Treatment / Inpatient Stay | In-person Interpreter using Interpreter Scheduling tool, VRI/OPI, Epic integration |
+| Discharge & Transition of Care | Jaide AI Translation and Live Speech (one combined catalog card), VRI/OPI |
+| Post Visit & Ongoing Care | In-person Interpreter using Interpreter Scheduling tool, VRI/OPI, Mobile Device Access |
+
+Website uses the new `website` ID because no Website connection card existed.
+It and the added ongoing-care In-person card are Joanna-only. Existing
+`in-person`, `jaide`, `vri-opi`, `epic` and `mobile` IDs and labels are reused;
+Maria, Abdi and Tran's cards and preferences are unchanged.
+
+Verification: all 22 tests pass with `node --test tests/*.test.cjs`;
+`node --check app.js` and `git diff --check` pass. Chromium checks covered
+all seven stages, exact badges, persona switching, bold preferred headings
+and visible secondary cards in both modes at widths 1366, 1440, 768, 375 and
+320, without page overflow.
 
 ### Connection regression checks
 

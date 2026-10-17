@@ -11,7 +11,7 @@ vm.runInContext(source.slice(0, source.indexOf("const scenarioGrid ="))
   + "\nthis.data = { personas, stages, solutionCatalog, connectionsFor };", context);
 const { personas, stages, solutionCatalog, connectionsFor } = context.data;
 
-test("catalog contains the eight canonical solutions with stable IDs", () => {
+test("catalog contains the canonical solutions with stable IDs", () => {
   assert.deepEqual({ ...solutionCatalog }, {
     "vri-opi": "VRI/OPI",
     "in-person": "In-person Interpreter using Interpreter Scheduling tool",
@@ -21,10 +21,11 @@ test("catalog contains the eight canonical solutions with stable IDs", () => {
     "patient-line": "Patient Line",
     mobile: "Mobile Device Access",
     "smart-tv": "Smart TV integration",
+    website: "Website",
   });
 });
 
-test("all seven stages map valid, unique IDs and collectively show all eight solutions", () => {
+test("all seven stages map valid, unique IDs and collectively show all solutions", () => {
   assert.equal(stages.length, 7);
   const represented = new Set();
   for (const stage of stages) {
@@ -61,10 +62,16 @@ for (const persona of personas) {
   });
 }
 
-test("ASL cards exclude audio and AI options and require qualified visual workflows", () => {
-  for (const stage of stages) {
+test("ASL cards exclude audio options and retain qualified visual workflows and AI safeguards", () => {
+  for (const [index, stage] of stages.entries()) {
     const cards = connectionsFor(stage, "joanna");
-    assert.ok(!cards.some(({ id }) => ["patient-line", "jaide", "teladoc"].includes(id)));
+    assert.ok(!cards.some(({ id }) => ["patient-line", "teladoc"].includes(id)));
+    const ai = cards.find(({ id }) => id === "jaide");
+    assert.equal(Boolean(ai), index === 5);
+    if (ai) {
+      assert.match(ai.description, /qualified review.*qualified ASL interpretation/);
+      assert.match(ai.description, /do not provide ASL interpretation or replace a qualified interpreter/);
+    }
     for (const card of cards) {
       if (card.id === "epic") continue;
       assert.match(card.description, /qualified.*ASL/i);
@@ -76,7 +83,7 @@ test("ASL cards exclude audio and AI options and require qualified visual workfl
   }
 });
 
-test("Maria, Abdi and Tran's stage preferences use valid visible solution IDs without affecting Joanna", () => {
+test("all personas' stage preferences use valid visible solution IDs", () => {
   const expected = { span: [
     ["patient-line"],
     ["patient-line"],
@@ -101,6 +108,14 @@ test("Maria, Abdi and Tran's stage preferences use valid visible solution IDs wi
     ["mobile", "vri-opi", "in-person", "epic"],
     ["jaide"],
     ["patient-line", "teladoc"],
+  ], joanna: [
+    ["website"],
+    ["in-person"],
+    ["vri-opi", "in-person"],
+    ["vri-opi", "in-person"],
+    ["vri-opi", "in-person", "epic"],
+    ["vri-opi", "jaide"],
+    ["vri-opi", "mobile", "in-person"],
   ] };
   stages.forEach((stage, index) => {
     for (const persona of personas) {
@@ -118,6 +133,13 @@ test("Maria, Abdi and Tran's stage preferences use valid visible solution IDs wi
   const { preferredConnections, ...unmappedStage } = stages[0];
   for (const persona of personas) {
     assert.ok(connectionsFor(unmappedStage, persona.id).every(({ preferred }) => preferred === false));
+  }
+});
+
+test("Website and ongoing in-person additions are Joanna-only and use existing canonical labels", () => {
+  for (const persona of personas) {
+    assert.equal(connectionsFor(stages[0], persona.id).some(({ id }) => id === "website"), persona.id === "joanna");
+    assert.equal(connectionsFor(stages[6], persona.id).some(({ id }) => id === "in-person"), persona.id === "joanna");
   }
 });
 
