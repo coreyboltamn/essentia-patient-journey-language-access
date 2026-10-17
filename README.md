@@ -51,7 +51,7 @@ Patient Line and approved written content support access/preparation; qualified
 interpretation and configured endpoints support encounters; Smart TV appears
 for inpatient care; discharge and follow-up emphasize reviewed instructions and
 continued communication. Teladoc cards appear only in Tran's virtual-visit
-preparation, encounter and ongoing-care stages.
+preparation, check-in, encounter and ongoing-care stages.
 
 Joanna's cards omit Patient Line audio and AI options, use VRI rather than OPI
 for ASL, and require qualified ASL interpreters and configured accessible video
@@ -66,7 +66,7 @@ scenarios are retained.
 
 Maria's per-stage preferences use stable solution IDs in `stage.preferredConnections.span`.
 Matching cards have a purple border, tinted background, bold heading and a visible
-**Maria** badge. Other options stay readable; Tran and Joanna are unchanged.
+**Maria** badge. Other options stay readable; other personas use their own preferences.
 Highlights update with timeline selection, Back/Next, autoplay and Restart in
 both normal and Presentation Mode.
 
@@ -100,7 +100,29 @@ autoplay and persona switching in normal and Presentation Mode.
 Interpreter Scheduler uses the existing `in-person` ID and label; Jaide AI
 Translation and Live Speech remain the existing combined `jaide` card.
 
-Verification: `node --test tests/*.test.cjs` passed all 19 tests, including exact
+### Tran's highlighted connections
+
+Tran uses the same stable-ID mapping in `stage.preferredConnections.tele`, with
+the badge text exactly **Tran**. All preferred cards receive the existing purple
+border, tinted background and bold heading; other options remain visible.
+Highlights follow navigation, autoplay and persona switching in normal and
+Presentation Mode, without changing Maria, Abdi or Joanna.
+
+| Stage | Highlighted connection(s) |
+| --- | --- |
+| Awareness & Access to Care | Patient Line |
+| Appointment Confirmation & Pre-Visit | Telehealth integration with Teladoc |
+| Arrival & Check-In | Telehealth integration with Teladoc |
+| Clinical Encounter | Telehealth integration with Teladoc |
+| Treatment / Inpatient Stay | Mobile Device Access, VRI/OPI, Epic integration, In-person Interpreter using Interpreter Scheduling tool |
+| Discharge & Transition of Care | Jaide AI Translation and Live Speech (one combined catalog card) |
+| Post Visit & Ongoing Care | Patient Line, Telehealth integration with Teladoc |
+
+The check-in Teladoc card is Tran-only. Existing catalog labels and IDs are
+retained, including `in-person` for Interpreter Scheduler and `jaide` for the
+combined translation/live-speech option.
+
+Verification: `node --test tests/*.test.cjs` passed all 20 tests, including exact
 stage mappings, badge wording, Back/Next, timeline navigation, autoplay, persona
 switching, Restart and Presentation Mode. `node --check app.js` and
 `git diff --check` passed. Chromium checks covered every persona and stage in both

@@ -76,7 +76,7 @@ test("ASL cards exclude audio and AI options and require qualified visual workfl
   }
 });
 
-test("Maria and Abdi's stage preferences use valid visible solution IDs without affecting other personas", () => {
+test("Maria, Abdi and Tran's stage preferences use valid visible solution IDs without affecting Joanna", () => {
   const expected = { span: [
     ["patient-line"],
     ["patient-line"],
@@ -93,6 +93,14 @@ test("Maria and Abdi's stage preferences use valid visible solution IDs without 
     ["smart-tv", "epic"],
     ["jaide"],
     ["patient-line"],
+  ], tele: [
+    ["patient-line"],
+    ["teladoc"],
+    ["teladoc"],
+    ["teladoc"],
+    ["mobile", "vri-opi", "in-person", "epic"],
+    ["jaide"],
+    ["patient-line", "teladoc"],
   ] };
   stages.forEach((stage, index) => {
     for (const persona of personas) {
@@ -118,7 +126,7 @@ test("Teladoc is tied to Tran's virtual stages and all clinical AI materials req
     for (const persona of personas) {
       assert.equal(
         connectionsFor(stage, persona.id).some(({ id }) => id === "teladoc"),
-        persona.id === "tele" && [1, 3, 6].includes(index),
+        persona.id === "tele" && [1, 2, 3, 6].includes(index),
       );
     }
     const ai = connectionsFor(stage, "span").find(({ id }) => id === "jaide");
